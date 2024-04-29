@@ -1058,6 +1058,7 @@ GameObject:
   - component: {fileID: 3295801283677807603}
   - component: {fileID: 8953421476570498298}
   - component: {fileID: 3894336577725791352}
+  - component: {fileID: -3868921838903159018}
   m_Layer: 0
   m_Name: First Person Controller Variant
   m_TagString: Untagged
@@ -1364,7 +1365,19 @@ MonoBehaviour:
         m_CallState: 2
   OnUnpossessed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3894336577725791352}
+        m_TargetAssemblyTypeName: EnableCameraOnSpawn, Assembly-CSharp
+        m_MethodName: DisableCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3894336577725791352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,6 +1388,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dae011236d341b4d956ea92429d5402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3868921838903159018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033490709502480563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2309ef79fba034a8b04a7c9b9416ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8793466938106258361
