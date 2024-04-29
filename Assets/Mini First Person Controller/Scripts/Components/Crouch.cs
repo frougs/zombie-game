@@ -29,8 +29,10 @@ public class Crouch : MonoBehaviour
     public event System.Action CrouchStart, CrouchEnd;
     private bool startHeadReset;
     private Alteruna.Avatar _avatar;
+    private Animator anim;
 
     private void Start(){
+        anim = GetComponentInChildren<Animator>();
         _avatar = GetComponent<Alteruna.Avatar>();
         if(!_avatar.IsMe){
             return;
@@ -55,6 +57,7 @@ public class Crouch : MonoBehaviour
         }
         if (UserInputs.instance.crouch.IsPressed())
         {
+            //anim.SetBool("Crouch", true);
             startHeadReset = false;
             // Enforce a low head.
             if (headToLower)

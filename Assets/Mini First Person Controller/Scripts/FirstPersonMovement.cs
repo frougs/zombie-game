@@ -15,6 +15,7 @@ public class FirstPersonMovement : MonoBehaviour
     public float defaultFOV;
     private CinemachineVirtualCamera camera;
     private Alteruna.Avatar _avatar;
+    private Animator anim;
 
 
     Rigidbody rigidbody;
@@ -23,6 +24,8 @@ public class FirstPersonMovement : MonoBehaviour
 
 
     private void Start(){
+        anim = GetComponentInChildren<Animator>();
+        anim.SetBool("Idle", true);
         _avatar = GetComponent<Alteruna.Avatar>();
         if(!_avatar.IsMe){
             return;
@@ -60,13 +63,24 @@ public class FirstPersonMovement : MonoBehaviour
         // Apply movement.
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
         if(rigidbody.velocity != Vector3.zero){
+            anim.SetBool("Walking", true);
+            anim.SetBool("Idle", false);
             var speedChange = camera.m_Lens.FieldOfView + rigidbody.velocity.magnitude;
             speedChange = Mathf.Clamp(speedChange, defaultFOV, defaultFOV + rigidbody.velocity.magnitude);
 
             camera.m_Lens.FieldOfView = Mathf.Lerp(camera.m_Lens.FieldOfView, speedChange, (runTransitionSpeed + rigidbody.velocity.magnitude) * Time.deltaTime);
         }
         else{
+            anim.SetBool("Walking", false);
+            anim.SetBool("Idle", true);
             camera.m_Lens.FieldOfView = Mathf.Lerp(camera.m_Lens.FieldOfView, defaultFOV, runTransitionSpeed * Time.deltaTime);
+        }
+        if(IsRunning){
+            anim.SetBool("Running", true);
+            anim.SetBool("Idle", false);
+        }
+        else{
+            anim.SetBool("Running", false);
         }
     }
 }

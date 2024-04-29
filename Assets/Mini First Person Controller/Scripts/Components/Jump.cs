@@ -10,8 +10,9 @@ public class Jump : MonoBehaviour
     [SerializeField, Tooltip("Prevents jumping when the transform is in mid-air.")]
     GroundCheck groundCheck;
     private Alteruna.Avatar _avatar;
-
+    private Animator anim;
     private void Start(){
+        anim = GetComponentInChildren<Animator>();
         _avatar = GetComponent<Alteruna.Avatar>();
     }
     void Reset()
@@ -37,8 +38,12 @@ public class Jump : MonoBehaviour
         // Jump when the Jump button is pressed and we are on the ground.
         if (UserInputs.instance.jump.triggered && (!groundCheck || groundCheck.isGrounded))
         {
+            anim.SetBool("Jumping", true);
             rigidbody.AddForce(Vector3.up * 100 * jumpStrength);
             Jumped?.Invoke();
+        }
+        else{
+            anim.SetBool("Jumping", false);
         }
     }
 }
