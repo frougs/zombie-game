@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using Alteruna;
 
 public class Jump : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    RigidbodySynchronizable rigidbody;
     public float jumpStrength = 2;
     public event System.Action Jumped;
     public UnityEvent OnJump;
@@ -29,7 +30,7 @@ public class Jump : MonoBehaviour
     void Awake()
     {
         // Get rigidbody.
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<RigidbodySynchronizable>();
     }
 
     void LateUpdate()
@@ -40,7 +41,7 @@ public class Jump : MonoBehaviour
         // Jump when the Jump button is pressed and we are on the ground.
         if (UserInputs.instance.jump.triggered && (!groundCheck || groundCheck.isGrounded))
         {
-            rigidbody.AddForce(Vector3.up * 100 * jumpStrength);
+            rigidbody.AddForce(jumpStrength * Vector3.up, ForceMode.Impulse);
             Jumped?.Invoke();
             OnJump?.Invoke();
         }

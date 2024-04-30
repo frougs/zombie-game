@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using Alteruna;
 public class FirstPersonMovement : MonoBehaviour
 {
     public float speed = 5;
@@ -18,7 +19,7 @@ public class FirstPersonMovement : MonoBehaviour
     private Animator anim;
 
 
-    Rigidbody rigidbody;
+    RigidbodySynchronizable rigidbody;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
 
@@ -37,7 +38,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
 
         // Get the rigidbody on this.
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<RigidbodySynchronizable>();
 
     }
 
