@@ -58,13 +58,15 @@ public class FirstPersonMovement : MonoBehaviour
 
         // Get targetVelocity from input.
         Vector2 moveInput = UserInputs.instance.move.ReadValue<Vector2>();
+        if(moveInput != Vector2.zero){
+            anim.SetBool("Walking", true);
+            anim.SetBool("Idle", false);
+        }
         Vector2 targetVelocity =new Vector2( moveInput.x * targetMovingSpeed, moveInput.y * targetMovingSpeed);
 
         // Apply movement.
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
         if(rigidbody.velocity != Vector3.zero){
-            anim.SetBool("Walking", true);
-            anim.SetBool("Idle", false);
             var speedChange = camera.m_Lens.FieldOfView + rigidbody.velocity.magnitude;
             speedChange = Mathf.Clamp(speedChange, defaultFOV, defaultFOV + rigidbody.velocity.magnitude);
 
@@ -77,6 +79,7 @@ public class FirstPersonMovement : MonoBehaviour
         }
         if(IsRunning){
             anim.SetBool("Running", true);
+            anim.SetBool("Walking", false);
             anim.SetBool("Idle", false);
         }
         else{
