@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using Alteruna;
 public class FirstPersonMovement : MonoBehaviour
 {
     public float speed = 5;
@@ -15,14 +16,17 @@ public class FirstPersonMovement : MonoBehaviour
     public float defaultFOV;
     private CinemachineVirtualCamera camera;
     private Alteruna.Avatar _avatar;
+    private Animator anim;
 
 
-    Rigidbody rigidbody;
+    RigidbodySynchronizable rigidbody;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
 
 
     private void Start(){
+        anim = GetComponentInChildren<Animator>();
+        anim.SetBool("Idle", true);
         _avatar = GetComponent<Alteruna.Avatar>();
         if(!_avatar.IsMe){
             return;
@@ -34,7 +38,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
 
         // Get the rigidbody on this.
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<RigidbodySynchronizable>();
 
     }
 
@@ -55,6 +59,10 @@ public class FirstPersonMovement : MonoBehaviour
 
         // Get targetVelocity from input.
         Vector2 moveInput = UserInputs.instance.move.ReadValue<Vector2>();
+        if(moveInput != Vector2.zero){
+            anim.SetBool("Walking", true);
+            anim.SetBool("Idle", false);
+        }
         Vector2 targetVelocity =new Vector2( moveInput.x * targetMovingSpeed, moveInput.y * targetMovingSpeed);
 
         // Apply movement.
@@ -66,7 +74,17 @@ public class FirstPersonMovement : MonoBehaviour
             camera.m_Lens.FieldOfView = Mathf.Lerp(camera.m_Lens.FieldOfView, speedChange, (runTransitionSpeed + rigidbody.velocity.magnitude) * Time.deltaTime);
         }
         else{
+            anim.SetBool("Walking", false);
+            anim.SetBool("Idle", true);
             camera.m_Lens.FieldOfView = Mathf.Lerp(camera.m_Lens.FieldOfView, defaultFOV, runTransitionSpeed * Time.deltaTime);
         }
+        if(IsRunning){
+            anim.SetBool("Running", true);
+            anim.SetBool("Walking", false);
+            anim.SetBool("Idle", false);
+        }
+        else{
+            anim.SetBool("Running", false);
+        }
     }
-}
+}*/

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 public class FirstPersonLook : MonoBehaviour
@@ -68,4 +68,4 @@ public class FirstPersonLook : MonoBehaviour
     public void ToggleLook(bool status){
         canLook = status;
     }
-}
+}*/

@@ -5,14 +5,24 @@ using UnityEngine;
 namespace Alteruna{
     public class NameChanger : MonoBehaviour
     {
-        public string name;
+        //public string name;
         private Multiplayer Multiplayer;
         public void UpdateName(){
-            Multiplayer.SetUsername(name);
+            var name = PlayerPrefs.GetString("Username");
+            if(PlayerPrefs.GetInt("HasUsername") == 1){
+                Debug.Log("Changing name");
+                Multiplayer.SetUsername(name);
+            }
         }
         public void Awake(){
             Multiplayer = FindObjectOfType<Multiplayer>();
-            UpdateName();
+            if(Multiplayer == null){
+                Debug.Log("Multiplayer found");
+                UpdateName();
+            }
         }
     }
 }
+    
+
+
