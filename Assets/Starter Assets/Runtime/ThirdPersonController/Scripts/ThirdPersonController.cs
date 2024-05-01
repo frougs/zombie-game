@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
+using Alteruna;
 using UnityEngine.InputSystem;
-#endif
+
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -9,15 +9,16 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM
-    [RequireComponent(typeof(PlayerInput))]
-#endif
+
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
-
+        [Tooltip("Look sensitivity")]
+        public float lookSens;
+        public float lookXLimit = 45.0f;
+        float rotationX = 0;
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
@@ -74,6 +75,7 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
+        private Alteruna.Avatar _avatar;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -98,52 +100,63 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM
-        private PlayerInput _playerInput;
-#endif
-        private Animator _animator;
+        private AnimationSynchronizable _animator;
         private CharacterController _controller;
-        private StarterAssetsInputs _input;
+        //private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
+        public PlayerInput _pInput;
+        [HideInInspector] public InputAction move;
+        [HideInInspector] public InputAction jump;
+        [HideInInspector] public InputAction sprint;
+        [HideInInspector] public InputAction look;
 
-        private bool _hasAnimator;
+        //private bool _hasAnimator;
 
-        private bool IsCurrentDeviceMouse
+        /*private bool IsCurrentDeviceMouse
         {
             get
             {
 #if ENABLE_INPUT_SYSTEM
-                return _playerInput.currentControlScheme == "KeyboardMouse";
+                //return _playerInput.currentControlScheme == "KeyboardMouse";
 #else
 				return false;
 #endif
             }
         }
-
+*/
 
         private void Awake()
         {
             // get a reference to our main camera
             if (_mainCamera == null)
             {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                _mainCamera = GameObject.FindGameObjectWithTag("PlayerCamera");
             }
         }
 
         private void Start()
         {
-            _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+                    _avatar = GetComponent<Alteruna.Avatar>();
+                    _animator = GetComponent<AnimationSynchronizable>();
+ 
+        if (!_avatar.IsMe)
+            return;
+            _pInput = GetComponent<PlayerInput>();
+            move = _pInput.actions["Move"];
+            jump = _pInput.actions["Jump"];
+            sprint = _pInput.actions["Sprint"];
+            look = _pInput.actions["Look"];
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            _mainCamera.transform.position = CinemachineCameraTarget.transform.position;
+            _mainCamera.transform.SetParent(CinemachineCameraTarget.transform);
             
-            _hasAnimator = TryGetComponent(out _animator);
+            //_hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
-            _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM
-            _playerInput = GetComponent<PlayerInput>();
-#else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-#endif
+            //_input = GetComponent<StarterAssetsInputs>();
 
             AssignAnimationIDs();
 
@@ -154,8 +167,10 @@ namespace StarterAssets
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
-
+             
+        if (!_avatar.IsMe)
+            return;
+            //_hasAnimator = TryGetComponent(out _animator);
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -163,11 +178,17 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
+                    
+ 
+        if (!_avatar.IsMe)
+            return;
             CameraRotation();
         }
 
         private void AssignAnimationIDs()
         {
+                    if (!_avatar.IsMe)
+            return;
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("Jump");
@@ -177,6 +198,8 @@ namespace StarterAssets
 
         private void GroundedCheck()
         {
+                    if (!_avatar.IsMe)
+            return;
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
@@ -184,22 +207,24 @@ namespace StarterAssets
                 QueryTriggerInteraction.Ignore);
 
             // update animator if using character
-            if (_hasAnimator)
-            {
+            //if (_hasAnimator)
+            //{
                 _animator.SetBool(_animIDGrounded, Grounded);
-            }
+           // }
         }
 
         private void CameraRotation()
         {
+                    if (!_avatar.IsMe)
+            return;
             // if there is an input and camera position is not fixed
-            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            if (look.ReadValue<Vector2>().sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                //float deltaTimeMultiplier = 1f;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+                _cinemachineTargetYaw += look.ReadValue<Vector2>().x * lookSens/100 ;// * deltaTimeMultiplier;
+                _cinemachineTargetPitch += (look.ReadValue<Vector2>().y * lookSens/100) * -1;// * deltaTimeMultiplier;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -213,20 +238,22 @@ namespace StarterAssets
 
         private void Move()
         {
+                    if (!_avatar.IsMe)
+            return;
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = sprint.IsPressed() ? SprintSpeed : MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            if (move.ReadValue<Vector2>() == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
             float speedOffset = 0.1f;
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+            float inputMagnitude = 1f;
 
             // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
@@ -249,36 +276,62 @@ namespace StarterAssets
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            //Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            
+            //Getting rid of rotation stuff
+            
+            if (move.ReadValue<Vector2>() != Vector2.zero)
             {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                /*_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
-
+*/
                 // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                //transform.rotation = _mainCamera.transform.rotation;
             }
+            
 
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            //Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            
+            //
+            Vector3 targetDirection = new(move.ReadValue<Vector2>().x, 0f, move.ReadValue<Vector2>().y);
+            /*rotationX += -_input.look.y *lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            _mainCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, _input.look.x * lookSpeed, 0);*/
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                             //new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
-            if (_hasAnimator)
-            {
+            //if (_hasAnimator)
+            //{
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-            }
+           // }
         }
+        private void FixedUpdate(){
+                    if (!_avatar.IsMe)
+            return;
 
+            Vector3 inputDirection = new Vector3(move.ReadValue<Vector2>().x, 0.0f, move.ReadValue<Vector2>().y).normalized;
+            //Debug.Log(inputDirection);
+            _targetRotation = _mainCamera.transform.eulerAngles.y;
+                //float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,RotationSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0, _targetRotation, 0.0f);
+            var mDirection = transform.forward * move.ReadValue<Vector2>().y + transform.right * move.ReadValue<Vector2>().x;
+
+            _controller.Move(mDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            
+
+
+        }
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -287,11 +340,11 @@ namespace StarterAssets
                 _fallTimeoutDelta = FallTimeout;
 
                 // update animator if using character
-                if (_hasAnimator)
-                {
+                //if (_hasAnimator)
+                //{
                     _animator.SetBool(_animIDJump, false);
                     _animator.SetBool(_animIDFreeFall, false);
-                }
+                //}
 
                 // stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
@@ -300,16 +353,16 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (jump.triggered && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
                     // update animator if using character
-                    if (_hasAnimator)
-                    {
+                    //if (_hasAnimator)
+                    //{
                         _animator.SetBool(_animIDJump, true);
-                    }
+                    //}
                 }
 
                 // jump timeout
@@ -331,14 +384,14 @@ namespace StarterAssets
                 else
                 {
                     // update animator if using character
-                    if (_hasAnimator)
-                    {
+                    //if (_hasAnimator)
+                    //{
                         _animator.SetBool(_animIDFreeFall, true);
-                    }
+                    //}
                 }
 
                 // if we are not grounded, do not jump
-                _input.jump = false;
+                //_input.jump = false;
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
@@ -371,6 +424,10 @@ namespace StarterAssets
 
         private void OnFootstep(AnimationEvent animationEvent)
         {
+
+ 
+        if (!_avatar.IsMe)
+            return;
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 if (FootstepAudioClips.Length > 0)
@@ -383,6 +440,10 @@ namespace StarterAssets
 
         private void OnLand(AnimationEvent animationEvent)
         {
+
+ 
+        if (!_avatar.IsMe)
+            return;
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);

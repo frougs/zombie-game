@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Alteruna;
@@ -58,4 +58,4 @@ public class Jump : MonoBehaviour
     public void JumpAnim(){
         anim.SetBool("Jumping", true);
     }
-}
+}*/

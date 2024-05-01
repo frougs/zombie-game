@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
@@ -87,4 +87,4 @@ public class FirstPersonMovement : MonoBehaviour
             anim.SetBool("Running", false);
         }
     }
-}
+}*/

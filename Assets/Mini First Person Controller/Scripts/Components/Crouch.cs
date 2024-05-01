@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
@@ -171,4 +171,4 @@ public class Crouch : MonoBehaviour
 
     float SpeedOverride() => movementSpeed;
     #endregion
-}
+}*/

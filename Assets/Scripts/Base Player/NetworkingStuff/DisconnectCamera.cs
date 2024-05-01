@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,4 +9,4 @@ public class DisconnectCamera : MonoBehaviour
         CameraSingleton.instance.GetComponentInChildren<FirstPersonLook>().ToggleLook(false);
         CameraSingleton.instance.GetComponentInChildren<FirstPersonLook>().enabled = false;
     }
-}
+}*/
