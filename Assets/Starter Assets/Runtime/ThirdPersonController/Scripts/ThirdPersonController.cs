@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
-namespace StarterAssets
-{
+
+
     [RequireComponent(typeof(CharacterController))]
 
     public class ThirdPersonController : MonoBehaviour
@@ -75,7 +75,7 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
-        private Alteruna.Avatar _avatar;
+        [HideInInspector] public Alteruna.Avatar _avatar;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -111,6 +111,8 @@ namespace StarterAssets
         [HideInInspector] public InputAction jump;
         [HideInInspector] public InputAction sprint;
         [HideInInspector] public InputAction look;
+        //[HideInInspector] public bool owner;
+        //[HideInInspector] public InputAction interact;
 
         //private bool _hasAnimator;
 
@@ -148,6 +150,7 @@ namespace StarterAssets
             jump = _pInput.actions["Jump"];
             sprint = _pInput.actions["Sprint"];
             look = _pInput.actions["Look"];
+            //interact = _pInput.actions["Interact"];
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             //_cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
@@ -450,4 +453,3 @@ namespace StarterAssets
             }
         }
     }
-}
