@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 
 public class ItemInteractionPopup : MonoBehaviour
@@ -15,10 +16,18 @@ public class ItemInteractionPopup : MonoBehaviour
     [SerializeField] private InputActionReference m_Action;
     [HideInInspector] public bool held;
     private void OnTriggerEnter(Collider other){
-        if(other.GetComponent<ThirdPersonController>()._avatar.IsMe){
-            pickupPopup.SetActive(true);
-            var bindingString = displayString;
-            pickupText.text = "Pickup: [ " + getText.text +" ]";
+        try{
+        var isMe = other.GetComponent<ThirdPersonController>()._avatar;
+        if(isMe != null){
+            if(isMe.IsMe){
+                pickupPopup.SetActive(true);
+                var bindingString = displayString;
+                pickupText.text = "Pickup: [ " + getText.text +" ]";
+            }
+        }
+        }
+        catch(Exception e){
+            //Debug.Log("Thing doesnt have the component skullemoji");
         }
     }
     private void OnTriggerExit(Collider other){

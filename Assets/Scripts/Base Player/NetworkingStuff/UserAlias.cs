@@ -6,13 +6,13 @@ using Alteruna;
 public class UserAlias : AttributesSync
 {
     private Alteruna.Avatar _avatar;
-    private Multiplayer Multiplayer;
+    //private Multiplayer Multiplayer;
     public TextMeshPro nameText;
-    [SynchronizableField] private string name;
+    [SynchronizableField] private string disName;
 
     private void Start(){
         _avatar = GetComponentInParent<Alteruna.Avatar>();
-        Multiplayer = FindObjectOfType<Multiplayer>();
+        //Multiplayer = FindObjectOfType<Multiplayer>();
         if (!_avatar.IsMe)
             return;
         if(PlayerPrefs.GetInt("HasUsername") == 0){
@@ -21,15 +21,15 @@ public class UserAlias : AttributesSync
             int closeParenIndex = objectName.IndexOf(")");
             if(openParenIndex != -1 && closeParenIndex != -1){
                 string substring = objectName.Substring(openParenIndex + 1, closeParenIndex - openParenIndex - 1);
-                name=substring;
+                disName=substring;
             } 
         }
         else{
-            name=PlayerPrefs.GetString("Username");
+            disName=PlayerPrefs.GetString("Username");
         }
     }
     private void FixedUpdate(){
-        nameText.text = name;
+        nameText.text = disName;
     }
 }
 

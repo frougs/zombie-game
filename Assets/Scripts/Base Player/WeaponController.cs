@@ -12,7 +12,7 @@ public class WeaponController : MonoBehaviour
             var weapon = gunRoot.transform.GetChild(0);
             foreach(Transform obj in weapon.transform){
                 if(obj.GetComponent<WeaponPickup>()!=null){
-                    obj.GetComponent<WeaponPickup>().Dropped(this.gameObject);
+                    obj.GetComponent<WeaponPickup>().Dropped(/*this.gameObject*/);
                 }
             }
         }

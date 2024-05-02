@@ -19,11 +19,16 @@ public class WeaponPickup : MonoBehaviour, IInteractable
             this.GetComponent<ItemInteractionPopup>().Held();
         }
     }
-    public void Dropped(GameObject player){
+    public void Dropped(/*GameObject player*/){
         this.GetComponent<BoxCollider>().enabled = true;
         item.GetComponent<Rigidbody>().isKinematic = false;
         item.GetComponent<BoxCollider>().enabled = true;
         item.transform.SetParent(null);
-        item.GetComponent<Rigidbody>().AddForce(player.transform.forward * dropForce, ForceMode.Impulse);
+        // var camPOS = CameraSingleton.instance.transform.position;
+        // camPOS.x += 0.5f;
+        // camPOS.z += 0.5f;
+        var camPOS = CameraSingleton.instance.transform.position + CameraSingleton.instance.transform.forward * 0.75f;
+        item.transform.position = camPOS;
+        item.GetComponent<Rigidbody>().AddForce(CameraSingleton.instance.transform.forward * dropForce, ForceMode.Impulse);
     }
 }
