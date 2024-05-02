@@ -17,7 +17,7 @@ public class ItemInteractionPopup : MonoBehaviour
     [HideInInspector] public bool held;
     private void OnTriggerEnter(Collider other){
         try{
-        var isMe = other.GetComponent<ThirdPersonController>()._avatar;
+        var isMe = other.GetComponent<FirstPersonControllerREMAKE>()._avatar;
         if(isMe != null){
             if(isMe.IsMe){
                 pickupPopup.SetActive(true);

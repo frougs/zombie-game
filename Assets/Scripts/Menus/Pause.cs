@@ -22,7 +22,7 @@ public class Pause : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 //GetComponent<ThirdPersonController>().LockCameraPosition = true;
-                this.GetComponent<ThirdPersonController>().enabled = false;
+                this.GetComponent<FirstPersonControllerREMAKE>().enabled = false;
                 paused = true;
             }
             else if(paused){
@@ -31,7 +31,7 @@ public class Pause : MonoBehaviour
                 //Debug.Log("Closed Pause Menu");
                 paused = false;
                 this.GetComponent<ThirdPersonController>().enabled = true;
-                GetComponent<ThirdPersonController>().LockCameraPosition = false;
+                GetComponent<FirstPersonControllerREMAKE>().LockCameraPosition = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
