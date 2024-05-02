@@ -25,16 +25,22 @@ public class EnterUsername : MonoBehaviour
     public void SubmitName()
     {
         //Debug.Log(textBox.text);
-        
-        exampleName.text = "USERNAME: " +textBox.text;
-        PlayerPrefs.SetString("Username", textBox.text);
-        PlayerPrefs.SetInt("HasUsername", 1);
-        textBox.text = null;
+        if(textBox.text != "" || textBox.text != null){
+            exampleName.text = "USERNAME: " +textBox.text;
+            PlayerPrefs.SetString("Username", textBox.text);
+            PlayerPrefs.SetInt("HasUsername", 1);
+            textBox.text = null;
+        }
+    }
+    public void EnterPressed(string alias){
+            exampleName.text = "USERNAME: " +alias;
+            PlayerPrefs.SetString("Username", alias);
+            PlayerPrefs.SetInt("HasUsername", 1);
+            textBox.text = null;
     }
     public void ResetName(){
         PlayerPrefs.SetInt("HasUsername", 0);
         PlayerPrefs.DeleteKey("Username");
         exampleName.text = "USERNAME: RANDOM";
     }
-    
 }

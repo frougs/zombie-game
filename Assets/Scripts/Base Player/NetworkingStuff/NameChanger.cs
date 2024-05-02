@@ -16,7 +16,7 @@ namespace Alteruna{
         }
         public void Awake(){
             Multiplayer = FindObjectOfType<Multiplayer>();
-            if(Multiplayer == null){
+            if(Multiplayer != null){
                 Debug.Log("Multiplayer found");
                 UpdateName();
             }

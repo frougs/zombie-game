@@ -11,6 +11,10 @@ public class JoinedServer : MonoBehaviour
     }
     public void Joined(){
         chat.SetActive(true);
-        roomMenu.SetActive(false);
+        //roomMenu.SetActive(false);
+        roomMenu.GetComponent<CanvasGroup>().alpha = 0;
+        roomMenu.GetComponent<CanvasGroup>().interactable = false;
+        roomMenu.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        //Destroy(roomMenu);
     }
 }
