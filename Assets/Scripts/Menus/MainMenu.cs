@@ -29,7 +29,8 @@ public class MainMenu : MonoBehaviour
 
             //LoadingBarFill.fillAmount = progressValue;
             bar.value = progressValue;
-            percent.text = progressValue.ToString() +"%";
+            var barPercent = progressValue * 100;
+            percent.text = barPercent.ToString() +"%";
 
             yield return null;
         }
