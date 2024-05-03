@@ -10,7 +10,7 @@ public class PickupController : MonoBehaviour
     public float dropForce;
     public GameObject popupText;
 
-    public void Pickup(GameObject gunRoot, InteractionController interactionCon){
+    public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         UpdateStatus(false);
         item.transform.position = gunRoot.transform.position;
         item.transform.rotation = gunRoot.transform.rotation;
