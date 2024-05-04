@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InteractionController : MonoBehaviour
 {
-    [HideInInspector] public bool holdingItem;
+    [HideInInspector] public bool holdingItem = false;
     private List<GameObject> overlaps = new List<GameObject>();
     private Alteruna.Avatar _avatar;
     [HideInInspector] public InputAction interact;
@@ -21,6 +21,9 @@ public class InteractionController : MonoBehaviour
     }
     private void Update(){
         if (!_avatar.IsMe) return;
+        if(interact.triggered){
+        }
+        //Picks up the item
         if(interact.triggered && holdingItem == false){
             foreach(GameObject go in overlaps){
                 IInteractable interactable = go.GetComponent<IInteractable>();
@@ -29,13 +32,29 @@ public class InteractionController : MonoBehaviour
                 }
             }
         }
+        //Drops the item
         if(drop.triggered && holdingItem == true){
+            //Debug.Log("Attemping drop");
             var weapon = gunRoot.transform.GetChild(0);
             foreach(Transform obj in weapon.transform){
                 if(obj.GetComponent<PickupController>()!=null){
                     obj.GetComponent<PickupController>().Drop(this.GetComponent<ThirdPersonController>().CinemachineCameraTarget, this);
                 }
             }
+        }
+    }
+    //Stores currently overlapped items
+    private void OnTriggerEnter(Collider other){
+        if (!_avatar.IsMe) return;
+        if(!overlaps.Contains(other.gameObject)){
+            overlaps.Add(other.gameObject);
+        }
+    }
+    //Removes overlapped items when out of range
+    private void OnTriggerExit(Collider other){
+        if (!_avatar.IsMe) return;
+        if(overlaps.Contains(other.gameObject)){
+            overlaps.Remove(other.gameObject);
         }
     }
 }
