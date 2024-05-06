@@ -29,7 +29,10 @@ public class UserAlias : AttributesSync
         }
     }
     private void FixedUpdate(){
-        nameText.text = name;
+        if(name!= null){
+            nameText.text = name;
+        }
+        
     }
 }
 

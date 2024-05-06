@@ -11,7 +11,7 @@ public class InteractionController : MonoBehaviour
     [HideInInspector] public InputAction interact;
     [HideInInspector] public InputAction drop;
     [HideInInspector] public PlayerInput _pInput;
-    [SerializeField] GameObject gunRoot;
+    [SerializeField] public GameObject gunRoot;
     private void Start(){
         _avatar = GetComponent<Alteruna.Avatar>();
         if (!_avatar.IsMe) return;

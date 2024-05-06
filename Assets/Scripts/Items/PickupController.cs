@@ -11,24 +11,29 @@ public class PickupController : AttributesSync, IInteractable
     public BoxCollider objColl;
     public float dropForce;
     //public GameObject popupText;
-    [SynchronizableField] bool currentlyHeld;
+    [SynchronizableField] public bool currentlyHeld;
+    [SynchronizableField] public int currentHolderIndex = 5;
     private GameObject currentGunRoot;
     //private float storedMass;
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
-        //BroadcastRemoteMethod("Interacted", gunRoot, interactionCon);
-        UpdateStatus(false);
-        currentGunRoot = gunRoot;
-        /*rb.velocity = Vector3.zero;
-        storedMass = rb.mass;
-        rb.mass = 0f;*/
-        
-        item.transform.position = gunRoot.transform.position;
-        item.transform.rotation = gunRoot.transform.rotation;
-        item.transform.SetParent(gunRoot.transform);
-        currentlyHeld = true;
-        interactionCon.holdingItem = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        //If this works end up passing interactionCon back the item assigned to this as a gameobject, so when I set up shooting it can call the shoot function on that script instead of looking for child object
+        if(currentlyHeld == false){
+            //BroadcastRemoteMethod("Interacted", gunRoot, interactionCon);
+            UpdateStatus(false);
+            currentGunRoot = gunRoot;
+            /*rb.velocity = Vector3.zero;
+            storedMass = rb.mass;
+            rb.mass = 0f;*/
+            //item.transform.position = gunRoot.transform.position;
+            //item.transform.rotation = gunRoot.transform.rotation;
+            //item.transform.SetParent(gunRoot.transform);
+            currentlyHeld = true;
+            interactionCon.holdingItem = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            currentHolderIndex = ExtractNum(interactionCon.GetComponent<Alteruna.Avatar>().ToString());
+            //BroadcastRemoteMethod(nameof(RemoteUpdateParent), interactionCon.GetComponent<Alteruna.Avatar>().ToString());
+
+        }
+
         
     }
     public void Drop(GameObject cam, InteractionController interactionCon){
@@ -44,6 +49,7 @@ public class PickupController : AttributesSync, IInteractable
         var camPOS = cam.transform.position + cam.transform.forward * 0.75f;
         item.transform.position = camPOS;
         item.GetComponent<Rigidbody>().AddForce(CameraSingleton.instance.transform.forward * dropForce, ForceMode.Impulse);
+        currentHolderIndex = 5;
     }
     private void UpdateStatus(bool toggle){
         //BroadcastRemoteMethod("UpdateStatus", toggle);
@@ -66,4 +72,71 @@ public class PickupController : AttributesSync, IInteractable
 
         
     }
+    private int ExtractNum(string input)
+    {
+        int number = 0;
+        int startIndex = input.IndexOf("Index: ");
+        if (startIndex != -1)
+        {
+            startIndex += "Index: ".Length;
+            int endIndex = input.IndexOf(")", startIndex);
+            if (endIndex != -1)
+            {
+                string numberString = input.Substring(startIndex, endIndex - startIndex);
+                if (int.TryParse(numberString, out number))
+                {
+                    return number;
+                }
+                else
+                {
+                    Debug.LogError("Failed to parse number.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Closing parenthesis not found.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Index not found in input string.");
+        }
+        return number;
+    }
+
+    private void FixedUpdate(){
+        if(!currentlyHeld && currentHolderIndex != 5){
+            currentHolderIndex = 5;
+        }
+        if(currentHolderIndex != 5 && item.transform.parent == null){
+            var user = Multiplayer.GetUser(currentHolderIndex);
+            //Debug.Log("Current holder not 5");
+            var userObj = FindObjectsOfType<Alteruna.Avatar>();
+            foreach(Alteruna.Avatar players in userObj){
+                //Debug.Log("Currently on player: " +players.gameObject.name);
+                //Debug.Log(players.ToString() +" : " +user);
+                if(players.ToString().Contains(user)){
+                    //Debug.Log("User found: " +players.gameObject.name);
+                    var holderGunRoot = players.gameObject.GetComponent<InteractionController>().gunRoot;
+                    item.transform.position = holderGunRoot.transform.position;
+                    item.transform.rotation = holderGunRoot.transform.rotation;
+                    item.transform.SetParent(holderGunRoot.transform);
+                    //Debug.Log(holderGunRoot.name);
+                    
+                }
+            }
+        }
+        
+        
+    }
+
+    /*[SynchronizableMethod]
+    public void RemoteUpdateParent(string user){
+        Debug.Log(user);
+        var remotePlayer = GameObject.Find(user).transform;
+        var remoteGunRoot = remotePlayer.transform.Find("gunRoot");
+        item.transform.SetParent(remoteGunRoot);
+        /*var remoteGunRoot = u.gameObject.transform.Find("gunRoot");
+        item.transform.SetParent(remoteGunRoot);
+    }   */
 }
