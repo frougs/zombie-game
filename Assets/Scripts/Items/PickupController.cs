@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Alteruna;
 
+/// <summary>
+/// NOTE FOR FUTURE, MAYBE HAVE RIGID BODY AND TRANSFORM SYNCHRONIZATION BE ENABLED/DISABLED WHEN PICKED UP OR DROPPED TO PREVENT DESYNC ISSUES WHEN WEAPONS ARE DROPPED
+/// </summary>
+
+
+
+
+
+
+
+
+
+
 public class PickupController : AttributesSync, IInteractable
 {
     public GameObject item;

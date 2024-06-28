@@ -1877,6 +1877,7 @@ MonoBehaviour:
     m_Flags: 0
   _pInput: {fileID: 0}
   gunRoot: {fileID: 6841185944694290600}
+  interactRange: 10
 --- !u!1 &5530875047889826652
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 
 public class InteractionController : MonoBehaviour
 {
-    [HideInInspector] public bool holdingItem = false;
+    public bool holdingItem = false;
     private List<GameObject> overlaps = new List<GameObject>();
     private Alteruna.Avatar _avatar;
     [HideInInspector] public InputAction interact;
     [HideInInspector] public InputAction drop;
     [HideInInspector] public PlayerInput _pInput;
     [SerializeField] public GameObject gunRoot;
+    [SerializeField] private float interactRange;
+    [SerializeField] private float pickupDelay;
     private void Start(){
         _avatar = GetComponent<Alteruna.Avatar>();
         if (!_avatar.IsMe) return;
@@ -24,24 +26,40 @@ public class InteractionController : MonoBehaviour
         if(interact.triggered){
         }
         //Picks up the item
-        if(interact.triggered && holdingItem == false){
-            foreach(GameObject go in overlaps){
-                IInteractable interactable = go.GetComponent<IInteractable>();
-                if(interactable != null){
-                    interactable.Interacted(gunRoot, this);
+        if(interact.triggered){
+            if(Physics.Raycast(this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, interactRange)){
+                IInteractable interactable  = hitData.transform.gameObject.GetComponentInChildren<IInteractable>();
+                if(interactable != null && holdingItem == false){
+                    InteractItem(interactable);
+                    StartCoroutine(InteractDelay());
+                }
+                else if(interactable != null && holdingItem){
+                    DropItem();
+                    StartCoroutine(InteractDelay());
+                    InteractItem(interactable);
+                }
+                else{
+                    //Put something here for error interact sound
+                    Debug.Log("Not Interactable Cuh");
                 }
             }
         }
         //Drops the item
         if(drop.triggered && holdingItem == true){
-            //Debug.Log("Attemping drop");
-            var weapon = gunRoot.transform.GetChild(0);
+            DropItem();
+        }
+    }
+    public void InteractItem(IInteractable interactable){
+
+        interactable.Interacted(gunRoot, this);
+    }
+    public void DropItem(){
+         var weapon = gunRoot.transform.GetChild(0);
             foreach(Transform obj in weapon.transform){
                 if(obj.GetComponent<PickupController>()!=null){
                     obj.GetComponent<PickupController>().Drop(this.GetComponent<ThirdPersonController>().CinemachineCameraTarget, this);
                 }
             }
-        }
     }
     //Stores currently overlapped items
     private void OnTriggerEnter(Collider other){
@@ -56,5 +74,8 @@ public class InteractionController : MonoBehaviour
         if(overlaps.Contains(other.gameObject)){
             overlaps.Remove(other.gameObject);
         }
+    }
+    IEnumerator InteractDelay(){
+        yield return new WaitForSeconds(pickupDelay);
     }
 }
