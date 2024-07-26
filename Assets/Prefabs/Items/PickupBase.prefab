@@ -58,6 +58,36 @@ MonoBehaviour:
   dropForce: 2
   currentlyHeld: 0
   currentHolderIndex: 5
+  triggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7584881630476470274}
+        m_TargetAssemblyTypeName: PickupHoverText, Assembly-CSharp
+        m_MethodName: Held
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dropped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7584881630476470274}
+        m_TargetAssemblyTypeName: PickupHoverText, Assembly-CSharp
+        m_MethodName: Dropped
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &8478063287026731932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73,7 +103,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -309,7 +339,6 @@ MonoBehaviour:
   pickupText: {fileID: 3987326646592451450}
   getText: {fileID: 8172792490417655503}
   m_Action: {fileID: -3203458135462910667, guid: f5542061dd4e1584e9ee2d45c81b4247, type: 3}
-  held: 0
   hoverHeight: 0.3
 --- !u!65 &4104244116778380828
 BoxCollider:
