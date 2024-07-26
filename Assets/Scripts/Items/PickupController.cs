@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Alteruna;
-
+using UnityEngine.Events;
 /// <summary>
 /// NOTE FOR FUTURE, MAYBE HAVE RIGID BODY AND TRANSFORM SYNCHRONIZATION BE ENABLED/DISABLED WHEN PICKED UP OR DROPPED TO PREVENT DESYNC ISSUES WHEN WEAPONS ARE DROPPED
 /// </summary>
@@ -27,6 +27,8 @@ public class PickupController : AttributesSync, IInteractable
     [SynchronizableField] public bool currentlyHeld;
     [SynchronizableField] public int currentHolderIndex = 5;
     private GameObject currentGunRoot;
+    public UnityEvent triggered;
+    public UnityEvent dropped;
     //private float storedMass;
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(currentlyHeld == false){
@@ -40,6 +42,7 @@ public class PickupController : AttributesSync, IInteractable
             //item.transform.rotation = gunRoot.transform.rotation;
             //item.transform.SetParent(gunRoot.transform);
             currentlyHeld = true;
+            triggered?.Invoke();
             interactionCon.holdingItem = true;
             rb.constraints = RigidbodyConstraints.FreezeAll;
             currentHolderIndex = ExtractNum(interactionCon.GetComponent<Alteruna.Avatar>().ToString());
@@ -63,6 +66,7 @@ public class PickupController : AttributesSync, IInteractable
         item.transform.position = camPOS;
         item.GetComponent<Rigidbody>().AddForce(CameraSingleton.instance.transform.forward * dropForce, ForceMode.Impulse);
         currentHolderIndex = 5;
+        dropped?.Invoke();
     }
     private void UpdateStatus(bool toggle){
         //BroadcastRemoteMethod("UpdateStatus", toggle);
