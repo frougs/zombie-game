@@ -14,6 +14,7 @@ public class InteractionController : MonoBehaviour
     [SerializeField] public GameObject gunRoot;
     [SerializeField] private float interactRange;
     [SerializeField] private float pickupDelay;
+    private UIContainer uiStuff;
     private void Start(){
         _avatar = GetComponent<Alteruna.Avatar>();
         if (!_avatar.IsMe) return;
@@ -23,6 +24,9 @@ public class InteractionController : MonoBehaviour
     }
     private void Update(){
         if (!_avatar.IsMe) return;
+        if(uiStuff == null){
+            uiStuff = FindObjectOfType<UIContainer>();
+        }
         if(interact.triggered){
         }
         //Picks up the item
@@ -47,6 +51,9 @@ public class InteractionController : MonoBehaviour
         //Drops the item
         if(drop.triggered && holdingItem == true){
             DropItem();
+        }
+        if(!holdingItem){
+            uiStuff.ClearAmmo();
         }
     }
     public void InteractItem(IInteractable interactable){
