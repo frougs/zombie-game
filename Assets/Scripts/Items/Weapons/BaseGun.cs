@@ -11,6 +11,7 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public int maxAmmo;
     [SerializeField] float reloadSpeed;
     [SerializeField] float range;
+    [SerializeField] float critMultiplier;
     [SerializeField] public int currentAmmo;
     private bool canShoot = true;
     private bool hasAmmo = true;
@@ -31,8 +32,11 @@ public class BaseGun : MonoBehaviour, IShootable
             currentAmmo -= 1;
             if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity)){
                 IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
-                if(damagable != null){
+                if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
                     damagable.Damaged(damage);
+                }
+                else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
+                    damagable.Damaged(damage * critMultiplier);
                 }
                 else{
                     Debug.LogWarning("Damagable not found");
