@@ -23,13 +23,19 @@ public class BaseGun : MonoBehaviour, IShootable
     private float rProgress;
     [HideInInspector] public bool reloading;
     [HideInInspector] public bool fullAmmo;
+    [SerializeField] private AudioClip gunshot;
+    [SerializeField] private AudioSource soundSource;
 
     private void Start(){
         currentAmmo = maxAmmo;
+        soundSource = this.GetComponent<AudioSource>();
     }
     public void Shot(GameObject shooter){
         if(canShoot && hasAmmo){
             currentAmmo -= 1;
+            if(soundSource != null){
+                soundSource.PlayOneShot(gunshot);
+            }
             if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity)){
                 IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                 if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
