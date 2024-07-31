@@ -1525,6 +1525,7 @@ GameObject:
   - component: {fileID: -968917149698196559}
   - component: {fileID: 799340399982205167}
   - component: {fileID: -4847515939425539842}
+  - component: {fileID: 5057575795150353720}
   m_Layer: 8
   m_Name: PlayerArmature Variant
   m_TagString: Player
@@ -1901,7 +1902,32 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  reload:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7669c19f-4346-490a-8340-731695d26321
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   _pInput: {fileID: 0}
+--- !u!114 &5057575795150353720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436408381090443553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57600c876887cef48907fa5a29a8e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  died:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5530875047889826652
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,12 @@ public class Dummy : MonoBehaviour, IDamagable
     public bool startChase;
     private bool chasing;
     public GameObject player;
+    private GameObject target;
+    public bool pastBarricade;
+    [SerializeField] float attackDelay;
+    [SerializeField] float attackDistance;
+    [SerializeField] float attackDamage;
+    private bool currentlyAttacking;
 
     public void Damaged(float damage){
         //Debug.Log("OUCHIE!!!! I WAS DAMAGED FOR: " + damage);
@@ -46,12 +52,19 @@ public class Dummy : MonoBehaviour, IDamagable
             chasing = true;
         }
         if(chasing){
-            nav.SetDestination(player.transform.position);
+            nav.SetDestination(target.transform.position);
         }
         if(player == null){
             player = FindObjectOfType<ThirdPersonController>().gameObject;
         }
-
+        if(pastBarricade){
+            target = player;
+        }
+        if(target != null){
+            if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance && currentlyAttacking == false){
+                StartCoroutine(DamageTimer());
+            }
+        }
     }
     private void Death(){
         healthText.gameObject.SetActive(false);
@@ -76,5 +89,16 @@ public class Dummy : MonoBehaviour, IDamagable
     private void EnableEnemy(){
         nav.enabled = true;
 
+    }
+
+    IEnumerator DamageTimer(){
+        currentlyAttacking = true;
+        yield return new WaitForSeconds(attackDelay);
+        Debug.Log("Attacking");
+        currentlyAttacking = false;
+        IDamagable attackTarget = target.GetComponent<IDamagable>();
+        if(attackTarget != null){
+            attackTarget.Damaged(attackDamage);
+        }
     }
 }
