@@ -645,7 +645,8 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: NORMCORE
+    Server: PROBUILDER_EXPERIMENTAL_FEATURES
+    Standalone: NORMCORE;PROBUILDER_EXPERIMENTAL_FEATURES
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
