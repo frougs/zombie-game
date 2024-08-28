@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Dummy : MonoBehaviour, IDamagable
 {
-    [SerializeField] float maxHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] float regenDelay;
     [SerializeField] TextMeshPro healthText;
     [SerializeField] float currentHealth;
@@ -36,7 +36,7 @@ public class Dummy : MonoBehaviour, IDamagable
         eRend = GetComponent<Renderer>();
         currentHealth = maxHealth;
         nav = GetComponent<NavMeshAgent>();
-        nav.enabled = false;
+        //nav.enabled = false;
     }
     private void FixedUpdate(){
         if(currentHealth <= 0){
@@ -46,11 +46,11 @@ public class Dummy : MonoBehaviour, IDamagable
             healthText.gameObject.SetActive(true);
             healthText.text = currentHealth.ToString() + " | " +maxHealth.ToString();
         }
-        if(startChase){
+        /*if(startChase){
             EnableEnemy();
             startChase = false;
             chasing = true;
-        }
+        }*/
         if(chasing){
             nav.SetDestination(target.transform.position);
         }
@@ -58,6 +58,7 @@ public class Dummy : MonoBehaviour, IDamagable
             player = FindObjectOfType<ThirdPersonController>().gameObject;
         }
         if(pastBarricade){
+            chasing = true;
             target = player;
         }
         if(target != null){
@@ -67,12 +68,15 @@ public class Dummy : MonoBehaviour, IDamagable
         }
     }
     private void Death(){
-        healthText.gameObject.SetActive(false);
-        dead = true;
-        eRend.material = deadMat;
-        StartCoroutine(RegenTimer());
-        chasing = false;
-        nav.SetDestination(this.transform.position);
+        Destroy(this.gameObject);
+        FindObjectOfType<RoundsScript>().remainingSpawnCount -= 1;
+        FindObjectOfType<RoundsScript>().currentAlive -= 1;
+        // healthText.gameObject.SetActive(false);
+        // dead = true;
+        // eRend.material = deadMat;
+        // StartCoroutine(RegenTimer());
+        // chasing = false;
+        // nav.SetDestination(this.transform.position);
 
     }
     IEnumerator RegenTimer(){

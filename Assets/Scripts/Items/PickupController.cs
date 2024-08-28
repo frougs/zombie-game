@@ -1,34 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Alteruna;
+//using Alteruna;
 using UnityEngine.Events;
 /// <summary>
 /// NOTE FOR FUTURE, MAYBE HAVE RIGID BODY AND TRANSFORM SYNCHRONIZATION BE ENABLED/DISABLED WHEN PICKED UP OR DROPPED TO PREVENT DESYNC ISSUES WHEN WEAPONS ARE DROPPED
 /// </summary>
 
-
-
-
-
-
-
-
-
-
-public class PickupController : AttributesSync, IInteractable
+public class PickupController : MonoBehaviour, IInteractable
 {
+    public bool startHeld;
     public GameObject item;
     public Rigidbody rb;
     public BoxCollider thisColl;
     public BoxCollider objColl;
     public float dropForce;
     //public GameObject popupText;
-    [SynchronizableField] public bool currentlyHeld;
-    [SynchronizableField] public int currentHolderIndex = 5;
+    public bool currentlyHeld;
+    public int currentHolderIndex = 5;
     private GameObject currentGunRoot;
     public UnityEvent triggered;
     public UnityEvent dropped;
+    public int itemID;
     //private float storedMass;
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(currentlyHeld == false){
@@ -45,12 +38,14 @@ public class PickupController : AttributesSync, IInteractable
             triggered?.Invoke();
             interactionCon.holdingItem = true;
             rb.constraints = RigidbodyConstraints.FreezeAll;
-            currentHolderIndex = ExtractNum(interactionCon.GetComponent<Alteruna.Avatar>().ToString());
+            //currentHolderIndex = ExtractNum(interactionCon.GetComponent<Alteruna.Avatar>().ToString());
+            currentHolderIndex = 1;
+            //interactionCon.currentItemID = itemID;
+            interactionCon.currentHeldID = itemID;
+            
             //BroadcastRemoteMethod(nameof(RemoteUpdateParent), interactionCon.GetComponent<Alteruna.Avatar>().ToString());
 
-        }
-
-        
+        } 
     }
     public void Drop(GameObject cam, InteractionController interactionCon){
         //BroadcastRemoteMethod("Drop", cam, interactionCon);
@@ -65,6 +60,8 @@ public class PickupController : AttributesSync, IInteractable
         var camPOS = cam.transform.position + cam.transform.forward * 0.75f;
         item.transform.position = camPOS;
         item.GetComponent<Rigidbody>().AddForce(CameraSingleton.instance.transform.forward * dropForce, ForceMode.Impulse);
+        //interactionCon.currentItemID = 0;
+        interactionCon.currentHeldID = 0;
         currentHolderIndex = 5;
         dropped?.Invoke();
     }
@@ -126,27 +123,35 @@ public class PickupController : AttributesSync, IInteractable
             currentHolderIndex = 5;
         }
         if(currentHolderIndex != 5 && item.transform.parent == null){
-            var user = Multiplayer.GetUser(currentHolderIndex);
+            //var user = Multiplayer.GetUser(currentHolderIndex);
             //Debug.Log("Current holder not 5");
-            var userObj = FindObjectsOfType<Alteruna.Avatar>();
-            foreach(Alteruna.Avatar players in userObj){
+            var userObj = FindObjectsOfType<ThirdPersonController>();
+            foreach(ThirdPersonController players in userObj){
                 //Debug.Log("Currently on player: " +players.gameObject.name);
                 //Debug.Log(players.ToString() +" : " +user);
-                if(players.ToString().Contains(user)){
+                // if(players.ToString().Contains(user)){
                     //Debug.Log("User found: " +players.gameObject.name);
+                    Debug.Log(players.gameObject.name);
                     var holderGunRoot = players.gameObject.GetComponent<InteractionController>().gunRoot;
                     item.transform.position = holderGunRoot.transform.position;
                     item.transform.rotation = holderGunRoot.transform.rotation;
                     item.transform.SetParent(holderGunRoot.transform);
                     //Debug.Log(holderGunRoot.name);
                     
-                }
+                //}
+            
             }
         }
-        
-        
     }
-
+    private void Start(){
+        if(startHeld){
+            StartGameHeld();
+        }
+    }
+    private void StartGameHeld(){
+        var player = FindObjectOfType<InteractionController>();
+        Interacted(player.gunRoot, player);
+    }
     /*[SynchronizableMethod]
     public void RemoteUpdateParent(string user){
         Debug.Log(user);

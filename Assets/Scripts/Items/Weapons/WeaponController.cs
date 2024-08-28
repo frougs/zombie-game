@@ -17,37 +17,39 @@ public class WeaponController : MonoBehaviour
     }
 
     private void Update(){
-        if(attack.IsPressed()){
-            try{
-                var child = this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject;
-                IShootable shootable = child.GetComponent<IShootable>();
-                if(shootable != null){
-                    //Debug.Log("Child Found, attempting shot");
-                    shootable.Shot(this.gameObject);
-                }
-            }
-            catch(Exception e){
-                //Debug.Log("No Child");
-            }            
-        }
-        if(reload.triggered){
-            try{
-                var child = this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject;
-                IShootable shootable = child.GetComponent<IShootable>();
-                if(shootable != null){
-                    //Debug.Log("Child Found, attempting shot");
-                    //shootable.Reload();
-                    if( child.GetComponent<BaseGun>().fullAmmo != true){
-                        child.GetComponent<BaseGun>().Reload();
-                    }
-                    else{
-                        //Maybe add error sound
+        if(PauseMenuSingleton.instance.GetComponent<PauseController>().isPaused == false){
+            if(attack.IsPressed()){
+                try{
+                    var child = this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject;
+                    IShootable shootable = child.GetComponent<IShootable>();
+                    if(shootable != null){
+                        //Debug.Log("Child Found, attempting shot");
+                        shootable.Shot(this.gameObject);
                     }
                 }
+                catch(Exception e){
+                    //Debug.Log("No Child");
+                }            
             }
-            catch(Exception e){
-                //Debug.Log("No Child");
-            }            
+            if(reload.triggered){
+                try{
+                    var child = this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject;
+                    IShootable shootable = child.GetComponent<IShootable>();
+                    if(shootable != null){
+                        //Debug.Log("Child Found, attempting shot");
+                        //shootable.Reload();
+                        if( child.GetComponent<BaseGun>().fullAmmo != true){
+                            child.GetComponent<BaseGun>().Reload();
+                        }
+                        else{
+                            //Maybe add error sound
+                        }
+                    }
+                }
+                catch(Exception e){
+                    //Debug.Log("No Child");
+                }            
+            }
         }
     }
 }

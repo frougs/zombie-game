@@ -7,7 +7,7 @@ public class InteractionController : MonoBehaviour
 {
     public bool holdingItem = false;
     private List<GameObject> overlaps = new List<GameObject>();
-    private Alteruna.Avatar _avatar;
+    //private Alteruna.Avatar _avatar;
     [HideInInspector] public InputAction interact;
     [HideInInspector] public InputAction drop;
     [HideInInspector] public PlayerInput _pInput;
@@ -15,15 +15,18 @@ public class InteractionController : MonoBehaviour
     [SerializeField] private float interactRange;
     [SerializeField] private float pickupDelay;
     private UIContainer uiStuff;
+    //public int currentItemID = 0;
+    [SerializeField] public GameObject currentlyHeld;
+    [SerializeField] public int currentHeldID;
     private void Start(){
-        _avatar = GetComponent<Alteruna.Avatar>();
-        if (!_avatar.IsMe) return;
+        // _avatar = GetComponent<Alteruna.Avatar>();
+        // if (!_avatar.IsMe) return;
         _pInput = GetComponent<PlayerInput>();
         interact = _pInput.actions["Interact"];
         drop = _pInput.actions["DropItem"];
     }
     private void Update(){
-        if (!_avatar.IsMe) return;
+        // if (!_avatar.IsMe) return;
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();
         }
@@ -38,7 +41,10 @@ public class InteractionController : MonoBehaviour
                     StartCoroutine(InteractDelay());
                 }
                 else if(interactable != null && holdingItem){
-                    DropItem();
+                    Debug.Log("Already holding something, trying to drop it");
+                    if(hitData.transform.gameObject.GetComponent<BaseGun>() != null){
+                        DropItem();
+                    }
                     StartCoroutine(InteractDelay());
                     InteractItem(interactable);
                 }
@@ -55,6 +61,10 @@ public class InteractionController : MonoBehaviour
         if(!holdingItem){
             uiStuff.ClearAmmo();
         }
+        if(gunRoot.transform.GetChild(0).gameObject != null){
+            currentlyHeld = gunRoot.transform.GetChild(0).gameObject;
+        }
+        
     }
     public void InteractItem(IInteractable interactable){
 
@@ -70,14 +80,14 @@ public class InteractionController : MonoBehaviour
     }
     //Stores currently overlapped items
     private void OnTriggerEnter(Collider other){
-        if (!_avatar.IsMe) return;
+        // if (!_avatar.IsMe) return;
         if(!overlaps.Contains(other.gameObject)){
             overlaps.Add(other.gameObject);
         }
     }
     //Removes overlapped items when out of range
     private void OnTriggerExit(Collider other){
-        if (!_avatar.IsMe) return;
+        // if (!_avatar.IsMe) return;
         if(overlaps.Contains(other.gameObject)){
             overlaps.Remove(other.gameObject);
         }

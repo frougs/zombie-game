@@ -13,8 +13,8 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
-        if (!_avatar.IsMe)
-            return;
+        // if (!_avatar.IsMe)
+        //     return;
         if(pause.triggered){
             if(!paused){
                 //Debug.Log("Opened Pause Menu");
@@ -24,6 +24,7 @@ public class Pause : MonoBehaviour
                 //GetComponent<ThirdPersonController>().LockCameraPosition = true;
                 this.GetComponent<ThirdPersonController>().enabled = false;
                 paused = true;
+                Time.timeScale = 0f;
             }
             else if(paused){
                 PauseMenuSingleton.instance.GetComponent<PauseController>().UnPause();
@@ -34,15 +35,16 @@ public class Pause : MonoBehaviour
                 GetComponent<ThirdPersonController>().LockCameraPosition = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                Time.timeScale = 1.0f;
             }
         }
     }
     void OnEnable(){
     }
     void Start(){
-        _avatar = GetComponent<Alteruna.Avatar>();
-                if (!_avatar.IsMe)
-            return;
+        // _avatar = GetComponent<Alteruna.Avatar>();
+        //         if (!_avatar.IsMe)
+        //     return;
         _pInput = GetComponent<PlayerInput>();
         pause = _pInput.actions["Pause"];
     }

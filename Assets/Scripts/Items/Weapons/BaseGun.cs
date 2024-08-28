@@ -9,10 +9,14 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] float damage;
     [SerializeField] float fireRate;
     [SerializeField] public int maxAmmo;
+    [SerializeField] public int maxReserveAmmo;
+    [SerializeField] public int currentReserveAmmo;
     [SerializeField] float reloadSpeed;
     [SerializeField] float range;
     [SerializeField] float critMultiplier;
     [SerializeField] public int currentAmmo;
+    [SerializeField] public int ammoPrice;
+    [SerializeField] public int gunPrice;
     private bool canShoot = true;
     private bool hasAmmo = true;
     //private GameObject progressBar;
@@ -25,33 +29,49 @@ public class BaseGun : MonoBehaviour, IShootable
     [HideInInspector] public bool fullAmmo;
     [SerializeField] private AudioClip gunshot;
     [SerializeField] private AudioSource soundSource;
+    [SerializeField] private int pointsPerHit;
+    private ScoreSystem scoreSystem;
+    private bool hasReserveAmmo;
+    [SerializeField] public GameObject buyModel;
 
     private void Start(){
         currentAmmo = maxAmmo;
+        currentReserveAmmo = maxReserveAmmo;
         soundSource = this.GetComponent<AudioSource>();
     }
     public void Shot(GameObject shooter){
-        if(canShoot && hasAmmo){
-            currentAmmo -= 1;
-            if(soundSource != null){
-                soundSource.PlayOneShot(gunshot);
+        if(reloading == false){
+            if(canShoot && hasAmmo){
+                currentAmmo -= 1;
+                if(soundSource != null){
+                    soundSource.PlayOneShot(gunshot);
+                }
+                if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity)){
+                    IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
+                    //NonCrit hit
+                    if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
+                        damagable.Damaged(damage);
+                        scoreSystem.AddToScore(pointsPerHit);
+                    }
+                    //Crit hit
+                    else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
+                        damagable.Damaged(damage * critMultiplier);
+                        scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
+
+                    }
+                    else{
+                        //Debug.LogWarning("Damagable not found");
+                    }
+                }
+                StartCoroutine(ShotDelay());
             }
-            if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity)){
-                IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
-                if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
-                    damagable.Damaged(damage);
-                }
-                else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
-                    damagable.Damaged(damage * critMultiplier);
-                }
-                else{
-                    Debug.LogWarning("Damagable not found");
-                }
+            else if(canShoot && !hasAmmo && hasReserveAmmo){
+                Reload();
             }
-            StartCoroutine(ShotDelay());
-        }
-        else if(canShoot && !hasAmmo){
-            Reload();
+            else if(currentAmmo == 0 && currentReserveAmmo == 0){
+                //idk play click sound??
+                Debug.LogWarning("*CLICK* no ammo!");
+            }
         }
     }
     IEnumerator ShotDelay(){
@@ -60,6 +80,16 @@ public class BaseGun : MonoBehaviour, IShootable
         canShoot = true;
     }
     private void Update(){
+        if(currentReserveAmmo <= 0){
+            currentReserveAmmo = 0;
+            hasReserveAmmo = false;
+        }
+        else{
+            hasReserveAmmo = true;
+        }
+        if(scoreSystem == null){
+            scoreSystem = FindObjectOfType<ScoreSystem>();
+        }
         if(currentAmmo <= 0){
             hasAmmo = false;
         }
@@ -74,7 +104,7 @@ public class BaseGun : MonoBehaviour, IShootable
             progressBar = uiStuff.progressBar;
         }
         if(held){
-            uiStuff.UpdateAmmo(currentAmmo, maxAmmo);
+            uiStuff.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
         if(reloading){
             if(rProgress < reloadSpeed){
@@ -93,14 +123,23 @@ public class BaseGun : MonoBehaviour, IShootable
         }
     }
     public void Reload(){
-        StartCoroutine(ReloadTimer());
+        if(currentReserveAmmo > 0){
+            StartCoroutine(ReloadTimer());
+        }
     }
     IEnumerator ReloadTimer(){
         reloading = true;
         progressBar.gameObject.SetActive(true);
         yield return new WaitForSeconds(reloadSpeed);
         progressBar.gameObject.SetActive(false);
-        currentAmmo = maxAmmo;
+        var savedAmmo = currentReserveAmmo;
+        currentReserveAmmo += (currentAmmo - maxAmmo);
+        if(currentReserveAmmo >=  maxAmmo){
+            currentAmmo = maxAmmo;
+        }
+        else{
+            currentAmmo = savedAmmo;
+        }
         progressBar.fillAmount = 0f;
         reloadProgress = 0f;
         reloading = false;

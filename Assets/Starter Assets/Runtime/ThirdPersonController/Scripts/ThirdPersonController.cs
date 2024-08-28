@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Alteruna;
+//using Alteruna;
 using UnityEngine.InputSystem;
 
 
@@ -74,7 +74,7 @@ using UnityEngine.InputSystem;
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
-        private Alteruna.Avatar _avatar;
+        //private Alteruna.Avatar _avatar;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -99,7 +99,7 @@ using UnityEngine.InputSystem;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-        private AnimationSynchronizable _animator;
+        private Animator _animator;
         private CharacterController _controller;
         //private StarterAssetsInputs _input;
         private GameObject _mainCamera;
@@ -137,11 +137,11 @@ using UnityEngine.InputSystem;
 
         private void Start()
         {
-                    _avatar = GetComponent<Alteruna.Avatar>();
-                    _animator = GetComponent<AnimationSynchronizable>();
+                    //_avatar = GetComponent<Alteruna.Avatar>();
+                    _animator = GetComponent<Animator>();
  
-        if (!_avatar.IsMe)
-            return;
+        // if (!_avatar.IsMe)
+        //     return;
             _pInput = GetComponent<PlayerInput>();
             move = _pInput.actions["Move"];
             jump = _pInput.actions["Jump"];
@@ -167,8 +167,8 @@ using UnityEngine.InputSystem;
         private void Update()
         {
              
-        if (!_avatar.IsMe)
-            return;
+        // if (!_avatar.IsMe)
+        //     return;
             //_hasAnimator = TryGetComponent(out _animator);
             JumpAndGravity();
             GroundedCheck();
@@ -179,15 +179,15 @@ using UnityEngine.InputSystem;
         {
                     
  
-        if (!_avatar.IsMe)
-            return;
+        // if (!_avatar.IsMe)
+        //     return;
             CameraRotation();
         }
 
         private void AssignAnimationIDs()
         {
-                    if (!_avatar.IsMe)
-            return;
+            //         if (!_avatar.IsMe)
+            // return;
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
             _animIDJump = Animator.StringToHash("Jump");
@@ -197,8 +197,8 @@ using UnityEngine.InputSystem;
 
         private void GroundedCheck()
         {
-                    if (!_avatar.IsMe)
-            return;
+            //         if (!_avatar.IsMe)
+            // return;
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
@@ -214,8 +214,8 @@ using UnityEngine.InputSystem;
 
         private void CameraRotation()
         {
-                    if (!_avatar.IsMe)
-            return;
+            //         if (!_avatar.IsMe)
+            // return;
             // if there is an input and camera position is not fixed
             if (look.ReadValue<Vector2>().sqrMagnitude >= _threshold && !LockCameraPosition)
             {
@@ -237,8 +237,8 @@ using UnityEngine.InputSystem;
 
         private void Move()
         {
-                    if (!_avatar.IsMe)
-            return;
+            //         if (!_avatar.IsMe)
+            // return;
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = sprint.IsPressed() ? SprintSpeed : MoveSpeed;
 
@@ -315,8 +315,8 @@ using UnityEngine.InputSystem;
            // }
         }
         private void FixedUpdate(){
-                    if (!_avatar.IsMe)
-            return;
+            //         if (!_avatar.IsMe)
+            // return;
 
             Vector3 inputDirection = new Vector3(move.ReadValue<Vector2>().x, 0.0f, move.ReadValue<Vector2>().y).normalized;
             //Debug.Log(inputDirection);
@@ -425,8 +425,8 @@ using UnityEngine.InputSystem;
         {
 
  
-        if (!_avatar.IsMe)
-            return;
+        // if (!_avatar.IsMe)
+        //     return;
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 if (FootstepAudioClips.Length > 0)
@@ -441,8 +441,8 @@ using UnityEngine.InputSystem;
         {
 
  
-        if (!_avatar.IsMe)
-            return;
+        // if (!_avatar.IsMe)
+        //     return;
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
