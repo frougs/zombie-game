@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    void Damaged(float damage);
+    void Damaged(float damage, GameObject attacker);
 }

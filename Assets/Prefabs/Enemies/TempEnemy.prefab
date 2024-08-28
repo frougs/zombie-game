@@ -131,10 +131,12 @@ MonoBehaviour:
   aliveMat: {fileID: 2100000, guid: 3766dc98b50f7164ab5e98f4e09b6263, type: 2}
   startChase: 0
   player: {fileID: 0}
-  pastBarricade: 1
+  pastBarricade: 0
   attackDelay: 1.2
   attackDistance: 2
   attackDamage: 10
+  killBonus: 100
+  spawnedRoom: 0
 --- !u!195 &4226794117900371105
 NavMeshAgent:
   m_ObjectHideFlags: 0

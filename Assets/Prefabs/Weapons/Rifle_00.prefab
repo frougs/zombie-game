@@ -92,16 +92,25 @@ MonoBehaviour:
   damage: 3
   fireRate: 0.08
   maxAmmo: 32
+  maxReserveAmmo: 0
+  currentReserveAmmo: 0
   reloadSpeed: 1
   range: 45
   critMultiplier: 1.25
   currentAmmo: 0
+  ammoPrice: 0
+  gunPrice: 0
   held: 0
   reloadProgress: 0
   reloading: 0
   fullAmmo: 0
   gunshot: {fileID: 8300000, guid: 7c3232403eb04cf4997a5d8ec15770eb, type: 3}
   soundSource: {fileID: 0}
+  pointsPerHit: 0
+  buyModel: {fileID: 0}
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &5418589098786725845
 Rigidbody:
   m_ObjectHideFlags: 0

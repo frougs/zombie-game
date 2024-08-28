@@ -8,6 +8,7 @@ public class DoorSystem : MonoBehaviour, IInteractable
     [SerializeField] int doorPrice;
     [SerializeField] GameObject[] connectedDoors;
     [SerializeField] TextMeshPro[] costText;
+    [SerializeField] SpawnerScript[] spawners;
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
@@ -25,6 +26,11 @@ public class DoorSystem : MonoBehaviour, IInteractable
         Destroy(this.gameObject);
         foreach (GameObject door in connectedDoors){
             Destroy(door);
+        }
+        if(spawners != null){
+            foreach(SpawnerScript spawner in spawners){
+                spawner.roomActive = true;
+            }
         }
     }
     public void UpdateCostText(){

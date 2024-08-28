@@ -18,14 +18,19 @@ public class Dummy : MonoBehaviour, IDamagable
     public bool startChase;
     private bool chasing;
     public GameObject player;
-    private GameObject target;
+    [SerializeField] private GameObject target;
     public bool pastBarricade;
     [SerializeField] float attackDelay;
     [SerializeField] float attackDistance;
     [SerializeField] float attackDamage;
     private bool currentlyAttacking;
+    [SerializeField] int killBonus;
+    [SerializeField] public int spawnedRoom;
+    private bool barrierDown;
+    private GameObject targetBarrier;
+    private bool barrierDelay;
 
-    public void Damaged(float damage){
+    public void Damaged(float damage, GameObject attacker){
         //Debug.Log("OUCHIE!!!! I WAS DAMAGED FOR: " + damage);
         if(!dead){
             currentHealth -= damage;
@@ -37,6 +42,8 @@ public class Dummy : MonoBehaviour, IDamagable
         currentHealth = maxHealth;
         nav = GetComponent<NavMeshAgent>();
         //nav.enabled = false;
+        targetBarrier = FindOptimalBarrier();
+
     }
     private void FixedUpdate(){
         if(currentHealth <= 0){
@@ -57,20 +64,41 @@ public class Dummy : MonoBehaviour, IDamagable
         if(player == null){
             player = FindObjectOfType<ThirdPersonController>().gameObject;
         }
-        if(pastBarricade){
+        /*if(pastBarricade){
             chasing = true;
             target = player;
         }
+        else{
+            chasing = true;
+            target = FindOptimalBarrier();
+        }*/
+        if(target != player){
+            chasing = true;
+            //this.target = FindOptimalBarrier();
+            this.target = targetBarrier;
+            if(targetBarrier.GetComponent<BarrierScript>() != null){
+                if(targetBarrier.GetComponent<BarrierScript>().barrierActive == false){
+                    target = player;
+                    StartCoroutine(BarrierBreakDelay());
+                }
+            }
+        }
+        else{
+            chasing = true;
+            target = player;
+        }
+
         if(target != null){
-            if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance && currentlyAttacking == false){
+            if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance && currentlyAttacking == false && barrierDelay == false){
                 StartCoroutine(DamageTimer());
             }
         }
     }
     private void Death(){
-        Destroy(this.gameObject);
+        FindObjectOfType<ScoreSystem>().AddToScore(killBonus);
         FindObjectOfType<RoundsScript>().remainingSpawnCount -= 1;
         FindObjectOfType<RoundsScript>().currentAlive -= 1;
+        Destroy(this.gameObject);
         // healthText.gameObject.SetActive(false);
         // dead = true;
         // eRend.material = deadMat;
@@ -100,9 +128,69 @@ public class Dummy : MonoBehaviour, IDamagable
         yield return new WaitForSeconds(attackDelay);
         Debug.Log("Attacking");
         currentlyAttacking = false;
-        IDamagable attackTarget = target.GetComponent<IDamagable>();
-        if(attackTarget != null){
-            attackTarget.Damaged(attackDamage);
+        if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance){
+            IDamagable attackTarget = target.GetComponent<IDamagable>();
+            if(attackTarget != null){
+                attackTarget.Damaged(attackDamage, this.gameObject);
+            }
         }
+    }
+    IEnumerator BarrierBreakDelay(){
+        barrierDelay = true;
+        yield return new WaitForSeconds(attackDelay);
+        barrierDelay = false;
+    }
+    // private GameObject FindOptimalBarrier(){
+    //     var rooms = FindObjectsOfType<RoomDetection>();
+    //     foreach(RoomDetection room in rooms){
+    //         if(room.roomNumber == spawnedRoom){
+    //             var barriers = room.barriers;
+    //             float closestBarrier = Mathf.Infinity;
+    //             foreach(BarrierScript barrier in barriers){
+    //                 float distance = Vector3.Distance(this.transform.position, barrier.gameObject.transform.position);
+    //                 if(distance < closestBarrier){
+    //                     closestBarrier = distance;
+    //                     if(barrier.barrierActive == true){
+    //                         return barrier.gameObject;
+    //                     }
+    //                     else{
+    //                         break;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return player;
+    // }
+    private GameObject FindOptimalBarrier()
+    {
+        var rooms = FindObjectsOfType<RoomDetection>();
+        GameObject closestBarrier = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (RoomDetection room in rooms)
+        {
+            if (room.roomNumber == spawnedRoom)
+            {
+                var barriers = room.barriers;
+
+                foreach (BarrierScript barrier in barriers)
+                {
+                    if (barrier.barrierActive)
+                    {
+                        float distance = Vector3.Distance(this.transform.position, barrier.gameObject.transform.position);
+                        if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestBarrier = barrier.gameObject;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+        return closestBarrier != null ? closestBarrier : player;
+        //return closestBarrier;
     }
 }

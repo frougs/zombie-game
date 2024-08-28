@@ -157,10 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322fbaa5ea998d54cb3c3e989a568b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 150
+  damage: 300
   fireRate: 0.5
   maxAmmo: 6
-  maxReserveAmmo: 21
+  maxReserveAmmo: 27
   currentReserveAmmo: 0
   reloadSpeed: 0.75
   range: 35
@@ -176,6 +176,9 @@ MonoBehaviour:
   soundSource: {fileID: 8040279227542516848}
   pointsPerHit: 12
   buyModel: {fileID: 2889979119924903280, guid: d8cc71a1b9167c842a8db4fc0362fab3, type: 3}
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!82 &8040279227542516848
 AudioSource:
   m_ObjectHideFlags: 0

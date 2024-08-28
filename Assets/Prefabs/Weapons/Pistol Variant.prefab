@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: maxReserveAmmo
       value: 36
       objectReference: {fileID: 0}
+    - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: IgnoreLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 420175440332076912, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.113598

@@ -33,6 +33,7 @@ public class BaseGun : MonoBehaviour, IShootable
     private ScoreSystem scoreSystem;
     private bool hasReserveAmmo;
     [SerializeField] public GameObject buyModel;
+    public LayerMask IgnoreLayer;
 
     private void Start(){
         currentAmmo = maxAmmo;
@@ -46,16 +47,16 @@ public class BaseGun : MonoBehaviour, IShootable
                 if(soundSource != null){
                     soundSource.PlayOneShot(gunshot);
                 }
-                if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity)){
+                if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity,  ~IgnoreLayer)){
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
                     if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
-                        damagable.Damaged(damage);
+                        damagable.Damaged(damage, shooter);
                         scoreSystem.AddToScore(pointsPerHit);
                     }
                     //Crit hit
                     else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
-                        damagable.Damaged(damage * critMultiplier);
+                        damagable.Damaged(damage * critMultiplier, shooter);
                         scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
 
                     }

@@ -9,8 +9,8 @@ public class CritSpot : MonoBehaviour, IDamagable
     private void Start(){
         enemyScript = GetComponentInParent<Dummy>();
     }
-     public void Damaged(float damage){
-        enemyScript.Damaged(damage);
+     public void Damaged(float damage, GameObject shooter){
+        enemyScript.Damaged(damage, shooter);
 
     }
 }

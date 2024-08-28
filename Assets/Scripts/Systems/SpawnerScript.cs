@@ -15,6 +15,7 @@ public class SpawnerScript : MonoBehaviour
     private RoundsScript roundsScript;
     [SerializeField] float maxXRange;
     [SerializeField] float maxZRange;
+    public int room;
     private void Start(){
         player = FindObjectOfType<ThirdPersonController>().transform;
         roundsScript = FindObjectOfType<RoundsScript>();
@@ -25,6 +26,7 @@ public class SpawnerScript : MonoBehaviour
         //var randomInRadius = new Vector3(this.transform.position.x + Random.Range(maxXRange * -1, maxXRange), this.transform.position.y, this.transform.position.z +  Random.Range(maxZRange * -1, maxZRange));
         var zombie = Instantiate(zombiePrefab, this.transform.position, Quaternion.identity);
         zombie.GetComponent<Dummy>().maxHealth = zombieHP;
+         zombie.GetComponent<Dummy>().spawnedRoom = room;
         roundsScript.roundSpawned += 1;
         roundsScript.currentAlive += 1;
         spawnDelay = (1f / roundsScript.roundNumber) *5;
@@ -36,10 +38,10 @@ public class SpawnerScript : MonoBehaviour
         onCooldown = false;
     }
     private void FixedUpdate(){
-        float distance = Vector3.Distance(player.position, this.transform.position);
+        /*float distance = Vector3.Distance(player.position, this.transform.position);
         if(distance <= maxPlayerDistance){
             playerActive = true;
-        }
+        }*/
         var activeSpawnerList = roundsScript.activeSpawners;
         if(playerActive && roomActive == true){
             if(!activeSpawnerList.Contains(this.gameObject)){

@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
             uiStuff = FindObjectOfType<UIContainer>();
         }
     }
-    public void Damaged(float damage){
+    public void Damaged(float damage, GameObject attacker){
         if(!dead){
             currentHealth -= damage;
         }
