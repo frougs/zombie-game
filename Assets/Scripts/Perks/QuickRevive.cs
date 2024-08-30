@@ -23,6 +23,7 @@ public class QuickRevive : PerkBase
     public override void DefaultPerk(){
         player.GetComponent<PlayerHealth>().weaponXEnabled = true;
         player.GetComponent<PlayerHealth>().weaponXLevel = 1;
+        player.GetComponent<PlayerHealth>().extraLives = 1;
     }
     public override void PerkUpgrade1(){
         player.GetComponent<PlayerHealth>().weaponXLevel = 2;

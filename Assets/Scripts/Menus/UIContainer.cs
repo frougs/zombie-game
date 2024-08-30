@@ -15,6 +15,10 @@ public class UIContainer : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundText;
     [SerializeField] TextMeshProUGUI remainingText;
     [SerializeField] GameObject perkParent;
+    [SerializeField] GameObject rageBar;
+    [SerializeField] Image rageBarFill;
+    [SerializeField] GameObject doubleDamageObj;
+
 
 
     public void UpdateAmmo(int currentAmmo, int maxAmmo){
@@ -46,5 +50,21 @@ public class UIContainer : MonoBehaviour
     }
     Sprite TextureToSprite(Texture2D texture){
          return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+    }
+    public void UpdateRageBar(bool enable, float rageAmnt, bool doubledamage){
+        if(enable){
+            rageBar.SetActive(true);
+            rageBarFill.fillAmount = Mathf.Lerp(rageBarFill.fillAmount, rageAmnt, Time.deltaTime);
+            if(doubledamage){
+                doubleDamageObj.SetActive(true);
+            }
+            else{
+                doubleDamageObj.SetActive(false);
+            }
+        }
+        else{
+            rageBar.SetActive(false);
+            doubleDamageObj.SetActive(false);
+        }
     }
 }

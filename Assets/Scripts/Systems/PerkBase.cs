@@ -11,12 +11,12 @@ public class PerkBase : MonoBehaviour, IInteractable
     [SerializeField] Texture2D perkIcon;
     [SerializeField] public string perkName;
     [SerializeField] public string perkDescription;
-    [SerializeField] int upgradeNum = 0;
+    [SerializeField] public int upgradeNum = 0;
     [SerializeField] public int price;
     [SerializeField] public GameObject player;
     [SerializeField] public float popupDuration;
     [SerializeField] public bool hasPerk;
-    private UIContainer uiStuff;
+    public UIContainer uiStuff;
 
     private void Update(){
         // if(player == null){
@@ -25,7 +25,7 @@ public class PerkBase : MonoBehaviour, IInteractable
         if(powered){
             light.enabled = true;
         }
-        else{
+        else if(powered == false){
             light.enabled = false;
         }
     }

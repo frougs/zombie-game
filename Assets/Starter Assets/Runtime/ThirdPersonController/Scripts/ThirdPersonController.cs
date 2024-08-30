@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 //using Alteruna;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -111,6 +112,13 @@ using UnityEngine.InputSystem;
         [HideInInspector] public InputAction sprint;
         [HideInInspector] public InputAction look;
 
+        //QuickFeet Perk Stuff!
+        public bool quickFeet;
+        [HideInInspector] public float burstSpeedAmount;
+        [HideInInspector] public float burstDuration;
+        [HideInInspector] public float burstTransitionTime;
+        private Coroutine burstSprintCoroutine;
+
         //private bool _hasAnimator;
 
         /*private bool IsCurrentDeviceMouse
@@ -173,6 +181,31 @@ using UnityEngine.InputSystem;
             JumpAndGravity();
             GroundedCheck();
             Move();
+            if(sprint.triggered && quickFeet){
+                //Debug.Log("Starting quick feet!!");
+                burstSprintCoroutine = StartCoroutine(BurstSprintCoroutine());
+            }
+            if(sprint.IsPressed() == false && burstSprintCoroutine != null){
+                StopCoroutine(burstSprintCoroutine);
+            }
+        }
+        private IEnumerator BurstSprintCoroutine(){
+            float elapsedTime = 0f;
+            var baseSprintSpeed = SprintSpeed;
+            while(elapsedTime < burstDuration){
+                SprintSpeed = Mathf.Lerp(baseSprintSpeed, burstSpeedAmount, elapsedTime/burstDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            SprintSpeed = burstSpeedAmount;
+            elapsedTime = 0f;
+            while(elapsedTime < burstTransitionTime){
+                SprintSpeed = Mathf.Lerp(burstSpeedAmount, baseSprintSpeed, elapsedTime/burstTransitionTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            SprintSpeed = baseSprintSpeed;
+            //Debug.Log("Quick feet ended");
         }
 
         private void LateUpdate()

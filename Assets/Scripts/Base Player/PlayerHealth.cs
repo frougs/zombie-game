@@ -5,12 +5,13 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
     public int maxHealth = 100;
-    [HideInInspector] float currentHealth;
+    [HideInInspector] public float currentHealth;
     private bool dead;
     public UnityEvent died;
     private UIContainer uiStuff;
     public bool weaponXEnabled = false;
     public int weaponXLevel;
+    public int juqMasterLevel;
     public int extraLives;
     public int extraLifeBoost;
     public bool extraLifeRegen;
@@ -49,14 +50,13 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     private void Update()
     {
-        if (currentHealth <= 0 && extraLives == 0)
+        if (currentHealth <= 0 && extraLives == 0 && isRegenerating == false)
         {
             Death();
         }
-        else if(extraLives > 0){
+        else if(extraLives > 0 && currentHealth <= 0){
             extraLives -= 1;
             currentHealth += extraLifeBoost;
-            extraLifeRegen = true;
             StartCoroutine(RegenerateHealthAfterDelay());
         }
         uiStuff.UpdateHealth((int)currentHealth);
@@ -71,10 +71,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     private IEnumerator RegenerateHealthAfterDelay()
     {
-        if(extraLifeRegen == false){
-            extraLifeRegen = false;
-            yield return new WaitForSeconds(regenerationDelay);
-        }
+
+        yield return new WaitForSeconds(regenerationDelay);
 
         isRegenerating = true;
 

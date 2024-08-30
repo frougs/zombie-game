@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 
 public class BaseGun : MonoBehaviour, IShootable
 {
@@ -17,7 +17,7 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public int currentAmmo;
     [SerializeField] public int ammoPrice;
     [SerializeField] public int gunPrice;
-    private bool canShoot = true;
+    public bool canShoot = true;
     private bool hasAmmo = true;
     //private GameObject progressBar;
     private UIContainer uiStuff;
@@ -34,6 +34,8 @@ public class BaseGun : MonoBehaviour, IShootable
     private bool hasReserveAmmo;
     [SerializeField] public GameObject buyModel;
     public LayerMask IgnoreLayer;
+    private Rage rageScript;
+    float modifiedDamage;
 
     private void Start(){
         currentAmmo = maxAmmo;
@@ -43,6 +45,12 @@ public class BaseGun : MonoBehaviour, IShootable
     public void Shot(GameObject shooter){
         if(reloading == false){
             if(canShoot && hasAmmo){
+                if(rageScript.doubledamage){
+                    modifiedDamage = damage * 2f;
+                }
+                else{
+                    modifiedDamage = damage;
+                }
                 currentAmmo -= 1;
                 if(soundSource != null){
                     soundSource.PlayOneShot(gunshot);
@@ -51,14 +59,17 @@ public class BaseGun : MonoBehaviour, IShootable
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
                     if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
-                        damagable.Damaged(damage, shooter);
+                        damagable.Damaged(modifiedDamage, shooter);
                         scoreSystem.AddToScore(pointsPerHit);
+                        canShoot = false;
+                        rageScript.Hit();
                     }
                     //Crit hit
                     else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
-                        damagable.Damaged(damage * critMultiplier, shooter);
+                        damagable.Damaged(modifiedDamage * critMultiplier, shooter);
                         scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
-
+                        canShoot = false;
+                        rageScript.CritHit();
                     }
                     else{
                         //Debug.LogWarning("Damagable not found");
@@ -121,6 +132,9 @@ public class BaseGun : MonoBehaviour, IShootable
         }
         else{
             fullAmmo = false;
+        }
+        if(rageScript == null){
+            rageScript = FindObjectOfType<Rage>();
         }
     }
     public void Reload(){

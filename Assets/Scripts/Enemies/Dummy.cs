@@ -59,7 +59,9 @@ public class Dummy : MonoBehaviour, IDamagable
             chasing = true;
         }*/
         if(chasing){
-            nav.SetDestination(target.transform.position);
+            if(target != null && nav != null){
+                nav.SetDestination(target.transform.position);
+            }
         }
         if(player == null){
             player = FindObjectOfType<ThirdPersonController>().gameObject;
@@ -126,7 +128,7 @@ public class Dummy : MonoBehaviour, IDamagable
     IEnumerator DamageTimer(){
         currentlyAttacking = true;
         yield return new WaitForSeconds(attackDelay);
-        Debug.Log("Attacking");
+        //Debug.Log("Attacking");
         currentlyAttacking = false;
         if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance){
             IDamagable attackTarget = target.GetComponent<IDamagable>();

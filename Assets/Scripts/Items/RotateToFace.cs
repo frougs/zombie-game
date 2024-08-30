@@ -25,7 +25,7 @@ public class RotateToFace : MonoBehaviour
                 }
             }
             */
-            Debug.Log("No Target Found");
+            //Debug.Log("No Target Found");
             target = FindObjectOfType<ThirdPersonController>().gameObject.transform;
         }
     }

@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickFeet : MonoBehaviour
+public class QuickFeet : PerkBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+    [SerializeField] float burstSpeedAmount;
+    [SerializeField] float burstDuration;
+    [SerializeField] float burstTransitionTime;
+    public override void DefaultPerk(){
+        player.GetComponent<ThirdPersonController>().quickFeet = true;
+        player.GetComponent<ThirdPersonController>().burstSpeedAmount = burstSpeedAmount;
+        player.GetComponent<ThirdPersonController>().burstDuration = burstDuration;
+        player.GetComponent<ThirdPersonController>().burstTransitionTime = burstTransitionTime;
         
     }
 }

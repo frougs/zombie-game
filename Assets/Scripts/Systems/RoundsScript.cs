@@ -69,10 +69,10 @@ public class RoundsScript : MonoBehaviour
     }
 
     private IEnumerator RoundStartDelay(){
-        Debug.Log("Waiting for round to start");
+        //Debug.Log("Waiting for round to start");
         canSpawn = false;
         yield return new WaitForSeconds(roundDelay);
-        Debug.Log("Round Starting...");
+        //Debug.Log("Round Starting...");
         canSpawn = true;
     }
 }

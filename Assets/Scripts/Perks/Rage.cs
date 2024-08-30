@@ -2,17 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rage : MonoBehaviour
+public class Rage : PerkBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private float rageAmount;
+    public bool doubledamage;
+    public float ragePerShot;
+    public float critMultiplier;
+    public float rageDecayRate;
+    public float rageDecayPauseDuration;
+    private float storedDecayRate;
+    private bool raging;
+    private bool canDecay;
+    private Coroutine rageDecayCoroutine;
+    public override void DefaultPerk(){
+        raging = true;
+    }
+    private void Update(){
+        uiStuff.UpdateRageBar(raging, rageAmount, doubledamage);
+    }
+    public void Hit(){
+        rageAmount += ragePerShot;
+        if(rageDecayCoroutine != null){
+            StopCoroutine(rageDecayCoroutine);
+        }
+    }
+    public void CritHit(){
+        rageAmount += ragePerShot * critMultiplier;
+        if(rageDecayCoroutine != null){
+            StopCoroutine(rageDecayCoroutine);
+        }
+    }
+    private void FixedUpdate(){
+        if(canDecay){
+            rageAmount -= rageDecayRate * Time.fixedDeltaTime;
+        }
+
+        if(rageAmount <= 0f){
+            rageAmount = 0f;
+        }
+        if(rageAmount >= 1f){
+            rageAmount = 1f;
+            doubledamage = true;
+            canDecay = false;
+            rageDecayCoroutine = StartCoroutine(RageDecayPause());
+        }
+        else{
+            doubledamage = false;
+        }
+    }
+    private IEnumerator RageDecayPause(){
+        canDecay = false;
+        yield return new WaitForSeconds(rageDecayPauseDuration);
+        canDecay = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

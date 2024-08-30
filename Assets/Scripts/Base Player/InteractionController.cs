@@ -41,7 +41,7 @@ public class InteractionController : MonoBehaviour
                     StartCoroutine(InteractDelay());
                 }
                 else if(interactable != null && holdingItem){
-                    Debug.Log("Already holding something, trying to drop it");
+                    //Debug.Log("Already holding something, trying to drop it");
                     if(hitData.transform.gameObject.GetComponent<BaseGun>() != null){
                         DropItem();
                     }

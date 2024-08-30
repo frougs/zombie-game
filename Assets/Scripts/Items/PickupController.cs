@@ -131,7 +131,7 @@ public class PickupController : MonoBehaviour, IInteractable
                 //Debug.Log(players.ToString() +" : " +user);
                 // if(players.ToString().Contains(user)){
                     //Debug.Log("User found: " +players.gameObject.name);
-                    Debug.Log(players.gameObject.name);
+                    //Debug.Log(players.gameObject.name);
                     var holderGunRoot = players.gameObject.GetComponent<InteractionController>().gunRoot;
                     item.transform.position = holderGunRoot.transform.position;
                     item.transform.rotation = holderGunRoot.transform.rotation;

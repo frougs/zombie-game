@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JuqMaster : MonoBehaviour
+public class JuqMaster : PerkBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public int healthBoost;
+    public float chanceToIgnoreHit;
+    public float damageNegationAmount;
+    public override void DefaultPerk(){
+        player.GetComponent<PlayerHealth>().maxHealth += healthBoost;
+        player.GetComponent<PlayerHealth>().currentHealth += healthBoost;
     }
 }
