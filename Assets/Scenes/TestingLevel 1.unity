@@ -3090,7 +3090,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1048042172}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PerkBase, Assembly-CSharp
         m_MethodName: PoweredOn
         m_Mode: 1
@@ -3800,20 +3800,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7b5dd359579a14aa9c60abb67470b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powered: 0
+  price: 2000
+  discountAmount: 0
+  discountApplied: 0
+  powered: 1
   light: {fileID: 195601876}
   perkIcon: {fileID: 2800000, guid: 3ba7b96984bbe5e49a76856becf0921e, type: 3}
   perkName: Quick Feet
   perkDescription: Swift on Your Toes...mmhh.. toes...
   upgradeNum: 0
-  price: 0
   player: {fileID: 0}
   popupDuration: 2.5
   hasPerk: 0
   uiStuff: {fileID: 0}
-  burstSpeedAmount: 15
+  burstSpeedAmount: 10
   burstDuration: 1
   burstTransitionTime: 0.5
+  level1Duration: 2
+  upgradedWalkSpeed: 5
+  reloadSpeedAugment: 0.5
 --- !u!1 &185210344
 GameObject:
   m_ObjectHideFlags: 0
@@ -30902,7 +30907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510ad0f5a54e0cb48b1c69e5949461b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  score: 4000
 --- !u!1001 &984153726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32809,8 +32814,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048042170}
-  - component: {fileID: 1048042172}
   - component: {fileID: 1048042171}
+  - component: {fileID: 1048042172}
   m_Layer: 0
   m_Name: SymbiosisPerkMachine
   m_TagString: Untagged
@@ -32866,21 +32871,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1048042169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb5d7ad38635f44486b47a57bd8b86b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f51702d05851b04f91f84e3f9d06ed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powered: 0
+  price: 4000
+  discountAmount: 0.25
+  discountApplied: 0
+  powered: 1
   light: {fileID: 112689342}
   perkIcon: {fileID: 2800000, guid: 49dde4a9e54af9f47a781c7f8bb00804, type: 3}
   perkName: Symbiosis
-  perkDescription: Become one
-  upgradeNum: 0
-  price: 100
+  perkDescription: Why do I hear eminem?
+  upgradeNum: 3
   player: {fileID: 0}
   popupDuration: 2.5
   hasPerk: 0
   uiStuff: {fileID: 0}
-  firstPurchased: 0
+  ammoDropObj: {fileID: 1474381863660203281, guid: 0f76207277f0aca49983fde1dd02247d, type: 3}
+  discountAmount: 0.25
+  lifeSteal: 0
+  lifeStealPercent: 0.01
 --- !u!4 &1049269442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1676609100239073865, guid: 0d780173c250d334f80c9061373c8e4f, type: 3}
@@ -33030,13 +33040,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb5d7ad38635f44486b47a57bd8b86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 500
+  discountAmount: 0
+  discountApplied: 0
   powered: 1
   light: {fileID: 1125514801}
   perkIcon: {fileID: 2800000, guid: f4dbc921bfed7434dbf666ea97885677, type: 3}
   perkName: Weapon X
   perkDescription: Pretty much quick revive! lol!
   upgradeNum: 0
-  price: 100
   player: {fileID: 0}
   popupDuration: 2.5
   hasPerk: 0
@@ -53991,13 +54003,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880a34435f9c1094bba61cf7ffc95176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 2000
+  discountAmount: 0
+  discountApplied: 0
   powered: 0
   light: {fileID: 1650041134}
   perkIcon: {fileID: 2800000, guid: 25a4104240ea21145a7ad5e774b82beb, type: 3}
   perkName: Rage
   perkDescription: AAAAHHHHHH!!!
   upgradeNum: 0
-  price: 0
   player: {fileID: 0}
   popupDuration: 2.5
   hasPerk: 0
@@ -54007,6 +54021,8 @@ MonoBehaviour:
   critMultiplier: 2
   rageDecayRate: 0.1
   rageDecayPauseDuration: 15
+  ragePerShotUpgrade: 0.1
+  rageDecayRateUpgrade: 0.05
 --- !u!1 &1696822144
 GameObject:
   m_ObjectHideFlags: 0
@@ -54421,20 +54437,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7c4a809e7d9814684f461221ba1c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 2500
+  discountAmount: 0
+  discountApplied: 0
   powered: 0
   light: {fileID: 1032986023}
   perkIcon: {fileID: 2800000, guid: 54e160c801ba4954ba1724906e449cfa, type: 3}
   perkName: Juq Master
   perkDescription: Nepali Women...
   upgradeNum: 0
-  price: 0
   player: {fileID: 0}
   popupDuration: 2.5
   hasPerk: 0
   uiStuff: {fileID: 0}
   healthBoost: 50
-  chanceToIgnoreHit: 20
-  damageNegationAmount: 2
+  level1HealthBoost: 0
+  chanceToIgnoreHit: 0.2
+  damageNegationAmount: 5
 --- !u!1 &1719585322 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6015801904299255468, guid: 3749b76f43b6f214f8b7c9f88c6ba504, type: 3}
@@ -59838,7 +59857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afad0289add7506449fd0e51ee038c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrice: 250
+  price: 0
+  discountAmount: 0
+  discountApplied: 0
   connectedDoors: []
   costText: []
   spawners: []

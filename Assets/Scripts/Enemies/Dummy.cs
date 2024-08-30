@@ -42,6 +42,7 @@ public class Dummy : MonoBehaviour, IDamagable
         currentHealth = maxHealth;
         nav = GetComponent<NavMeshAgent>();
         //nav.enabled = false;
+        player = FindObjectOfType<ThirdPersonController>().gameObject;
         targetBarrier = FindOptimalBarrier();
 
     }
@@ -62,9 +63,6 @@ public class Dummy : MonoBehaviour, IDamagable
             if(target != null && nav != null){
                 nav.SetDestination(target.transform.position);
             }
-        }
-        if(player == null){
-            player = FindObjectOfType<ThirdPersonController>().gameObject;
         }
         /*if(pastBarricade){
             chasing = true;
@@ -100,6 +98,7 @@ public class Dummy : MonoBehaviour, IDamagable
         FindObjectOfType<ScoreSystem>().AddToScore(killBonus);
         FindObjectOfType<RoundsScript>().remainingSpawnCount -= 1;
         FindObjectOfType<RoundsScript>().currentAlive -= 1;
+        FindObjectOfType<Symbiosis>().EnemyDeath(this.gameObject);
         Destroy(this.gameObject);
         // healthText.gameObject.SetActive(false);
         // dead = true;
@@ -194,5 +193,10 @@ public class Dummy : MonoBehaviour, IDamagable
         
         return closestBarrier != null ? closestBarrier : player;
         //return closestBarrier;
+    }
+    private void Update(){
+        if(player == null){
+            player = FindObjectOfType<ThirdPersonController>().gameObject;
+        }
     }
 }

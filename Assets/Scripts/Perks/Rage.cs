@@ -12,10 +12,23 @@ public class Rage : PerkBase
     public float rageDecayPauseDuration;
     private float storedDecayRate;
     private bool raging;
-    private bool canDecay;
+    private bool canDecay = true;
     private Coroutine rageDecayCoroutine;
+    [Header("Upgrades")]
+    public float ragePerShotUpgrade;
+    public float rageDecayRateUpgrade;
     public override void DefaultPerk(){
         raging = true;
+    }
+    public override void PerkUpgrade1(){
+        ragePerShot = ragePerShotUpgrade;
+    }
+    public override void PerkUpgrade2(){
+        rageDecayRate = rageDecayRateUpgrade;
+    }
+    public override void PerkUpgrade3(){
+        canDecay = false;
+        rageAmount = 1f;
     }
     private void Update(){
         uiStuff.UpdateRageBar(raging, rageAmount, doubledamage);
@@ -43,8 +56,11 @@ public class Rage : PerkBase
         if(rageAmount >= 1f){
             rageAmount = 1f;
             doubledamage = true;
-            canDecay = false;
-            rageDecayCoroutine = StartCoroutine(RageDecayPause());
+            //canDecay = false;
+            if(canDecay == true){
+                rageDecayCoroutine = StartCoroutine(RageDecayPause());
+            }
+            
         }
         else{
             doubledamage = false;

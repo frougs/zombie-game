@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
@@ -15,11 +16,17 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     public int extraLives;
     public int extraLifeBoost;
     public bool extraLifeRegen;
-
+    [Header("Weapon X Stuff")]
+//EDIT THESE FOR WEAPONX
     public float regenerationDelay = 5f; 
     public float regenerationRate = 1f; 
     private bool isRegenerating = false;
+    private Coroutine regen;
 
+    //JuqMaster stuff
+    [Header("Juq Master Stuff")]
+    public double chanceToIgnoreHit;
+    public float damageNegationAmount;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -31,20 +38,27 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     public void Damaged(float damage, GameObject attacker)
     {
-        if (!dead)
-        {
-            currentHealth -= damage;
-            StopCoroutine("RegenerateHealth"); 
-            isRegenerating = false; 
+        if(AttemptDodge() == false){
+            if(regen != null){
+                StopCoroutine(regen);
+            }
+            if (!dead)
+            {
+                currentHealth -= damage - damageNegationAmount;
+                isRegenerating = false; 
 
-            if (currentHealth <= 0)
-            {
-                Death();
+                if (currentHealth <= 0 && extraLives == 0)
+                {
+                    Death();
+                }
+                else if(weaponXEnabled == true)
+                {
+                    regen = StartCoroutine(RegenerateHealthAfterDelay());
+                }
             }
-            else if(weaponXEnabled == true)
-            {
-                StartCoroutine(RegenerateHealthAfterDelay());
-            }
+        }
+        else{
+            //Attack Dodged, add sound effect/visual here later
         }
     }
 
@@ -57,7 +71,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         else if(extraLives > 0 && currentHealth <= 0){
             extraLives -= 1;
             currentHealth += extraLifeBoost;
-            StartCoroutine(RegenerateHealthAfterDelay());
+            regen = StartCoroutine(RegenerateHealthAfterDelay());
         }
         uiStuff.UpdateHealth((int)currentHealth);
     }
@@ -85,5 +99,12 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         }
 
         isRegenerating = false;
+    }
+    private bool AttemptDodge(){
+        double roll = UnityEngine.Random.value;
+        return roll < chanceToIgnoreHit;
+    }
+    public void StartRegenWhenPurchased(){
+        regen = StartCoroutine(RegenerateHealthAfterDelay());
     }
 }

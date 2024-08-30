@@ -23,16 +23,21 @@ public class QuickRevive : PerkBase
     public override void DefaultPerk(){
         player.GetComponent<PlayerHealth>().weaponXEnabled = true;
         player.GetComponent<PlayerHealth>().weaponXLevel = 1;
-        player.GetComponent<PlayerHealth>().extraLives = 1;
+        player.GetComponent<PlayerHealth>().extraLives += 1;
+        player.GetComponent<PlayerHealth>().StartRegenWhenPurchased();
     }
     public override void PerkUpgrade1(){
         player.GetComponent<PlayerHealth>().weaponXLevel = 2;
+        player.GetComponent<PlayerHealth>().regenerationDelay =  player.GetComponent<PlayerHealth>().regenerationDelay / 2f;
     }
     public override void PerkUpgrade2(){
         player.GetComponent<PlayerHealth>().weaponXLevel = 3;
+        player.GetComponent<PlayerHealth>().regenerationRate += 2.5f;
+        player.GetComponent<PlayerHealth>().extraLifeBoost += 15;
     }
     public override void PerkUpgrade3(){
         player.GetComponent<PlayerHealth>().weaponXLevel = 4;
+        player.GetComponent<PlayerHealth>().extraLives += 1;
     }
 
     

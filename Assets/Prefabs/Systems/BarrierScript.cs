@@ -7,9 +7,9 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     public bool barrierActive;
     [SerializeField] GameObject[] planks;
     private UIContainer uiStuff;
-    [SerializeField] private float barrierCapacity;
+    [SerializeField] public float barrierCapacity;
     [SerializeField] private float currentProgress;
-    [SerializeField] private float progressPerInteract;
+    [SerializeField] public float progressPerInteract;
     private void Start(){
         currentProgress = barrierCapacity;
     }

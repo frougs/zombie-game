@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class WallBuyScript : MonoBehaviour, IInteractable
+public class WallBuyScript : Purchasable, IInteractable
 {
     [SerializeField] GameObject buyItem;
-    [SerializeField] int itemPrice;
+    //[SerializeField] int itemPrice;
     [SerializeField] bool gunMode;
     [SerializeField] bool ammoMode;
     [SerializeField] GameObject spawnPOS;
@@ -17,15 +17,15 @@ public class WallBuyScript : MonoBehaviour, IInteractable
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(gunMode){
             var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
-            if(scoreSystem.score >= itemPrice){
-            scoreSystem.SubtractScore(itemPrice);
+            if(scoreSystem.score >= price){
+            scoreSystem.SubtractScore(price);
             Instantiate(buyItem, spawnPOS.transform.position, Quaternion.identity);
             }
         }
         if(ammoMode){
             var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
             if(scoreSystem.score >= buyItem.GetComponent<BaseGun>().ammoPrice){
-                scoreSystem.SubtractScore(itemPrice);
+                scoreSystem.SubtractScore(price);
                 interactionCon.currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxReserveAmmo;
                 interactionCon.currentlyHeld.GetComponent<BaseGun>().currentAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxAmmo;
             }  
@@ -34,12 +34,16 @@ public class WallBuyScript : MonoBehaviour, IInteractable
     }
     public void Update(){
         if(FindObjectOfType<InteractionController>().currentHeldID == forSaleID){
-            itemPrice = buyItem.GetComponent<BaseGun>().ammoPrice;
+            //price = buyItem.GetComponent<BaseGun>().ammoPrice;
+ 
+            price = discountApplied ? buyItem.GetComponent<BaseGun>().ammoPrice - (int)(buyItem.GetComponent<BaseGun>().ammoPrice * discountAmount) : buyItem.GetComponent<BaseGun>().ammoPrice;
+            
             ammoMode = true;
             gunMode = false;
         }
         else{
-            itemPrice = buyItem.GetComponent<BaseGun>().gunPrice;
+            //price = buyItem.GetComponent<BaseGun>().gunPrice;
+            price = discountApplied ? buyItem.GetComponent<BaseGun>().gunPrice - (int)(buyItem.GetComponent<BaseGun>().gunPrice * discountAmount) : buyItem.GetComponent<BaseGun>().gunPrice;
             gunMode = true;
             ammoMode = false;  
         }
@@ -48,7 +52,7 @@ public class WallBuyScript : MonoBehaviour, IInteractable
         //     gunMode = true;
         //     ammoMode = false;
         // }
-        priceText.text = "$" + itemPrice.ToString();
+        priceText.text = "$" + price.ToString();
     }
     private void Start(){
         Instantiate(buyItem.GetComponent<BaseGun>().buyModel, examplePOS.transform.position, examplePOS.transform.rotation, examplePOS.transform);

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DoorSystem : MonoBehaviour, IInteractable
+public class DoorSystem : Purchasable, IInteractable
 {
-    [SerializeField] int doorPrice;
+    //[SerializeField] int doorPrice;
     [SerializeField] GameObject[] connectedDoors;
     [SerializeField] TextMeshPro[] costText;
     [SerializeField] SpawnerScript[] spawners;
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
-        if(scoreSystem.score >= doorPrice){
-            scoreSystem.SubtractScore(doorPrice);
+        if(scoreSystem.score >= price){
+            scoreSystem.SubtractScore(price);
             RemoveDoors();
         }
         else{
@@ -35,10 +35,13 @@ public class DoorSystem : MonoBehaviour, IInteractable
     }
     public void UpdateCostText(){
         foreach(TextMeshPro text in costText){
-            text.text = "$"+doorPrice;
+            text.text = "$"+price;
         }
     }
     private void Start(){
+        UpdateCostText();
+    }
+    private void Update(){
         UpdateCostText();
     }
 

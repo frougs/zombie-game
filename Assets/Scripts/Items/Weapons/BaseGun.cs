@@ -35,14 +35,23 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public GameObject buyModel;
     public LayerMask IgnoreLayer;
     private Rage rageScript;
+    private Symbiosis symbiosisScript;
     float modifiedDamage;
+    public WeaponController weaponCon;
+    public float reloadSpeedAugment;
+    private GameObject player;
+    
 
     private void Start(){
         currentAmmo = maxAmmo;
         currentReserveAmmo = maxReserveAmmo;
         soundSource = this.GetComponent<AudioSource>();
+        weaponCon = FindObjectOfType<WeaponController>();
     }
     public void Shot(GameObject shooter){
+        if(shooter.GetComponent<ThirdPersonController>() != null){
+            player = shooter;
+        }
         if(reloading == false){
             if(canShoot && hasAmmo){
                 if(rageScript.doubledamage){
@@ -59,6 +68,11 @@ public class BaseGun : MonoBehaviour, IShootable
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
                     if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
+                        if(symbiosisScript != null){
+                            if(symbiosisScript.lifeSteal && player != null){
+                                player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+                            }
+                        }
                         damagable.Damaged(modifiedDamage, shooter);
                         scoreSystem.AddToScore(pointsPerHit);
                         canShoot = false;
@@ -66,6 +80,11 @@ public class BaseGun : MonoBehaviour, IShootable
                     }
                     //Crit hit
                     else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
+                        if(symbiosisScript != null){
+                            if(symbiosisScript.lifeSteal && player != null){
+                                player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+                            }
+                        }
                         damagable.Damaged(modifiedDamage * critMultiplier, shooter);
                         scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
                         canShoot = false;
@@ -121,7 +140,13 @@ public class BaseGun : MonoBehaviour, IShootable
         if(reloading){
             if(rProgress < reloadSpeed){
                 rProgress += Time.deltaTime;
-                progressBar.fillAmount = rProgress/reloadSpeed;
+                if(reloadSpeedAugment == 0){
+                    progressBar.fillAmount = rProgress/reloadSpeed;
+                }
+                else{
+                    progressBar.fillAmount = rProgress/(reloadSpeed * reloadSpeedAugment);
+                }
+                
             }
         }
         else{
@@ -136,6 +161,18 @@ public class BaseGun : MonoBehaviour, IShootable
         if(rageScript == null){
             rageScript = FindObjectOfType<Rage>();
         }
+        /*if(FindObjectOfType<WeaponController>() == null && weaponCon == null){
+            weaponCon = FindObjectOfType<WeaponController>();
+        }
+        else{
+            reloadSpeedAugment = weaponCon.reloadSpeedAugment;
+        }*/
+        if(weaponCon.reloadSpeedAugment!= 0){
+            reloadSpeedAugment = weaponCon.reloadSpeedAugment;
+        }
+        if(symbiosisScript == null){
+            symbiosisScript = FindObjectOfType<Symbiosis>();
+        }
     }
     public void Reload(){
         if(currentReserveAmmo > 0){
@@ -145,7 +182,12 @@ public class BaseGun : MonoBehaviour, IShootable
     IEnumerator ReloadTimer(){
         reloading = true;
         progressBar.gameObject.SetActive(true);
-        yield return new WaitForSeconds(reloadSpeed);
+        if(reloadSpeedAugment == 0){
+            yield return new WaitForSeconds(reloadSpeed);
+        }
+        else{
+            yield return new WaitForSeconds(reloadSpeed * reloadSpeedAugment);
+        }
         progressBar.gameObject.SetActive(false);
         var savedAmmo = currentReserveAmmo;
         currentReserveAmmo += (currentAmmo - maxAmmo);

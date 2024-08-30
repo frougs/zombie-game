@@ -9,6 +9,7 @@ public class WeaponController : MonoBehaviour
     [HideInInspector] public InputAction attack;
     [HideInInspector] public InputAction reload;
     [HideInInspector] public PlayerInput _pInput;
+    public float reloadSpeedAugment;
     private void Start(){
         _pInput = GetComponent<PlayerInput>();
         attack = _pInput.actions["Attack"];

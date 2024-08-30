@@ -69,12 +69,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afad0289add7506449fd0e51ee038c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrice: 1000
+  price: 1000
   connectedDoors:
   - {fileID: 0}
   costText:
   - {fileID: 8291638847461623221}
   - {fileID: 1101234676119586595}
+  spawners: []
 --- !u!1 &2647504222968258405
 GameObject:
   m_ObjectHideFlags: 0

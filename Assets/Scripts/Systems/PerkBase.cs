@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PerkBase : MonoBehaviour, IInteractable
+public class PerkBase : Purchasable, IInteractable
 {
     [SerializeField] public bool powered;
     //[SerializeField] ThirdPersonController player;
@@ -12,7 +12,7 @@ public class PerkBase : MonoBehaviour, IInteractable
     [SerializeField] public string perkName;
     [SerializeField] public string perkDescription;
     [SerializeField] public int upgradeNum = 0;
-    [SerializeField] public int price;
+    //[SerializeField] public int price;
     [SerializeField] public GameObject player;
     [SerializeField] public float popupDuration;
     [SerializeField] public bool hasPerk;
@@ -48,16 +48,16 @@ public class PerkBase : MonoBehaviour, IInteractable
         FindObjectOfType<PopupTextScript>().Message(perkName, perkDescription, popupDuration);
         hasPerk = true;
         AddPerkToUI();
-        if(upgradeNum == 0){
+        if(upgradeNum >= 0){
             //Base perk stuff here
             DefaultPerk();
-            if(upgradeNum == 1){
+            if(upgradeNum >= 1){
                 //Upgrade number 1 stuff
                 PerkUpgrade1();
-                if(upgradeNum == 2){
+                if(upgradeNum >= 2){
                     //Upgrade number 2 stuff
                     PerkUpgrade2();
-                    if(upgradeNum == 3){
+                    if(upgradeNum >= 3){
                         //Upgrade number 3 stuff
                         PerkUpgrade3();
                     }
