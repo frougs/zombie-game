@@ -14,6 +14,8 @@ public class UIContainer : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI roundText;
     [SerializeField] TextMeshProUGUI remainingText;
+    [SerializeField] GameObject perkParent;
+
 
     public void UpdateAmmo(int currentAmmo, int maxAmmo){
         ammoText.text = "Ammo: " + currentAmmo + " | " + maxAmmo.ToString();
@@ -33,5 +35,16 @@ public class UIContainer : MonoBehaviour
     }
     public void UpdateRemaining(int remaining, int total){
         remainingText.text = "Left: " +remaining.ToString() + "/" +total;
+    }
+    public void AddPerk(Texture2D icon){
+        GameObject perkObject = new GameObject("Perk_UI");
+        perkObject.transform.SetParent(perkParent.transform, false);
+        Image image = perkObject.AddComponent<Image>();
+        if(icon != null){
+            image.sprite = TextureToSprite(icon);
+        }
+    }
+    Sprite TextureToSprite(Texture2D texture){
+         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 }
