@@ -18,6 +18,7 @@ public class UIContainer : MonoBehaviour
     [SerializeField] GameObject rageBar;
     [SerializeField] Image rageBarFill;
     [SerializeField] GameObject doubleDamageObj;
+    [SerializeField] TextMeshProUGUI upgradeTokenCount;
 
 
 
@@ -66,5 +67,11 @@ public class UIContainer : MonoBehaviour
             rageBar.SetActive(false);
             doubleDamageObj.SetActive(false);
         }
+    }
+    public void UpdateUpgradeTokens(){
+        upgradeTokenCount.text = PlayerPrefs.GetInt("UpgradeTokens").ToString();
+    }
+    public void LateUpdate(){
+        UpdateUpgradeTokens();
     }
 }

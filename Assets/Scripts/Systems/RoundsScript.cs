@@ -45,6 +45,11 @@ public class RoundsScript : MonoBehaviour
         }
         uiStuff.UpdateRemaining(remainingSpawnCount, totalSpawnCount);
 
+        if(roundNumber % 10 == 0){
+            uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(1);
+
+        }
+
     }
     private void CalculateNextRound(){
         float nextSpawnAmount = ((totalSpawnCount * 2.5f)/2f);

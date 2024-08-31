@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PerkBase : Purchasable, IInteractable
 {
@@ -17,6 +18,8 @@ public class PerkBase : Purchasable, IInteractable
     [SerializeField] public float popupDuration;
     [SerializeField] public bool hasPerk;
     public UIContainer uiStuff;
+    [SerializeField] TextMeshPro priceText;
+    [SerializeField] GameObject needPowerObj;
 
     private void Update(){
         // if(player == null){
@@ -24,10 +27,13 @@ public class PerkBase : Purchasable, IInteractable
         // }
         if(powered){
             light.enabled = true;
+            needPowerObj.SetActive(false);
         }
         else if(powered == false){
             light.enabled = false;
+            needPowerObj.SetActive(true);
         }
+        priceText.text = "$" + price.ToString();
     }
     public void PoweredOn(){
         powered = true;

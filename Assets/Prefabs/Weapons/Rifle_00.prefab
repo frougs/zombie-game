@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 129f0ad0f238ef349aef1e050de95f49, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.74
+      value: 23.546783
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129f0ad0f238ef349aef1e050de95f49, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.11
+      value: 0.010000229
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129f0ad0f238ef349aef1e050de95f49, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.28
+      value: 3.2252114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 129f0ad0f238ef349aef1e050de95f49, type: 3}
       propertyPath: m_LocalRotation.w
@@ -89,28 +89,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322fbaa5ea998d54cb3c3e989a568b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 25
   fireRate: 0.08
-  maxAmmo: 32
-  maxReserveAmmo: 0
+  maxAmmo: 16
+  maxReserveAmmo: 64
   currentReserveAmmo: 0
   reloadSpeed: 1
   range: 45
   critMultiplier: 1.25
   currentAmmo: 0
-  ammoPrice: 0
-  gunPrice: 0
+  ammoPrice: 300
+  gunPrice: 1200
+  canShoot: 1
   held: 0
   reloadProgress: 0
   reloading: 0
   fullAmmo: 0
   gunshot: {fileID: 8300000, guid: 7c3232403eb04cf4997a5d8ec15770eb, type: 3}
   soundSource: {fileID: 0}
-  pointsPerHit: 0
-  buyModel: {fileID: 0}
+  pointsPerHit: 10
+  buyModel: {fileID: 5017205580898781998, guid: cc4156adf6614cb4693b57fd602cf0b9, type: 3}
   IgnoreLayer:
     serializedVersion: 2
     m_Bits: 64
+  weaponCon: {fileID: 0}
+  reloadSpeedAugment: 0
 --- !u!54 &5418589098786725845
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,6 +279,10 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 125324796880710405}
+    - target: {fileID: -3954536723685085713, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3954536723685085713, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: objColl
       value: 
