@@ -30,9 +30,6 @@ public class Rage : PerkBase
         canDecay = false;
         rageAmount = 1f;
     }
-    private void Update(){
-        uiStuff.UpdateRageBar(raging, rageAmount, doubledamage);
-    }
     public void Hit(){
         rageAmount += ragePerShot;
         if(rageDecayCoroutine != null){
@@ -46,6 +43,7 @@ public class Rage : PerkBase
         }
     }
     private void FixedUpdate(){
+        uiStuff.UpdateRageBar(raging, rageAmount, doubledamage);
         if(canDecay){
             rageAmount -= rageDecayRate * Time.fixedDeltaTime;
         }

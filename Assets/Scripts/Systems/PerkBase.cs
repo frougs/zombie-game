@@ -18,10 +18,10 @@ public class PerkBase : Purchasable, IInteractable
     [SerializeField] public float popupDuration;
     [SerializeField] public bool hasPerk;
     public UIContainer uiStuff;
-    [SerializeField] TextMeshPro priceText;
-    [SerializeField] GameObject needPowerObj;
+    [SerializeField] public TextMeshPro priceText;
+    [SerializeField] public GameObject needPowerObj;
 
-    private void Update(){
+    public virtual void Update(){
         // if(player == null){
         //     player = FindObjectOfType<ThirdPersonController>();
         // }

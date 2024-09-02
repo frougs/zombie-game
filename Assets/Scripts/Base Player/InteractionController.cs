@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class InteractionController : MonoBehaviour
 {
@@ -61,8 +62,15 @@ public class InteractionController : MonoBehaviour
         if(!holdingItem){
             uiStuff.ClearAmmo();
         }
-        if(gunRoot.transform.GetChild(0).gameObject != null){
-            currentlyHeld = gunRoot.transform.GetChild(0).gameObject;
+        if(gunRoot != null){
+            try{
+                if(gunRoot.transform.GetChild(0).gameObject != null){
+                    currentlyHeld = gunRoot.transform.GetChild(0).gameObject;
+                }
+            }
+            catch(Exception e){
+
+            }
         }
         
     }

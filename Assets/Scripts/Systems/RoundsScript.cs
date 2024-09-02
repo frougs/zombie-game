@@ -20,6 +20,7 @@ public class RoundsScript : MonoBehaviour
     public int roundSpawned;
     private bool canSpawn;
     private UIContainer uiStuff;
+    private int triggeredForThisRound = 0;
     private void Start(){
         if(roundNumber == 0){
             roundNumber = 1;
@@ -45,8 +46,9 @@ public class RoundsScript : MonoBehaviour
         }
         uiStuff.UpdateRemaining(remainingSpawnCount, totalSpawnCount);
 
-        if(roundNumber % 10 == 0){
+        if(roundNumber % 10 == 0 && roundNumber != triggeredForThisRound){
             uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(1);
+            triggeredForThisRound = roundNumber;
 
         }
 

@@ -97,6 +97,7 @@ MonoBehaviour:
   floatSpeed: 1
   rotationSpeed: 50
   selfDestructTime: 10
+  ammoAmount: 5
 --- !u!65 &5429935858056110008
 BoxCollider:
   m_ObjectHideFlags: 0

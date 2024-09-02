@@ -147,7 +147,7 @@ using System.Collections;
         {
                     //_avatar = GetComponent<Alteruna.Avatar>();
                     _animator = GetComponent<Animator>();
- 
+
         // if (!_avatar.IsMe)
         //     return;
             _pInput = GetComponent<PlayerInput>();
@@ -174,7 +174,6 @@ using System.Collections;
 
         private void Update()
         {
-             
         // if (!_avatar.IsMe)
         //     return;
             //_hasAnimator = TryGetComponent(out _animator);
@@ -211,7 +210,6 @@ using System.Collections;
         private void LateUpdate()
         {
                     
- 
         // if (!_avatar.IsMe)
         //     return;
             CameraRotation();
@@ -318,7 +316,7 @@ using System.Collections;
             if (move.ReadValue<Vector2>() != Vector2.zero)
             {
                 /*_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
+                _mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
 */

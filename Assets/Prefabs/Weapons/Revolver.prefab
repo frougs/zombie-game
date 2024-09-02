@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Revolver
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4df3ce82db8e66645afd54ab1d5b0262, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -168,6 +172,7 @@ MonoBehaviour:
   currentAmmo: 0
   ammoPrice: 150
   gunPrice: 450
+  canShoot: 1
   held: 0
   reloadProgress: 0
   reloading: 0
@@ -178,7 +183,9 @@ MonoBehaviour:
   buyModel: {fileID: 2889979119924903280, guid: d8cc71a1b9167c842a8db4fc0362fab3, type: 3}
   IgnoreLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72
+  weaponCon: {fileID: 0}
+  reloadSpeedAugment: 0
 --- !u!82 &8040279227542516848
 AudioSource:
   m_ObjectHideFlags: 0
@@ -312,6 +319,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupBase
       objectReference: {fileID: 0}
+    - target: {fileID: 1503358749229723325, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603530763097581854, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942672664376132735, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3891792819432676871, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -351,6 +370,14 @@ PrefabInstance:
     - target: {fileID: 3891792819432676871, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011672436095594637, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4527620543784450645, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -40,6 +40,8 @@ public class BaseGun : MonoBehaviour, IShootable
     public WeaponController weaponCon;
     public float reloadSpeedAugment;
     private GameObject player;
+    [SerializeField] GameObject particleSpawnPOS;
+    [SerializeField] GameObject particlesOBJ;
     
 
     private void Start(){
@@ -63,35 +65,43 @@ public class BaseGun : MonoBehaviour, IShootable
                 currentAmmo -= 1;
                 if(soundSource != null){
                     soundSource.PlayOneShot(gunshot);
+                            if(particlesOBJ != null){
+                                //particles.toggle = true;
+                                //particles.ParticleBurst();
+                                Instantiate(particlesOBJ, particleSpawnPOS.transform);
+                            }
                 }
                 if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity,  ~IgnoreLayer)){
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
-                    if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
-                        if(symbiosisScript != null){
-                            if(symbiosisScript.lifeSteal && player != null){
-                                player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+                    //Debug.Log("hit: " +hitData.transform.gameObject.name);
+                    if(hitData.transform.gameObject != player){
+                        if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
+                            if(symbiosisScript != null){
+                                if(symbiosisScript.lifeSteal && player != null){
+                                    player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+                                }
                             }
+                            damagable.Damaged(modifiedDamage, shooter);
+                            scoreSystem.AddToScore(pointsPerHit);
+                            canShoot = false;
+                            rageScript.Hit();
                         }
-                        damagable.Damaged(modifiedDamage, shooter);
-                        scoreSystem.AddToScore(pointsPerHit);
-                        canShoot = false;
-                        rageScript.Hit();
-                    }
-                    //Crit hit
-                    else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
-                        if(symbiosisScript != null){
-                            if(symbiosisScript.lifeSteal && player != null){
-                                player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+                        //Crit hit
+                        else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
+                            if(symbiosisScript != null){
+                                if(symbiosisScript.lifeSteal && player != null){
+                                    player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+                                }
                             }
+                            damagable.Damaged(modifiedDamage * critMultiplier, shooter);
+                            scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
+                            canShoot = false;
+                            rageScript.CritHit();
                         }
-                        damagable.Damaged(modifiedDamage * critMultiplier, shooter);
-                        scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
-                        canShoot = false;
-                        rageScript.CritHit();
-                    }
-                    else{
-                        //Debug.LogWarning("Damagable not found");
+                        else{
+                            //Debug.LogWarning("Damagable not found");
+                        }
                     }
                 }
                 StartCoroutine(ShotDelay());
