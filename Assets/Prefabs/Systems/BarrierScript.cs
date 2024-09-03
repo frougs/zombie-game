@@ -37,7 +37,7 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
      public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         currentProgress += progressPerInteract;
     }
-    public void Damaged(float damage, GameObject attacker){
+    public void Damaged(float damage, GameObject attacker, Vector3 pos){
         if(attacker.GetComponent<Dummy>() != null){
             if(barrierActive){
                 currentProgress -= damage;

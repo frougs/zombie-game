@@ -139,6 +139,7 @@ MonoBehaviour:
   attackDamage: 10
   killBonus: 100
   spawnedRoom: 0
+  damagedParticles: {fileID: 1899273911771471241, guid: 43fdd1daf59e4b146ba94ee55ef5ffd5, type: 3}
 --- !u!195 &4226794117900371105
 NavMeshAgent:
   m_ObjectHideFlags: 0

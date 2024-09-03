@@ -19,7 +19,7 @@ public class UIContainer : MonoBehaviour
     [SerializeField] Image rageBarFill;
     [SerializeField] GameObject doubleDamageObj;
     [SerializeField] TextMeshProUGUI upgradeTokenCount;
-
+    [SerializeField] Image damagedOLay;
 
 
     public void UpdateAmmo(int currentAmmo, int maxAmmo){
@@ -73,5 +73,17 @@ public class UIContainer : MonoBehaviour
     }
     public void LateUpdate(){
         UpdateUpgradeTokens();
+    }
+    public void UpdateDamagedOverlay(bool enabled, float percent){
+        if(enabled){
+            damagedOLay.gameObject.SetActive(true);
+            float alpha = Mathf.Clamp(percent, 0f, 1f);
+            Color color = damagedOLay.color;
+            color.a = alpha;
+            damagedOLay.color = color; 
+        }
+        else{
+            damagedOLay.gameObject.SetActive(false);
+        }
     }
 }

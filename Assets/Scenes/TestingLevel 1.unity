@@ -18786,17 +18786,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1676609100239073865, guid: 0d780173c250d334f80c9061373c8e4f, type: 3}
   m_PrefabInstance: {fileID: 649670388}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &658864463 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1897471231405228611, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
-  m_PrefabInstance: {fileID: 1808756743}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &660829506
 GameObject:
   m_ObjectHideFlags: 0
@@ -19606,6 +19595,10 @@ PrefabInstance:
       propertyPath: particlesOBJ
       value: 
       objectReference: {fileID: 6527157342470819202, guid: 73cc2ab3d17f2294f91a0e67e8d4a075, type: 3}
+    - target: {fileID: 3280042868994268944, guid: 8254b48cb71610247bf8d442707c3243, type: 3}
+      propertyPath: impactParticle
+      value: 
+      objectReference: {fileID: 3290264720658229784, guid: 03bee7089ee1fd14b93714b34e86475b, type: 3}
     - target: {fileID: 8600061239845239585, guid: 8254b48cb71610247bf8d442707c3243, type: 3}
       propertyPath: m_Name
       value: Pistol Variant
@@ -38120,7 +38113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1247335877
 Transform:
   m_ObjectHideFlags: 0
@@ -42861,6 +42854,10 @@ PrefabInstance:
     - target: {fileID: 4652890345894121759, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: score
+      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 6783965680461646238, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55160,10 +55157,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
-      propertyPath: upgradeTokenCount
-      value: 
-      objectReference: {fileID: 658864463}
     - target: {fileID: 1795038381454630365, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -55279,18 +55272,6 @@ PrefabInstance:
     - target: {fileID: 8507005331179293834, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8667804205470256476, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
-      propertyPath: m_Text
-      value: Esc
-      objectReference: {fileID: 0}
-    - target: {fileID: 9037490759093005587, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
-      propertyPath: m_Text
-      value: Ctrl
-      objectReference: {fileID: 0}
-    - target: {fileID: 9149712053746136346, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
-      propertyPath: m_Text
-      value: Shift
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

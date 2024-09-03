@@ -29,8 +29,11 @@ public class Dummy : MonoBehaviour, IDamagable
     private bool barrierDown;
     private GameObject targetBarrier;
     private bool barrierDelay;
-
-    public void Damaged(float damage, GameObject attacker){
+    [SerializeField] GameObject damagedParticles;
+    public void Damaged(float damage, GameObject attacker, Vector3 hitPoint){
+        if(damagedParticles != null){
+            Instantiate(damagedParticles, hitPoint, Quaternion.LookRotation((player.transform.position - hitPoint).normalized));
+        }
         //Debug.Log("OUCHIE!!!! I WAS DAMAGED FOR: " + damage);
         if(!dead){
             currentHealth -= damage;
@@ -132,7 +135,7 @@ public class Dummy : MonoBehaviour, IDamagable
         if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance){
             IDamagable attackTarget = target.GetComponent<IDamagable>();
             if(attackTarget != null){
-                attackTarget.Damaged(attackDamage, this.gameObject);
+                attackTarget.Damaged(attackDamage, this.gameObject, Vector3.zero);
             }
         }
     }

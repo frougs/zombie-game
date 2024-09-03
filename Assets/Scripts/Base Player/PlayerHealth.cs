@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         }
     }
 
-    public void Damaged(float damage, GameObject attacker)
+    public void Damaged(float damage, GameObject attacker, Vector3 pos)
     {
         if(AttemptDodge() == false){
             if(regen != null){
@@ -74,6 +74,13 @@ public class PlayerHealth : MonoBehaviour, IDamagable
             regen = StartCoroutine(RegenerateHealthAfterDelay());
         }
         uiStuff.UpdateHealth((int)currentHealth);
+
+        if(currentHealth/maxHealth <= 0.25f){
+            uiStuff.UpdateDamagedOverlay(true, 1f - (currentHealth/maxHealth));
+        }
+        else{
+            uiStuff.UpdateDamagedOverlay(false, 0f);
+        }
     }
 
     private void Death()

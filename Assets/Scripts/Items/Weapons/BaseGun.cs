@@ -42,6 +42,7 @@ public class BaseGun : MonoBehaviour, IShootable
     private GameObject player;
     [SerializeField] GameObject particleSpawnPOS;
     [SerializeField] GameObject particlesOBJ;
+    [SerializeField] GameObject impactParticle;
     
 
     private void Start(){
@@ -72,6 +73,11 @@ public class BaseGun : MonoBehaviour, IShootable
                             }
                 }
                 if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity,  ~IgnoreLayer)){
+                    
+                    //Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+                    //Vector3 towardsPlayer = (player.transform.position - impParticle.transform.position).normalized;
+                    //Debug.Log(hitData.transform.position);
+
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
                     //Debug.Log("hit: " +hitData.transform.gameObject.name);
@@ -82,7 +88,7 @@ public class BaseGun : MonoBehaviour, IShootable
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
                                 }
                             }
-                            damagable.Damaged(modifiedDamage, shooter);
+                            damagable.Damaged(modifiedDamage, shooter, hitData.point);
                             scoreSystem.AddToScore(pointsPerHit);
                             canShoot = false;
                             rageScript.Hit();
@@ -94,12 +100,13 @@ public class BaseGun : MonoBehaviour, IShootable
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
                                 }
                             }
-                            damagable.Damaged(modifiedDamage * critMultiplier, shooter);
+                            damagable.Damaged(modifiedDamage * critMultiplier, shooter, hitData.point);
                             scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
                             canShoot = false;
                             rageScript.CritHit();
                         }
                         else{
+                            Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                             //Debug.LogWarning("Damagable not found");
                         }
                     }
