@@ -10,8 +10,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CartoonFX
-{
+
 	public class CFXR_ParticleTextFontAsset : ScriptableObject
 	{
 		public enum LetterCase
@@ -125,4 +124,3 @@ namespace CartoonFX
 		}
 	}
 #endif
-}

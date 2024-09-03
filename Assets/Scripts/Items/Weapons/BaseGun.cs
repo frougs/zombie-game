@@ -43,6 +43,7 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] GameObject particleSpawnPOS;
     [SerializeField] GameObject particlesOBJ;
     [SerializeField] GameObject impactParticle;
+    [SerializeField] GameObject damageNumberParticles;
     
 
     private void Start(){
@@ -83,6 +84,14 @@ public class BaseGun : MonoBehaviour, IShootable
                     //Debug.Log("hit: " +hitData.transform.gameObject.name);
                     if(hitData.transform.gameObject != player){
                         if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
+                            try{
+                                var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+                                dmgParticles.GetComponent<CFXR_ParticleText>().text = modifiedDamage.ToString();
+                                dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
+                            }
+                            catch(Exception e){
+                                Debug.LogWarning(e.ToString());
+                            }
                             if(symbiosisScript != null){
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
@@ -95,6 +104,14 @@ public class BaseGun : MonoBehaviour, IShootable
                         }
                         //Crit hit
                         else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
+                            try{
+                                var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+                                dmgParticles.GetComponent<CFXR_ParticleText>().text = (modifiedDamage * critMultiplier).ToString();
+                                dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
+                            }
+                            catch(Exception e){
+                                Debug.LogWarning(e.ToString());
+                            }
                             if(symbiosisScript != null){
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;

@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
             currentHealth += extraLifeBoost;
             regen = StartCoroutine(RegenerateHealthAfterDelay());
         }
-        uiStuff.UpdateHealth((int)currentHealth);
+        uiStuff.UpdateHealth((int)currentHealth, (int)maxHealth);
 
         if(currentHealth/maxHealth <= 0.25f){
             uiStuff.UpdateDamagedOverlay(true, 1f - (currentHealth/maxHealth));
@@ -101,7 +101,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         {
             currentHealth += regenerationRate * Time.deltaTime;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-            uiStuff.UpdateHealth((int)currentHealth);
+            uiStuff.UpdateHealth((int)currentHealth, (int)maxHealth);
             yield return null; 
         }
 

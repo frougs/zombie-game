@@ -9877,7 +9877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDynamic: 0
-  text: POW!
+  text: POWWIE!!
   size: 1
   letterSpacing: 0.35
   backgroundColor: {r: 0.4433962, g: 0, b: 0, a: 1}

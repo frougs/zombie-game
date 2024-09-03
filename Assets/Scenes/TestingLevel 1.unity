@@ -19599,6 +19599,10 @@ PrefabInstance:
       propertyPath: impactParticle
       value: 
       objectReference: {fileID: 3290264720658229784, guid: 03bee7089ee1fd14b93714b34e86475b, type: 3}
+    - target: {fileID: 3280042868994268944, guid: 8254b48cb71610247bf8d442707c3243, type: 3}
+      propertyPath: damageNumberParticles
+      value: 
+      objectReference: {fileID: 2433047439729013060, guid: 1d3e43e011526e44c80acc3b9491645e, type: 3}
     - target: {fileID: 8600061239845239585, guid: 8254b48cb71610247bf8d442707c3243, type: 3}
       propertyPath: m_Name
       value: Pistol Variant
@@ -42857,7 +42861,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
       propertyPath: score
-      value: 4000
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainMoneyColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainMoneyColor.g
+      value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainMoneyColor.r
+      value: 0.0026387358
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainScoreColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainScoreColor.b
+      value: 0.112090856
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainScoreColor.g
+      value: 0.6603774
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: gainScoreColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseMoneyColor.b
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseMoneyColor.g
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseMoneyColor.r
+      value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseScoreColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseScoreColor.b
+      value: 0.0033819948
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseScoreColor.g
+      value: 0.0033819948
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501676408478962638, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
+      propertyPath: loseScoreColor.r
+      value: 0.7169812
       objectReference: {fileID: 0}
     - target: {fileID: 6783965680461646238, guid: cd57e5b782982d443937f9d47bc986a8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55157,6 +55217,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: gainMoneyColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: gainMoneyColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: gainMoneyColor.g
+      value: 0.7075472
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: gainMoneyColor.r
+      value: 0.1899263
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: loseMoneyColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: loseMoneyColor.b
+      value: 0.039159846
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: loseMoneyColor.g
+      value: 0.039159846
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364042431508894987, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: loseMoneyColor.r
+      value: 0.754717
+      objectReference: {fileID: 0}
     - target: {fileID: 1795038381454630365, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -63052,8 +63144,36 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: midColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: midColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: midColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: baseColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: baseColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: baseColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
       propertyPath: maxZombiesAtOnce
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151657781574237731, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: colorTransitionTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8934410335641680800, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
       propertyPath: m_LocalPosition.x

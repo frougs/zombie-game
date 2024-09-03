@@ -4962,7 +4962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDynamic: 0
-  text: 123
+  text: CURSED
   size: 0.5
   letterSpacing: 0.35
   backgroundColor: {r: 0.18115875, g: 0.18950137, b: 0.21698111, a: 1}

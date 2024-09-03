@@ -10,8 +10,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 #endif
 
-namespace CartoonFX
-{
+
     [RequireComponent(typeof(ParticleSystem))]
     public class CFXR_ParticleText : MonoBehaviour
     {
@@ -20,7 +19,7 @@ namespace CartoonFX
         public bool isDynamic;
 
         [Header("Text")]
-        [SerializeField] string text;
+        [SerializeField] public string text;
         [SerializeField] float size = 1f;
         [SerializeField] float letterSpacing = 0.44f;
 
@@ -416,4 +415,3 @@ namespace CartoonFX
         }
     }
 #endif
-}

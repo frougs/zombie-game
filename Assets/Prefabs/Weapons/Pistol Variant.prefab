@@ -92,6 +92,10 @@ PrefabInstance:
       value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: impactParticle
+      value: 
+      objectReference: {fileID: 3290264720658229784, guid: 03bee7089ee1fd14b93714b34e86475b, type: 3}
+    - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: maxReserveAmmo
       value: 36
       objectReference: {fileID: 0}
@@ -103,6 +107,10 @@ PrefabInstance:
       propertyPath: IgnoreLayer.m_Bits
       value: 68
       objectReference: {fileID: 0}
+    - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: damageNumberParticles
+      value: 
+      objectReference: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47, type: 3}
     - target: {fileID: 327552499752576255, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Layer
       value: 6

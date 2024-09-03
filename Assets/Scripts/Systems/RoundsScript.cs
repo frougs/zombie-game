@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class RoundsScript : MonoBehaviour
 {
@@ -21,6 +23,11 @@ public class RoundsScript : MonoBehaviour
     private bool canSpawn;
     private UIContainer uiStuff;
     private int triggeredForThisRound = 0;
+    [Header("Round color change stuff")]
+    public float colorTransitionTime;
+    public Color baseColor;
+    public Color midColor;
+    private TextMeshProUGUI roundText;
     private void Start(){
         if(roundNumber == 0){
             roundNumber = 1;
@@ -44,6 +51,10 @@ public class RoundsScript : MonoBehaviour
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();
         }
+        else{
+            roundText = uiStuff.roundText;
+        }
+        roundText = uiStuff.roundText;
         uiStuff.UpdateRemaining(remainingSpawnCount, totalSpawnCount);
 
         if(roundNumber % 10 == 0 && roundNumber != triggeredForThisRound){
@@ -62,7 +73,6 @@ public class RoundsScript : MonoBehaviour
         totalSpawnCount = (int)nextSpawnAmount;
         remainingSpawnCount = (int)totalSpawnCount;
         StartCoroutine(RoundStartDelay());
-        StartSpawning();
 
     }
     private void StartSpawning(){
@@ -77,9 +87,31 @@ public class RoundsScript : MonoBehaviour
 
     private IEnumerator RoundStartDelay(){
         //Debug.Log("Waiting for round to start");
+        StartCoroutine(RoundTextColorTransition());
         canSpawn = false;
         yield return new WaitForSeconds(roundDelay);
         //Debug.Log("Round Starting...");
         canSpawn = true;
+        StartSpawning();
+    }
+    private IEnumerator RoundTextColorTransition(){
+        yield return StartCoroutine(TransitionColor(roundText.color, midColor, colorTransitionTime));
+        yield return StartCoroutine(TransitionColor(roundText.color, baseColor, colorTransitionTime));
+    }
+    private IEnumerator TransitionColor(Color startColor, Color endColor, float duration){
+        float elapsedTime = 0f;
+        float alpha = startColor.a;
+        while (elapsedTime < duration)
+        {
+            Color newColor= Color.Lerp(startColor, endColor, elapsedTime / duration);
+            newColor.a = alpha;
+            roundText.color = newColor;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        Color finalColor = endColor;
+        finalColor.a = alpha;
+        roundText.color = finalColor;
+
     }
 }
