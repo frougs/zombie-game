@@ -9,6 +9,9 @@ public class DoorSystem : Purchasable, IInteractable
     [SerializeField] GameObject[] connectedDoors;
     [SerializeField] TextMeshPro[] costText;
     [SerializeField] SpawnerScript[] spawners;
+    [SerializeField] public AudioSource soundSource;
+    [SerializeField] public AudioClip errorPurchase;
+    [SerializeField] public AudioClip purchase;
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
@@ -18,7 +21,7 @@ public class DoorSystem : Purchasable, IInteractable
         }
         else{
             //Once I add a notification system, display an error and play an error sound idk lol!! xD
-            Debug.LogWarning("Too Broke to Buy Door!!! HAHAHA!!");
+            soundSource.PlayOneShot(errorPurchase);
         }
     }
     private void RemoveDoors(){
@@ -40,6 +43,7 @@ public class DoorSystem : Purchasable, IInteractable
     }
     private void Start(){
         UpdateCostText();
+        soundSource = this.GetComponent<AudioSource>();
     }
     private void Update(){
         UpdateCostText();

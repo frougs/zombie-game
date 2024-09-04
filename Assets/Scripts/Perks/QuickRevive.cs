@@ -11,12 +11,17 @@ public class QuickRevive : PerkBase
         if(powered && !firstPurchased){
             firstPurchased = true;
             ActivatePerk();
+            soundSource.PlayOneShot(purchase);
         }
         else if(hasPerk == false){
             var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
             if(scoreSystem.score >= price){
                 scoreSystem.SubtractScore(price);
                 ActivatePerk();
+                soundSource.PlayOneShot(purchase);
+            }
+            else{
+                soundSource.PlayOneShot(errorPurchase);
             }
         }
     }

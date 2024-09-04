@@ -10,10 +10,17 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     [SerializeField] public float barrierCapacity;
     [SerializeField] private float currentProgress;
     [SerializeField] public float progressPerInteract;
+    [SerializeField] AudioClip repairSound;
+    [SerializeField] AudioClip breakSound;
+    [SerializeField] AudioSource soundSource;
     private void Start(){
         currentProgress = barrierCapacity;
+        soundSource = this.GetComponent<AudioSource>();
     }
     private void Update(){
+        if(soundSource == null){
+            soundSource = this.GetComponent<AudioSource>();
+        }
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();
         }
@@ -36,11 +43,13 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     }
      public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         currentProgress += progressPerInteract;
+        soundSource.PlayOneShot(repairSound);
     }
     public void Damaged(float damage, GameObject attacker, Vector3 pos){
         if(attacker.GetComponent<Dummy>() != null){
             if(barrierActive){
                 currentProgress -= damage;
+                soundSource.PlayOneShot(breakSound);
             }
         }
     }

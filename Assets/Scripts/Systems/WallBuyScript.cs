@@ -13,6 +13,9 @@ public class WallBuyScript : Purchasable, IInteractable
     [SerializeField] TextMeshPro priceText;
     [SerializeField] GameObject examplePOS;
     [SerializeField] int forSaleID;
+    [SerializeField] public AudioSource soundSource;
+    [SerializeField] public AudioClip errorPurchase;
+    [SerializeField] public AudioClip purchase;
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(gunMode){
@@ -21,6 +24,9 @@ public class WallBuyScript : Purchasable, IInteractable
             scoreSystem.SubtractScore(price);
             Instantiate(buyItem, spawnPOS.transform.position, Quaternion.identity);
             }
+            else{
+                soundSource.PlayOneShot(errorPurchase);
+            }
         }
         if(ammoMode){
             var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
@@ -28,7 +34,10 @@ public class WallBuyScript : Purchasable, IInteractable
                 scoreSystem.SubtractScore(price);
                 interactionCon.currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxReserveAmmo;
                 interactionCon.currentlyHeld.GetComponent<BaseGun>().currentAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxAmmo;
-            }  
+            }
+            else{
+                soundSource.PlayOneShot(errorPurchase);
+            }
         }
 
     }
@@ -57,5 +66,6 @@ public class WallBuyScript : Purchasable, IInteractable
     private void Start(){
         Instantiate(buyItem.GetComponent<BaseGun>().buyModel, examplePOS.transform.position, examplePOS.transform.rotation, examplePOS.transform);
         forSaleID = buyItem.GetComponentInChildren<PickupController>().itemID;
+        soundSource = this.GetComponent<AudioSource>();
     }
 }

@@ -20,6 +20,9 @@ public class PerkBase : Purchasable, IInteractable
     public UIContainer uiStuff;
     [SerializeField] public TextMeshPro priceText;
     [SerializeField] public GameObject needPowerObj;
+    [SerializeField] public AudioSource soundSource;
+    [SerializeField] public AudioClip errorPurchase;
+    [SerializeField] public AudioClip purchase;
 
     public virtual void Update(){
         // if(player == null){
@@ -46,7 +49,11 @@ public class PerkBase : Purchasable, IInteractable
                 scoreSystem.SubtractScore(price);
             if(powered && hasPerk == false){
                 ActivatePerk();
+                soundSource.PlayOneShot(purchase);
             }
+        }
+        else{
+            soundSource.PlayOneShot(errorPurchase);
         }
     }
 
@@ -88,6 +95,7 @@ public class PerkBase : Purchasable, IInteractable
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();
         }
+        soundSource = this.GetComponent<AudioSource>();
     }
     private void AddPerkToUI(){
         uiStuff.AddPerk(perkIcon);

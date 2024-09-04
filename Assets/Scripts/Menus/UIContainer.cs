@@ -32,6 +32,8 @@ public class UIContainer : MonoBehaviour
     [SerializeField] GameObject spawnTokenPOS;
     [SerializeField] GameObject addedTokenPrefab;
 
+    private AudioSource uiAudio;
+    [SerializeField] AudioClip purchase;
     private int lastHealth;
     private int lastMaxHealth;
     private float lastHealthFillAmount;
@@ -88,6 +90,9 @@ public class UIContainer : MonoBehaviour
     public void CreateScoreParticle(string prefix, int amount){
         var scorePart = Instantiate(scoreParticle, spawnScoreParticle.transform);
         scorePart.GetComponent<TextMeshProUGUI>().text = prefix + amount.ToString();
+        if(prefix == "-"){
+            uiAudio.PlayOneShot(purchase);
+        }
     }
 
     public void UpdateRound(int round){
@@ -147,5 +152,8 @@ public class UIContainer : MonoBehaviour
         else{
             damagedOLay.gameObject.SetActive(false);
         }
+    }
+    private void Start(){
+        uiAudio = GetComponent<AudioSource>();
     }
 }

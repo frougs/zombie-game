@@ -28,6 +28,9 @@ public class BaseGun : MonoBehaviour, IShootable
     [HideInInspector] public bool reloading;
     [HideInInspector] public bool fullAmmo;
     [SerializeField] private AudioClip gunshot;
+    [SerializeField] private AudioClip noAmmo;
+    private bool canPlayNoAmmo = true;
+    private Coroutine playAmmoSoundCoroutine;
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private int pointsPerHit;
     private ScoreSystem scoreSystem;
@@ -135,9 +138,23 @@ public class BaseGun : MonoBehaviour, IShootable
             }
             else if(currentAmmo == 0 && currentReserveAmmo == 0){
                 //idk play click sound??
-                Debug.LogWarning("*CLICK* no ammo!");
+                //Debug.LogWarning("*CLICK* no ammo!");
+                if(canPlayNoAmmo){
+                    if(playAmmoSoundCoroutine != null){
+                        StopCoroutine(playAmmoSoundCoroutine);
+                    }
+                    playAmmoSoundCoroutine = StartCoroutine(NoAmmoSound());
+                    //soundSource.PlayOneShot(noAmmo);
+                }
+                
             }
         }
+    }
+    IEnumerator NoAmmoSound(){
+        canPlayNoAmmo = false;
+        soundSource.PlayOneShot(noAmmo);
+        yield return new WaitForSeconds(fireRate);
+        canPlayNoAmmo = true;
     }
     IEnumerator ShotDelay(){
         canShoot = false;
