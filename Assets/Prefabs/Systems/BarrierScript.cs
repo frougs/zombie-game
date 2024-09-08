@@ -19,7 +19,7 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     }
     private void Update(){
         if(soundSource == null){
-            soundSource = this.GetComponent<AudioSource>();
+            soundSource = this.GetComponentInChildren<AudioSource>();
         }
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();

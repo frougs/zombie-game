@@ -8,7 +8,7 @@ public class PowerSystem : MonoBehaviour, IInteractable
     public UnityEvent powerOn;
     private bool powerToggled = false;
     [SerializeField] GameObject lever;
-    private AudioSource soundSource;
+    [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip powerOnSound;
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
@@ -20,6 +20,8 @@ public class PowerSystem : MonoBehaviour, IInteractable
         }
     }
     private void Start(){
-        soundSource = this.GetComponent<AudioSource>();
+        if(soundSource == null){
+            soundSource = this.GetComponentInChildren<AudioSource>();
+        }
     }
 }

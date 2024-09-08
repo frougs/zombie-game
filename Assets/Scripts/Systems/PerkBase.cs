@@ -95,7 +95,9 @@ public class PerkBase : Purchasable, IInteractable
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();
         }
-        soundSource = this.GetComponent<AudioSource>();
+        if(soundSource == null){
+            soundSource = this.GetComponentInChildren<AudioSource>();
+        }
     }
     private void AddPerkToUI(){
         uiStuff.AddPerk(perkIcon);

@@ -119,6 +119,8 @@ using System.Collections;
         [HideInInspector] public float burstTransitionTime;
         private Coroutine burstSprintCoroutine;
 
+        [SerializeField] AudioSource soundSource;
+
         //private bool _hasAnimator;
 
         /*private bool IsCurrentDeviceMouse
@@ -170,6 +172,10 @@ using System.Collections;
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            if(soundSource == null){
+                soundSource = this.GetComponentInChildren<AudioSource>();
+            }
         }
 
         private void Update()
@@ -463,7 +469,8 @@ using System.Collections;
                 if (FootstepAudioClips.Length > 0)
                 {
                     var index = Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                    //AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                    soundSource.PlayOneShot(FootstepAudioClips[index]);
                 }
             }
         }
@@ -476,7 +483,8 @@ using System.Collections;
         //     return;
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                //AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                soundSource.PlayOneShot(LandingAudioClip);
             }
         }
     }

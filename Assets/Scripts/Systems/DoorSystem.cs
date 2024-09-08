@@ -43,7 +43,10 @@ public class DoorSystem : Purchasable, IInteractable
     }
     private void Start(){
         UpdateCostText();
-        soundSource = this.GetComponent<AudioSource>();
+        if(soundSource == null){
+            soundSource = this.GetComponentInChildren<AudioSource>();
+        }
+        
     }
     private void Update(){
         UpdateCostText();

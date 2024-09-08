@@ -29,6 +29,9 @@ public class BaseGun : MonoBehaviour, IShootable
     [HideInInspector] public bool fullAmmo;
     [SerializeField] private AudioClip gunshot;
     [SerializeField] private AudioClip noAmmo;
+    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioClip defaultHit;
+    [SerializeField] private AudioClip criticalHit;
     private bool canPlayNoAmmo = true;
     private Coroutine playAmmoSoundCoroutine;
     [SerializeField] private AudioSource soundSource;
@@ -52,7 +55,9 @@ public class BaseGun : MonoBehaviour, IShootable
     private void Start(){
         currentAmmo = maxAmmo;
         currentReserveAmmo = maxReserveAmmo;
-        soundSource = this.GetComponent<AudioSource>();
+        if(soundSource == null){
+            soundSource = this.GetComponentInChildren<AudioSource>();
+        }
         weaponCon = FindObjectOfType<WeaponController>();
     }
     public void Shot(GameObject shooter){
@@ -76,7 +81,7 @@ public class BaseGun : MonoBehaviour, IShootable
                                 Instantiate(particlesOBJ, particleSpawnPOS.transform);
                             }
                 }
-                if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, Mathf.Infinity,  ~IgnoreLayer)){
+                if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, range,  ~IgnoreLayer)){
                     
                     //Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                     //Vector3 towardsPlayer = (player.transform.position - impParticle.transform.position).normalized;
@@ -101,6 +106,9 @@ public class BaseGun : MonoBehaviour, IShootable
                                 }
                             }
                             damagable.Damaged(modifiedDamage, shooter, hitData.point);
+                            if(soundSource != null){
+                                soundSource.PlayOneShot(defaultHit);
+                            }
                             scoreSystem.AddToScore(pointsPerHit);
                             canShoot = false;
                             rageScript.Hit();
@@ -119,6 +127,9 @@ public class BaseGun : MonoBehaviour, IShootable
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
                                 }
+                            }
+                            if(soundSource != null){
+                                soundSource.PlayOneShot(criticalHit);
                             }
                             damagable.Damaged(modifiedDamage * critMultiplier, shooter, hitData.point);
                             scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
@@ -233,6 +244,9 @@ public class BaseGun : MonoBehaviour, IShootable
     IEnumerator ReloadTimer(){
         reloading = true;
         progressBar.gameObject.SetActive(true);
+        if(soundSource != null){
+            soundSource.PlayOneShot(reloadSound);
+        }
         if(reloadSpeedAugment == 0){
             yield return new WaitForSeconds(reloadSpeed);
         }

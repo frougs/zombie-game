@@ -28,6 +28,8 @@ public class RoundsScript : MonoBehaviour
     public Color baseColor;
     public Color midColor;
     private TextMeshProUGUI roundText;
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip roundStartClip;
     private void Start(){
         if(roundNumber == 0){
             roundNumber = 1;
@@ -35,6 +37,9 @@ public class RoundsScript : MonoBehaviour
             remainingSpawnCount = totalSpawnCount;
             StartCoroutine(RoundStartDelay());
             StartSpawning();
+        }
+        if(soundSource == null){
+            soundSource = this.GetComponentInChildren<AudioSource>();
         }
     }
     private void Update(){
@@ -95,6 +100,7 @@ public class RoundsScript : MonoBehaviour
         StartSpawning();
     }
     private IEnumerator RoundTextColorTransition(){
+        soundSource.PlayOneShot(roundStartClip);
         yield return StartCoroutine(TransitionColor(roundText.color, midColor, colorTransitionTime));
         yield return StartCoroutine(TransitionColor(roundText.color, baseColor, colorTransitionTime));
     }

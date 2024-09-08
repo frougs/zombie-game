@@ -66,6 +66,8 @@ public class WallBuyScript : Purchasable, IInteractable
     private void Start(){
         Instantiate(buyItem.GetComponent<BaseGun>().buyModel, examplePOS.transform.position, examplePOS.transform.rotation, examplePOS.transform);
         forSaleID = buyItem.GetComponentInChildren<PickupController>().itemID;
-        soundSource = this.GetComponent<AudioSource>();
+        if(soundSource == null){
+            soundSource = this.GetComponentInChildren<AudioSource>();
+        }
     }
 }

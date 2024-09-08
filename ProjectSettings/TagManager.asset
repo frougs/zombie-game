@@ -7,6 +7,8 @@ TagManager:
   - CinemachineTarget
   - PlayerCamera
   - CriticalSpot
+  - SFX
+  - Music
   layers:
   - Default
   - TransparentFX
