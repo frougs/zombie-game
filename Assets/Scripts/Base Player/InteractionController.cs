@@ -19,6 +19,7 @@ public class InteractionController : MonoBehaviour
     //public int currentItemID = 0;
     [SerializeField] public GameObject currentlyHeld;
     [SerializeField] public int currentHeldID;
+    public bool canInteract = true;
     private void Start(){
         // _avatar = GetComponent<Alteruna.Avatar>();
         // if (!_avatar.IsMe) return;
@@ -34,7 +35,7 @@ public class InteractionController : MonoBehaviour
         if(interact.triggered){
         }
         //Picks up the item
-        if(interact.triggered){
+        if(interact.triggered && canInteract){
             if(Physics.Raycast(this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, interactRange)){
                 IInteractable interactable  = hitData.transform.gameObject.GetComponentInChildren<IInteractable>();
                 if(interactable != null && holdingItem == false){
@@ -101,6 +102,8 @@ public class InteractionController : MonoBehaviour
         }
     }
     IEnumerator InteractDelay(){
+        canInteract = false;
         yield return new WaitForSeconds(pickupDelay);
+        canInteract = true;
     }
 }

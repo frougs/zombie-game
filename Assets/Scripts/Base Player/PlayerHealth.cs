@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     public float regenerationRate = 1f; 
     private bool isRegenerating = false;
     private Coroutine regen;
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip damagedClip;
 
     //JuqMaster stuff
     [Header("Juq Master Stuff")]
@@ -33,6 +35,9 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         if (uiStuff == null)
         {
             uiStuff = FindObjectOfType<UIContainer>();
+        }
+        if(soundSource == null){
+            soundSource = GetComponentInChildren<AudioSource>();
         }
     }
 
@@ -46,6 +51,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
             {
                 currentHealth -= damage - damageNegationAmount;
                 isRegenerating = false; 
+                soundSource.PlayOneShot(damagedClip);
 
                 if (currentHealth <= 0 && extraLives == 0)
                 {

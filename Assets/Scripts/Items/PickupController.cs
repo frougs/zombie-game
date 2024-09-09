@@ -22,6 +22,9 @@ public class PickupController : MonoBehaviour, IInteractable
     public UnityEvent triggered;
     public UnityEvent dropped;
     public int itemID;
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip pickupClip;
+    [SerializeField] AudioClip dropClip;
     //private float storedMass;
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(currentlyHeld == false){
@@ -35,6 +38,7 @@ public class PickupController : MonoBehaviour, IInteractable
             //item.transform.rotation = gunRoot.transform.rotation;
             //item.transform.SetParent(gunRoot.transform);
             currentlyHeld = true;
+            soundSource.PlayOneShot(pickupClip);
             triggered?.Invoke();
             interactionCon.holdingItem = true;
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -63,6 +67,7 @@ public class PickupController : MonoBehaviour, IInteractable
         //interactionCon.currentItemID = 0;
         interactionCon.currentHeldID = 0;
         currentHolderIndex = 5;
+        soundSource.PlayOneShot(dropClip);
         dropped?.Invoke();
     }
     private void UpdateStatus(bool toggle){
@@ -146,6 +151,9 @@ public class PickupController : MonoBehaviour, IInteractable
     private void Start(){
         if(startHeld){
             StartGameHeld();
+        }
+        if(soundSource == null){
+            soundSource = GetComponentInChildren<AudioSource>();
         }
     }
     private void StartGameHeld(){

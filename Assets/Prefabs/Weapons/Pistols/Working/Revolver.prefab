@@ -25,8 +25,8 @@ Transform:
   m_GameObject: {fileID: 197092755510017369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.446, z: 0.755}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.301, z: 0.343}
+  m_LocalScale: {x: 3.0418, y: 3.0418, z: 3.0418}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5705449659772503005}
@@ -205,15 +205,15 @@ MonoBehaviour:
   critMultiplier: 2
   currentAmmo: 0
   ammoPrice: 150
-  gunPrice: 450
+  gunPrice: 950
   canShoot: 1
   held: 0
   reloadProgress: 0
   reloading: 0
   fullAmmo: 0
-  gunshot: {fileID: 8300000, guid: 7c3232403eb04cf4997a5d8ec15770eb, type: 3}
+  gunshot: {fileID: 8300000, guid: e269c3f7c5102eb41a9964f61786a91c, type: 3}
   noAmmo: {fileID: 8300000, guid: a83dbae26c015ca4d893909d00ca0794, type: 3}
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: c61249d94fa987346bf8907457f3f95d, type: 3}
   defaultHit: {fileID: 8300000, guid: 5f782a7af9c9f054ca928290efa18857, type: 3}
   criticalHit: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
   soundSource: {fileID: 4987896277659185815}
@@ -350,7 +350,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.47226676
+      value: 0.55638283
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

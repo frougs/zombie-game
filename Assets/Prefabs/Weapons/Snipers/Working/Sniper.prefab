@@ -162,7 +162,7 @@ MonoBehaviour:
   criticalHit: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
   soundSource: {fileID: 7147581398249016574}
   pointsPerHit: 10
-  buyModel: {fileID: 39725216594797428}
+  buyModel: {fileID: 3193160445362413872, guid: 76b43bf37de48c645800aaa230bfce24, type: 3}
   IgnoreLayer:
     serializedVersion: 2
     m_Bits: 68
@@ -336,6 +336,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 848631056657709518}
     m_Modifications:
+    - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
+      propertyPath: m_Volume
+      value: 0.55638283
+      objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -30,6 +30,8 @@ public class Dummy : MonoBehaviour, IDamagable
     private GameObject targetBarrier;
     private bool barrierDelay;
     [SerializeField] GameObject damagedParticles;
+    public AudioClip[] attackClips;
+    public AudioSource soundSource;
     public void Damaged(float damage, GameObject attacker, Vector3 hitPoint){
         if(damagedParticles != null){
             Instantiate(damagedParticles, hitPoint, Quaternion.LookRotation((player.transform.position - hitPoint).normalized));
@@ -47,6 +49,9 @@ public class Dummy : MonoBehaviour, IDamagable
         //nav.enabled = false;
         player = FindObjectOfType<ThirdPersonController>().gameObject;
         targetBarrier = FindOptimalBarrier();
+        if(soundSource == null){
+            soundSource = GetComponentInChildren<AudioSource>();
+        }
 
     }
     private void FixedUpdate(){
@@ -128,6 +133,10 @@ public class Dummy : MonoBehaviour, IDamagable
     }
 
     IEnumerator DamageTimer(){
+        if(attackClips.Length > 0){
+            var index = Random.Range(0, attackClips.Length);
+            soundSource.PlayOneShot(attackClips[index]);
+        }
         currentlyAttacking = true;
         yield return new WaitForSeconds(attackDelay);
         //Debug.Log("Attacking");

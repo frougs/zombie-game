@@ -216,8 +216,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   fireRate: 2
-  ammo: 0
+  maxAmmo: 0
+  maxReserveAmmo: 0
+  currentReserveAmmo: 0
   reloadSpeed: 0
+  range: 0
+  critMultiplier: 0
+  currentAmmo: 0
+  ammoPrice: 0
+  gunPrice: 0
+  canShoot: 1
+  held: 0
+  reloadProgress: 0
+  reloading: 0
+  fullAmmo: 0
+  gunshot: {fileID: 0}
+  noAmmo: {fileID: 0}
+  reloadSound: {fileID: 0}
+  defaultHit: {fileID: 0}
+  criticalHit: {fileID: 0}
+  soundSource: {fileID: 0}
+  pointsPerHit: 0
+  buyModel: {fileID: 0}
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  weaponCon: {fileID: 0}
+  reloadSpeedAugment: 0
+  particleSpawnPOS: {fileID: 0}
+  particlesOBJ: {fileID: 0}
+  impactParticle: {fileID: 0}
+  damageNumberParticles: {fileID: 0}
 --- !u!1001 &2353740123741392353
 PrefabInstance:
   m_ObjectHideFlags: 0
