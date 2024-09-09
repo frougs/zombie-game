@@ -69,5 +69,13 @@ public class Rage : PerkBase
         yield return new WaitForSeconds(rageDecayPauseDuration);
         canDecay = true;
     }
-
+    public override void GetUpgradeLevel(){
+        if(PlayerPrefs.HasKey("Rage")){
+            upgradeNum = PlayerPrefs.GetInt("Rage");
+        }
+        else{
+            PlayerPrefs.SetInt("Rage", 0);
+        }
+        
+    }
 }

@@ -28,4 +28,13 @@ public class QuickFeet : PerkBase
         player.GetComponent<ThirdPersonController>().SprintSpeed = burstSpeedAmount;
         FindObjectOfType<WeaponController>().reloadSpeedAugment = reloadSpeedAugment;
     }
+    public override void GetUpgradeLevel(){
+        if(PlayerPrefs.HasKey("QuickFeet")){
+            upgradeNum = PlayerPrefs.GetInt("QuickFeet");
+        }
+        else{
+            PlayerPrefs.SetInt("QuickFeet", 0);
+        }
+        
+    }
 }

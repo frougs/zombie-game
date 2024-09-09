@@ -22,4 +22,13 @@ public class JuqMaster : PerkBase
     public override void PerkUpgrade3(){
         player.GetComponent<PlayerHealth>().damageNegationAmount = damageNegationAmount;
     }
+    public override void GetUpgradeLevel(){
+        if(PlayerPrefs.HasKey("JuqMaster")){
+            upgradeNum = PlayerPrefs.GetInt("JuqMaster");
+        }
+        else{
+            PlayerPrefs.SetInt("JuqMaster", 0);
+        }
+        
+    }
 }

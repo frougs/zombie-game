@@ -44,6 +44,14 @@ public class QuickRevive : PerkBase
         player.GetComponent<PlayerHealth>().weaponXLevel = 4;
         player.GetComponent<PlayerHealth>().extraLives += 1;
     }
-
+    public override void GetUpgradeLevel(){
+        if(PlayerPrefs.HasKey("WeaponX")){
+            upgradeNum = PlayerPrefs.GetInt("WeaponX");
+        }
+        else{
+            PlayerPrefs.SetInt("WeaponX", 0);
+        }
+        
+    }
     
 }

@@ -35,4 +35,13 @@ public class Symbiosis : PerkBase
             buyable.discountAmount = discountAmount;
         }
     }
+    public override void GetUpgradeLevel(){
+        if(PlayerPrefs.HasKey("Symbiosis")){
+            upgradeNum = PlayerPrefs.GetInt("Symbiosis");
+        }
+        else{
+            PlayerPrefs.SetInt("Symbiosis", 0);
+        }
+        
+    }
 }

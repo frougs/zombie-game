@@ -98,8 +98,10 @@ public class PerkBase : Purchasable, IInteractable
         if(soundSource == null){
             soundSource = this.GetComponentInChildren<AudioSource>();
         }
+        GetUpgradeLevel();
     }
     private void AddPerkToUI(){
         uiStuff.AddPerk(perkIcon);
     }
+    public virtual void GetUpgradeLevel(){}
 }
