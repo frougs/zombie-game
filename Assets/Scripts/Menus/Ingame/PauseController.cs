@@ -7,6 +7,8 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject pMenu;
     [SerializeField] GameObject sMenu;
     [SerializeField] GameObject rMenu;
+    [SerializeField] GameObject jMenu;
+    [SerializeField] TabGroup journalTabs;
     [SerializeField] GameObject background;
     public bool isPaused;
     public void OnPause(){
@@ -18,6 +20,8 @@ public class PauseController : MonoBehaviour
         pMenu.SetActive(false);
         sMenu.SetActive(false);
         rMenu.SetActive(false);
+        jMenu.SetActive(false);
+        journalTabs.ClosePage();
         background.SetActive(false);
         isPaused = false;
 

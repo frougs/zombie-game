@@ -37,6 +37,10 @@ public class UIContainer : MonoBehaviour
     private int lastHealth;
     private int lastMaxHealth;
     private float lastHealthFillAmount;
+    [SerializeField] GameObject deadUI;
+    [SerializeField] TextMeshProUGUI deadRoundCount;
+    private int deathRounds;
+    private ThirdPersonController player;
 
     public void UpdateAmmo(int currentAmmo, int maxAmmo){
         ammoText.text = "Ammo: " + currentAmmo + " | " + maxAmmo.ToString();
@@ -97,6 +101,7 @@ public class UIContainer : MonoBehaviour
 
     public void UpdateRound(int round){
         roundText.text = round.ToString();
+        deathRounds = round;
     }
 
     public void UpdateRemaining(int remaining, int total){
@@ -139,6 +144,9 @@ public class UIContainer : MonoBehaviour
 
     public void LateUpdate(){
         UpdateUpgradeTokens();
+        if(player == null){
+            player = FindObjectOfType<ThirdPersonController>();
+        }
     }
 
     public void UpdateDamagedOverlay(bool enabled, float percent){
@@ -155,5 +163,15 @@ public class UIContainer : MonoBehaviour
     }
     private void Start(){
         uiAudio = GetComponent<AudioSource>();
+    }
+    public void DeathUI(){
+        deadUI.SetActive(true);
+        deadRoundCount.text = "HAHAHA U ONLY MADE IT TO ROUND " +deathRounds.ToString();
+        FindObjectOfType<Pause>().inMenu = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        player.GetComponent<ThirdPersonController>().enabled = false;
+        player.GetComponent<InteractionController>().enabled = false;
+        player.GetComponent<WeaponController>().enabled = false;
     }
 }

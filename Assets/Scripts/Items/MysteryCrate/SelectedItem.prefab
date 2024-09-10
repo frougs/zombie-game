@@ -620,9 +620,9 @@ MonoBehaviour:
   spawnPOS: {fileID: 1492329530477125595}
   examplePOS: {fileID: 7647640468164883981}
   forSaleID: 0
-  selected: 0
   pickupText: {fileID: 4288025631353804970}
   getText: {fileID: 2812378215807167086}
+  crate: {fileID: 0}
 --- !u!1 &3686089019455066094
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,7 +950,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.55638283
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x

@@ -70,15 +70,6 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     private void Update()
     {
-        if (currentHealth <= 0 && extraLives == 0 && isRegenerating == false)
-        {
-            Death();
-        }
-        else if(extraLives > 0 && currentHealth <= 0){
-            extraLives -= 1;
-            currentHealth += extraLifeBoost;
-            regen = StartCoroutine(RegenerateHealthAfterDelay());
-        }
         uiStuff.UpdateHealth((int)currentHealth, (int)maxHealth);
 
         if(currentHealth/maxHealth <= 0.25f){
@@ -88,12 +79,24 @@ public class PlayerHealth : MonoBehaviour, IDamagable
             uiStuff.UpdateDamagedOverlay(false, 0f);
         }
     }
+    private void LateUpdate(){
+        if(extraLives > 0 && currentHealth <= 0){
+            extraLives -= 1;
+            currentHealth += extraLifeBoost;
+            regen = StartCoroutine(RegenerateHealthAfterDelay());
+        }
+        else if (currentHealth <= 0 && extraLives == 0 && isRegenerating == false)
+        {
+            Death();
+        }
+    }
 
     private void Death()
     {
-        Debug.Log("BLEGHHHH IM DEADED");
+        uiStuff.DeathUI();
         dead = true;
         died?.Invoke();
+        isRegenerating = false;
     }
 
     private IEnumerator RegenerateHealthAfterDelay()

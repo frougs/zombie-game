@@ -6,14 +6,14 @@ using System;
 
 public class BaseGun : MonoBehaviour, IShootable
 {
-    [SerializeField] float damage;
-    [SerializeField] float fireRate;
+    [SerializeField] public float damage;
+    [SerializeField] public float fireRate;
     [SerializeField] public int maxAmmo;
     [SerializeField] public int maxReserveAmmo;
     [SerializeField] public int currentReserveAmmo;
     [SerializeField] float reloadSpeed;
     [SerializeField] float range;
-    [SerializeField] float critMultiplier;
+    [SerializeField] public float critMultiplier;
     [SerializeField] public int currentAmmo;
     [SerializeField] public int ammoPrice;
     [SerializeField] public int gunPrice;
@@ -34,7 +34,7 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] private AudioClip criticalHit;
     private bool canPlayNoAmmo = true;
     private Coroutine playAmmoSoundCoroutine;
-    [SerializeField] private AudioSource soundSource;
+    [SerializeField] public AudioSource soundSource;
     [SerializeField] private int pointsPerHit;
     private ScoreSystem scoreSystem;
     private bool hasReserveAmmo;
@@ -265,5 +265,9 @@ public class BaseGun : MonoBehaviour, IShootable
         progressBar.fillAmount = 0f;
         reloadProgress = 0f;
         reloading = false;
+    }
+    public void RefillAmmo(){
+        currentAmmo = maxAmmo;
+        currentReserveAmmo = maxReserveAmmo;
     }
 }
