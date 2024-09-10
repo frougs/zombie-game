@@ -44,7 +44,7 @@ public class InteractionController : MonoBehaviour
                 }
                 else if(interactable != null && holdingItem){
                     //Debug.Log("Already holding something, trying to drop it");
-                    if(hitData.transform.gameObject.GetComponent<BaseGun>() != null){
+                    if(hitData.transform.gameObject.GetComponent<BaseGun>() != null || hitData.transform.gameObject.GetComponentInChildren<PickupController>() != null){
                         DropItem();
                     }
                     StartCoroutine(InteractDelay());
@@ -80,12 +80,14 @@ public class InteractionController : MonoBehaviour
         interactable.Interacted(gunRoot, this);
     }
     public void DropItem(){
-         var weapon = gunRoot.transform.GetChild(0);
+        //var weapon = gunRoot.transform.GetChild(0);
+        var weapon = currentlyHeld;
             foreach(Transform obj in weapon.transform){
                 if(obj.GetComponent<PickupController>()!=null){
                     obj.GetComponent<PickupController>().Drop(this.GetComponent<ThirdPersonController>().CinemachineCameraTarget, this);
                 }
             }
+        currentlyHeld = null;
     }
     //Stores currently overlapped items
     private void OnTriggerEnter(Collider other){

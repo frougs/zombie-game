@@ -41,6 +41,41 @@ public class UIContainer : MonoBehaviour
     [SerializeField] TextMeshProUGUI deadRoundCount;
     private int deathRounds;
     private ThirdPersonController player;
+    [SerializeField] public AudioSource menuMusic;
+    [SerializeField] AudioSource gameplayMusic;
+    [SerializeField] AudioClip deathMusic;
+    [SerializeField] AudioClip[] gameplayMusicClips;
+    private bool triggerDeathMusicOnce = true;
+
+    public void UpdateMenuMusic(AudioClip music, bool looping){
+        menuMusic.clip = music;
+        menuMusic.loop = looping;
+        menuMusic.Play();
+    }
+    public void PauseAllSounds(){
+        AudioSource[] audioSources = Resources.FindObjectsOfTypeAll<AudioSource>();
+        foreach (AudioSource a in audioSources){
+            if(a.tag == "Music" || a.tag == "SFX"){
+                if(a.gameObject.layer != LayerMask.NameToLayer("MenuMusic")){
+                a.Pause();
+                }
+                
+                
+            }
+        }
+    }
+    public void UnpauseAllSounds(){
+        AudioSource[] audioSources = Resources.FindObjectsOfTypeAll<AudioSource>();
+        foreach (AudioSource a in audioSources){
+                    if(a.tag == "Music" || a.tag == "SFX"){
+                        if(a.gameObject.layer != LayerMask.NameToLayer("MenuMusic")){
+                        a.UnPause();
+                        }
+                        
+                        
+                    }
+                }
+    }
 
     public void UpdateAmmo(int currentAmmo, int maxAmmo){
         ammoText.text = "Ammo: " + currentAmmo + " | " + maxAmmo.ToString();
@@ -173,5 +208,10 @@ public class UIContainer : MonoBehaviour
         player.GetComponent<ThirdPersonController>().enabled = false;
         player.GetComponent<InteractionController>().enabled = false;
         player.GetComponent<WeaponController>().enabled = false;
+        if(triggerDeathMusicOnce == true){
+            UpdateMenuMusic(deathMusic, false);
+            triggerDeathMusicOnce = false;
+        }
+        PauseAllSounds();
     }
 }

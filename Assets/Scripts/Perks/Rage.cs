@@ -17,8 +17,10 @@ public class Rage : PerkBase
     [Header("Upgrades")]
     public float ragePerShotUpgrade;
     public float rageDecayRateUpgrade;
+    private bool canGainRage = false;
     public override void DefaultPerk(){
         raging = true;
+        canGainRage = true;
     }
     public override void PerkUpgrade1(){
         ragePerShot = ragePerShotUpgrade;
@@ -31,15 +33,19 @@ public class Rage : PerkBase
         rageAmount = 1f;
     }
     public void Hit(){
-        rageAmount += ragePerShot;
-        if(rageDecayCoroutine != null){
-            StopCoroutine(rageDecayCoroutine);
+        if(canGainRage){
+            rageAmount += ragePerShot;
+            if(rageDecayCoroutine != null){
+                StopCoroutine(rageDecayCoroutine);
+            }
         }
     }
     public void CritHit(){
-        rageAmount += ragePerShot * critMultiplier;
-        if(rageDecayCoroutine != null){
-            StopCoroutine(rageDecayCoroutine);
+        if(canGainRage){
+            rageAmount += ragePerShot * critMultiplier;
+            if(rageDecayCoroutine != null){
+                StopCoroutine(rageDecayCoroutine);
+            }
         }
     }
     private void FixedUpdate(){

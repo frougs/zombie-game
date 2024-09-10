@@ -11,45 +11,45 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public int maxAmmo;
     [SerializeField] public int maxReserveAmmo;
     [SerializeField] public int currentReserveAmmo;
-    [SerializeField] float reloadSpeed;
-    [SerializeField] float range;
+    [SerializeField] public float reloadSpeed;
+    [SerializeField] public float range;
     [SerializeField] public float critMultiplier;
     [SerializeField] public int currentAmmo;
     [SerializeField] public int ammoPrice;
     [SerializeField] public int gunPrice;
     public bool canShoot = true;
-    private bool hasAmmo = true;
+    [HideInInspector] public bool hasAmmo = true;
     //private GameObject progressBar;
-    private UIContainer uiStuff;
+    [HideInInspector] public UIContainer uiStuff;
     public bool held;
-    private Image progressBar;
+    [HideInInspector] public Image progressBar;
     public float reloadProgress;
-    private float rProgress;
+    [HideInInspector] public float rProgress;
     [HideInInspector] public bool reloading;
     [HideInInspector] public bool fullAmmo;
-    [SerializeField] private AudioClip gunshot;
-    [SerializeField] private AudioClip noAmmo;
-    [SerializeField] private AudioClip reloadSound;
-    [SerializeField] private AudioClip defaultHit;
-    [SerializeField] private AudioClip criticalHit;
-    private bool canPlayNoAmmo = true;
-    private Coroutine playAmmoSoundCoroutine;
+    [SerializeField] public AudioClip gunshot;
+    [SerializeField] public AudioClip noAmmo;
+    [SerializeField] public AudioClip reloadSound;
+    [SerializeField] public AudioClip defaultHit;
+    [SerializeField] public AudioClip criticalHit;
+    public bool canPlayNoAmmo = true;
+    public Coroutine playAmmoSoundCoroutine;
     [SerializeField] public AudioSource soundSource;
-    [SerializeField] private int pointsPerHit;
-    private ScoreSystem scoreSystem;
-    private bool hasReserveAmmo;
+    [SerializeField] public int pointsPerHit;
+    [HideInInspector] public ScoreSystem scoreSystem;
+    [HideInInspector] public bool hasReserveAmmo;
     [SerializeField] public GameObject buyModel;
     public LayerMask IgnoreLayer;
-    private Rage rageScript;
-    private Symbiosis symbiosisScript;
-    float modifiedDamage;
+    [HideInInspector] public Rage rageScript;
+    [HideInInspector] public Symbiosis symbiosisScript;
+    public float modifiedDamage;
     public WeaponController weaponCon;
     public float reloadSpeedAugment;
-    private GameObject player;
-    [SerializeField] GameObject particleSpawnPOS;
-    [SerializeField] GameObject particlesOBJ;
-    [SerializeField] GameObject impactParticle;
-    [SerializeField] GameObject damageNumberParticles;
+    [HideInInspector] public GameObject player;
+    [SerializeField] public GameObject particleSpawnPOS;
+    [SerializeField] public GameObject particlesOBJ;
+    [SerializeField] public GameObject impactParticle;
+    [SerializeField] public GameObject damageNumberParticles;
     
 
     private void Start(){
@@ -60,7 +60,7 @@ public class BaseGun : MonoBehaviour, IShootable
         }
         weaponCon = FindObjectOfType<WeaponController>();
     }
-    public void Shot(GameObject shooter){
+    public virtual void Shot(GameObject shooter){
         if(shooter.GetComponent<ThirdPersonController>() != null){
             player = shooter;
         }
@@ -161,13 +161,13 @@ public class BaseGun : MonoBehaviour, IShootable
             }
         }
     }
-    IEnumerator NoAmmoSound(){
+    public IEnumerator NoAmmoSound(){
         canPlayNoAmmo = false;
         soundSource.PlayOneShot(noAmmo);
         yield return new WaitForSeconds(fireRate);
         canPlayNoAmmo = true;
     }
-    IEnumerator ShotDelay(){
+    public IEnumerator ShotDelay(){
         canShoot = false;
         yield return new WaitForSeconds(fireRate);
         canShoot = true;

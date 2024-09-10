@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class TabGroup : MonoBehaviour
 {
@@ -42,9 +43,14 @@ public class TabGroup : MonoBehaviour
         }
     }
     public void ResetTabs(){
-        foreach(TabButton button in tabButtons){
-            if(selectedTab!=null && button == selectedTab){ continue;}
-            button.background.sprite = tabIdle;
+        try{
+            foreach(TabButton button in tabButtons){
+                if(selectedTab!=null && button == selectedTab){ continue;}
+                    button.background.sprite = tabIdle;
+            }
+        }
+        catch(Exception e){
+            Debug.LogWarning("Tab Group: " +e.Message);
         }
     }
     public void ClosePage(){

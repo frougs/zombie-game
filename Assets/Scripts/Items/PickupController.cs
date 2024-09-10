@@ -49,9 +49,13 @@ public class PickupController : MonoBehaviour, IInteractable
             
             //BroadcastRemoteMethod(nameof(RemoteUpdateParent), interactionCon.GetComponent<Alteruna.Avatar>().ToString());
 
-        } 
+        }
+        if(startHeld){
+            startHeld = false;
+        }
     }
     public void Drop(GameObject cam, InteractionController interactionCon){
+        //Debug.Log("Dropping: " +this.gameObject.name);
         //BroadcastRemoteMethod("Drop", cam, interactionCon);
         UpdateStatus(true);
         /*rb.mass = storedMass;

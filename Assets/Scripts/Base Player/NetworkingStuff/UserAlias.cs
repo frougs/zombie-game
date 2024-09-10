@@ -6,7 +6,7 @@ using Alteruna;
 public class UserAlias : AttributesSync
 {
     private Alteruna.Avatar _avatar;
-    private Multiplayer Multiplayer;
+    //private Multiplayer Multiplayer;
     public TextMeshPro nameText;
     [SynchronizableField] private string name;
 

@@ -39,11 +39,13 @@ public class WeaponController : MonoBehaviour
                     if(shootable != null){
                         //Debug.Log("Child Found, attempting shot");
                         //shootable.Reload();
-                        if( child.GetComponent<BaseGun>().fullAmmo != true){
-                            child.GetComponent<BaseGun>().Reload();
-                        }
-                        else{
-                            //Maybe add error sound
+                        if(child.GetComponent<BaseGun>() != null){
+                            if( child.GetComponent<BaseGun>().fullAmmo != true){
+                                child.GetComponent<BaseGun>().Reload();
+                            }
+                            else{
+                                //Maybe add error sound
+                            }
                         }
                     }
                 }

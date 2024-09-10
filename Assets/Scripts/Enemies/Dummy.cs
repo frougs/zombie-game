@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
+using System;
 
 public class Dummy : MonoBehaviour, IDamagable
 {
@@ -69,7 +70,10 @@ public class Dummy : MonoBehaviour, IDamagable
         }*/
         if(chasing){
             if(target != null && nav != null){
-                nav.SetDestination(target.transform.position);
+                try{
+                    nav.SetDestination(target.transform.position);
+                }
+                catch(Exception e){}
             }
         }
         /*if(pastBarricade){
@@ -134,7 +138,7 @@ public class Dummy : MonoBehaviour, IDamagable
 
     IEnumerator DamageTimer(){
         if(attackClips.Length > 0){
-            var index = Random.Range(0, attackClips.Length);
+            var index = UnityEngine.Random.Range(0, attackClips.Length);
             soundSource.PlayOneShot(attackClips[index]);
         }
         currentlyAttacking = true;

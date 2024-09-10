@@ -10,11 +10,15 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject jMenu;
     [SerializeField] TabGroup journalTabs;
     [SerializeField] GameObject background;
+    [SerializeField] AudioClip pauseMusic;
     public bool isPaused;
+    private UIContainer uiStuff;
     public void OnPause(){
         pMenu.SetActive(true);
         background.SetActive(true);
         isPaused = true;
+        uiStuff.PauseAllSounds();
+        uiStuff.UpdateMenuMusic(pauseMusic, true);
     }
     public void UnPause(){
         pMenu.SetActive(false);
@@ -24,6 +28,8 @@ public class PauseController : MonoBehaviour
         journalTabs.ClosePage();
         background.SetActive(false);
         isPaused = false;
+        uiStuff.UnpauseAllSounds();
+        uiStuff.UpdateMenuMusic(null, false);
 
     }
     private void Start(){
@@ -32,5 +38,11 @@ public class PauseController : MonoBehaviour
     }
     public void UnpausedFromButton(){
         //sMenu.SetActive(true);
+    }
+    void Update()
+    {
+        if(uiStuff == null){
+            uiStuff = FindObjectOfType<UIContainer>();
+        }
     }
 }

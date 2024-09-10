@@ -5,7 +5,7 @@ using UnityEngine;
 public class Symbiosis : PerkBase
 {
     [SerializeField] GameObject ammoDropObj;
-    [SerializeField] float discountAmount;
+    //[SerializeField] float discountAmount;
     [SerializeField] public bool lifeSteal;
     [SerializeField] public float lifeStealPercent;
     private Purchasable[] allPurchasables;
