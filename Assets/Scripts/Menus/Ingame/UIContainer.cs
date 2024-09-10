@@ -44,6 +44,8 @@ public class UIContainer : MonoBehaviour
     [SerializeField] public AudioSource menuMusic;
     [SerializeField] AudioSource gameplayMusic;
     [SerializeField] AudioClip deathMusic;
+    [SerializeField] AudioClip deathLoop;
+    private bool trackAudioComplete;
     [SerializeField] AudioClip[] gameplayMusicClips;
     private bool triggerDeathMusicOnce = true;
 
@@ -200,6 +202,7 @@ public class UIContainer : MonoBehaviour
         uiAudio = GetComponent<AudioSource>();
     }
     public void DeathUI(){
+        Time.timeScale = 0f;
         deadUI.SetActive(true);
         deadRoundCount.text = "HAHAHA U ONLY MADE IT TO ROUND " +deathRounds.ToString();
         FindObjectOfType<Pause>().inMenu = true;
@@ -211,7 +214,16 @@ public class UIContainer : MonoBehaviour
         if(triggerDeathMusicOnce == true){
             UpdateMenuMusic(deathMusic, false);
             triggerDeathMusicOnce = false;
+            trackAudioComplete = true;
         }
         PauseAllSounds();
+    }
+    private void Update(){
+        if(trackAudioComplete){
+            if(!menuMusic.isPlaying){
+                Debug.Log("Death music done playing, starting loop...");
+                UpdateMenuMusic(deathLoop, true);
+            }
+        }
     }
 }

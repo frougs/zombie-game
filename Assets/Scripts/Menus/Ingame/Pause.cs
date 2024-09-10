@@ -47,6 +47,7 @@ public class Pause : MonoBehaviour
         //     return;
         _pInput = GetComponent<PlayerInput>();
         pause = _pInput.actions["Pause"];
+        Time.timeScale = 1.0f;
     }
 }
 
