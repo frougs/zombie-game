@@ -35,4 +35,7 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
     }
+    public void DeleteAllData(){
+        PlayerPrefs.DeleteAll();
+    }
 }

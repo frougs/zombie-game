@@ -30,6 +30,7 @@ public class RoundsScript : MonoBehaviour
     private TextMeshProUGUI roundText;
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip roundStartClip;
+    private bool maxZombiesReached;
     private void Start(){
         if(roundNumber == 0){
             roundNumber = 1;
@@ -43,15 +44,18 @@ public class RoundsScript : MonoBehaviour
         }
     }
     private void Update(){
-        if(remainingSpawnCount == 0){
+        if(remainingSpawnCount == 0 && currentAlive == 0){
             canSpawn = false;
             CalculateNextRound();
         }
-        else if(roundSpawned != totalSpawnCount && canSpawn){
+        else if(roundSpawned != totalSpawnCount && canSpawn && !maxZombiesReached){
             StartSpawning();
         }
         if(currentAlive >= maxZombiesAtOnce){
-            canSpawn = false;
+            maxZombiesReached = true;
+        }
+        else{
+            maxZombiesReached = false;
         }
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();

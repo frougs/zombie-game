@@ -13,6 +13,7 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     [SerializeField] AudioClip repairSound;
     [SerializeField] AudioClip breakSound;
     [SerializeField] AudioSource soundSource;
+    [SerializeField] int repairPoints;
     private void Start(){
         currentProgress = barrierCapacity;
         soundSource = this.GetComponent<AudioSource>();
@@ -41,9 +42,12 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
             planks[i].SetActive(progressRatio >= threshold);
         }
     }
-     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
-        currentProgress += progressPerInteract;
-        soundSource.PlayOneShot(repairSound);
+    public void Interacted(GameObject gunRoot, InteractionController interactionCon){
+        if(currentProgress < barrierCapacity){
+            FindObjectOfType<ScoreSystem>().AddToScore(repairPoints);
+            currentProgress += progressPerInteract;
+            soundSource.PlayOneShot(repairSound);
+        }
     }
     public void Damaged(float damage, GameObject attacker, Vector3 pos){
         if(attacker.GetComponent<Dummy>() != null){

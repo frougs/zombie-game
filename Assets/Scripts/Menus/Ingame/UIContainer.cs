@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIContainer : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class UIContainer : MonoBehaviour
     private bool trackAudioComplete;
     [SerializeField] AudioClip[] gameplayMusicClips;
     private bool triggerDeathMusicOnce = true;
+    
 
     public void UpdateMenuMusic(AudioClip music, bool looping){
         menuMusic.clip = music;
@@ -217,6 +219,15 @@ public class UIContainer : MonoBehaviour
             trackAudioComplete = true;
         }
         PauseAllSounds();
+        var currentScene = SceneManager.GetActiveScene();
+        if(PlayerPrefs.HasKey(currentScene.name)){
+            if(PlayerPrefs.GetInt(currentScene.name) < deathRounds){
+                PlayerPrefs.SetInt(currentScene.name, deathRounds);
+            }
+        }
+        else{
+            PlayerPrefs.SetInt(currentScene.name, deathRounds);
+        }
     }
     private void Update(){
         if(trackAudioComplete){
