@@ -226,6 +226,7 @@ MonoBehaviour:
   particlesOBJ: {fileID: 1017802478401746369, guid: 8af46a8dc143fc64e861477748b352ef, type: 3}
   impactParticle: {fileID: 7214447472987976522, guid: 4867e90915b59b64ca36d1c1695b8211, type: 3}
   damageNumberParticles: {fileID: 2433047439729013060, guid: 1d3e43e011526e44c80acc3b9491645e, type: 3}
+  upgrades: []
   projectile: {fileID: 4314848030985360490, guid: ddaa9b2c215d6aa4fb78a502cf3b0281, type: 3}
   projectileSpeed: 20
   impactAudioSource: {fileID: 1028185963104246852}
@@ -325,6 +326,14 @@ PrefabInstance:
       propertyPath: thisColl
       value: 
       objectReference: {fileID: 6566074584760083133}
+    - target: {fileID: 721968209429068227, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemName
+      value: The Dennis Reynolds
+      objectReference: {fileID: 0}
+    - target: {fileID: 721968209429068227, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemRarity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1503358749229723325, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Name
       value: PickupBase

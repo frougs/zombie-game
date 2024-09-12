@@ -32,7 +32,9 @@ public class WorkBenchUpgrades : Purchasable, IInteractable
     [SerializeField] Button ammoButton;
     [SerializeField] Button firerateButton;
     [SerializeField] GameObject poweronObj;
-
+    [SerializeField] Material upgradeMaterial;
+    [SerializeField] AudioClip upgradeSound;
+    [SerializeField] ParticleSystem upgradeParticles;
 
     public void PoweredOn(){
         powered = true;
@@ -59,6 +61,7 @@ public class WorkBenchUpgrades : Purchasable, IInteractable
     private void OpenMenu(){
         CheckAugments();
         UpdateMenu();
+        CheckUpgrades();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         player.GetComponent<ThirdPersonController>().enabled = false;
@@ -129,29 +132,53 @@ public class WorkBenchUpgrades : Purchasable, IInteractable
     }
     public void PurchaseUpgrade(string upgradeName){
         if(scoreSystem.score >= price){
+
             scoreSystem.SubtractScore(price);
             soundSource.PlayOneShot(purchase);
             currentGun.GetComponent<BaseGun>().soundSource.pitch = 2f;
+            UpdateMaterial();
+            soundSource.PlayOneShot(upgradeSound);
+            upgradeParticles.Play();
             if(upgradeName == "damage"){
                 UpgradeDamage();
-                damageButton.interactable = false;
+                //damageButton.interactable = false;
+                currentGun.GetComponent<BaseGun>().upgrades.Add(upgradeName);
             }
             if(upgradeName == "crit"){
                 UpgradeCrit();
-                critButton.interactable = false;
+                //critButton.interactable = false;
+                currentGun.GetComponent<BaseGun>().upgrades.Add(upgradeName);
             }
             if(upgradeName == "ammo"){
                 UpgradeAmmo();
-                ammoButton.interactable = false;
+                //ammoButton.interactable = false;
+                currentGun.GetComponent<BaseGun>().upgrades.Add(upgradeName);
             }
             if(upgradeName == "firerate"){
                 UpgradeFirerate();
-                firerateButton.interactable = false;
+                //firerateButton.interactable = false;
+                currentGun.GetComponent<BaseGun>().upgrades.Add(upgradeName);
             }
         }
         else{
             soundSource.PlayOneShot(errorPurchase);
         }
+    }
+    private void UpdateMaterial(){
+        MeshRenderer[] meshRenderers = currentGun.GetComponentsInChildren<MeshRenderer>();
+        if(meshRenderers != null){
+            foreach(MeshRenderer meshRenderer in meshRenderers){
+                meshRenderer.material = upgradeMaterial;
+                //Debug.Log(meshRenderer.gameObject.name);
+            }   
+        }
+    }
+    public void CheckUpgrades(){
+        damageButton.interactable = !currentGun.GetComponent<BaseGun>().upgrades.Contains("damage");
+        critButton.interactable = !currentGun.GetComponent<BaseGun>().upgrades.Contains("crit");
+        ammoButton.interactable = !currentGun.GetComponent<BaseGun>().upgrades.Contains("ammo");
+        firerateButton.interactable = !currentGun.GetComponent<BaseGun>().upgrades.Contains("firerate");
+
     }
     
 }

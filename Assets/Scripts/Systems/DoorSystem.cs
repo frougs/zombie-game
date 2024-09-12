@@ -12,11 +12,13 @@ public class DoorSystem : Purchasable, IInteractable
     [SerializeField] public AudioSource soundSource;
     [SerializeField] public AudioClip errorPurchase;
     [SerializeField] public AudioClip purchase;
+    [SerializeField] AudioClip doorOpen;
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
         if(scoreSystem.score >= price){
             scoreSystem.SubtractScore(price);
+            scoreSystem.OpenDoor(doorOpen);
             RemoveDoors();
         }
         else{

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3891792819432676871}
+  - component: {fileID: 721968209429068227}
   - component: {fileID: -3954536723685085713}
   - component: {fileID: 8478063287026731932}
   m_Layer: 6
@@ -36,6 +37,35 @@ Transform:
   - {fileID: 9151676729673855348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &721968209429068227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503358749229723325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a965d6122b34503499db0a643215930d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemRarity: 0
+  itemColor: {r: 0, g: 0, b: 0, a: 0}
+  itemName: 
+  commonColor: {r: 0, g: 0, b: 0, a: 0}
+  rarityColors:
+  - rarity: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - rarity: 1
+    color: {r: 0.01713243, g: 0.7264151, b: 0.057851505, a: 1}
+  - rarity: 2
+    color: {r: 0, g: 0.23885393, b: 1, a: 1}
+  - rarity: 3
+    color: {r: 0.534441, g: 0, b: 1, a: 1}
+  - rarity: 4
+    color: {r: 1, g: 0.89299846, b: 0, a: 1}
+  - rarity: 5
+    color: {r: 0, g: 0.9500499, b: 1, a: 1}
 --- !u!114 &-3954536723685085713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +120,7 @@ MonoBehaviour:
   soundSource: {fileID: 5235901270771543261}
   pickupClip: {fileID: 8300000, guid: 6425c2beb366a13478ba82058a714ef3, type: 3}
   dropClip: {fileID: 8300000, guid: bd15da01b96d6074d8b557467d325fde, type: 3}
+  uiStuff: {fileID: 0}
 --- !u!65 &8478063287026731932
 BoxCollider:
   m_ObjectHideFlags: 0

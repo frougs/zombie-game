@@ -223,8 +223,12 @@ MonoBehaviour:
   ammoPrice: 300
   gunPrice: 1200
   canShoot: 1
+  hasAmmo: 1
+  uiStuff: {fileID: 0}
   held: 0
+  progressBar: {fileID: 0}
   reloadProgress: 0
+  rProgress: 0
   reloading: 0
   fullAmmo: 0
   gunshot: {fileID: 8300000, guid: 7b2b11b1daf6a8c41b99d66d34fe86bd, type: 3}
@@ -232,18 +236,26 @@ MonoBehaviour:
   reloadSound: {fileID: 0}
   defaultHit: {fileID: 8300000, guid: 5f782a7af9c9f054ca928290efa18857, type: 3}
   criticalHit: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
+  canPlayNoAmmo: 1
   soundSource: {fileID: 6586858792698407913}
   pointsPerHit: 10
+  scoreSystem: {fileID: 0}
+  hasReserveAmmo: 0
   buyModel: {fileID: 5017205580898781998, guid: cc4156adf6614cb4693b57fd602cf0b9, type: 3}
   IgnoreLayer:
     serializedVersion: 2
     m_Bits: 68
+  rageScript: {fileID: 0}
+  symbiosisScript: {fileID: 0}
+  modifiedDamage: 0
   weaponCon: {fileID: 0}
   reloadSpeedAugment: 0
+  player: {fileID: 0}
   particleSpawnPOS: {fileID: 6874989310054662872}
   particlesOBJ: {fileID: 6527157342470819202, guid: 73cc2ab3d17f2294f91a0e67e8d4a075, type: 3}
   impactParticle: {fileID: 3290264720658229784, guid: 03bee7089ee1fd14b93714b34e86475b, type: 3}
   damageNumberParticles: {fileID: 2433047439729013060, guid: 1d3e43e011526e44c80acc3b9491645e, type: 3}
+  upgrades: []
 --- !u!54 &5418589098786725845
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -325,6 +337,14 @@ PrefabInstance:
       propertyPath: thisColl
       value: 
       objectReference: {fileID: 6815190199516483791}
+    - target: {fileID: 721968209429068227, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemName
+      value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 721968209429068227, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemRarity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1503358749229723325, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Name
       value: PickupBase

@@ -29,4 +29,7 @@ public class ScoreSystem : MonoBehaviour
         uiStuff.UpdateScore(score);
         uiStuff.CreateScoreParticle("-", subscore);
     }
+    public void OpenDoor(AudioClip sound){
+        uiStuff.OpenDoor(sound);
+    }
 }

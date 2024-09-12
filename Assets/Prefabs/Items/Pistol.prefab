@@ -226,8 +226,12 @@ MonoBehaviour:
   ammoPrice: 0
   gunPrice: 0
   canShoot: 1
+  hasAmmo: 1
+  uiStuff: {fileID: 0}
   held: 0
+  progressBar: {fileID: 0}
   reloadProgress: 0
+  rProgress: 0
   reloading: 0
   fullAmmo: 0
   gunshot: {fileID: 0}
@@ -235,18 +239,26 @@ MonoBehaviour:
   reloadSound: {fileID: 0}
   defaultHit: {fileID: 0}
   criticalHit: {fileID: 0}
+  canPlayNoAmmo: 1
   soundSource: {fileID: 0}
   pointsPerHit: 0
+  scoreSystem: {fileID: 0}
+  hasReserveAmmo: 0
   buyModel: {fileID: 0}
   IgnoreLayer:
     serializedVersion: 2
     m_Bits: 0
+  rageScript: {fileID: 0}
+  symbiosisScript: {fileID: 0}
+  modifiedDamage: 0
   weaponCon: {fileID: 0}
   reloadSpeedAugment: 0
+  player: {fileID: 0}
   particleSpawnPOS: {fileID: 0}
   particlesOBJ: {fileID: 0}
   impactParticle: {fileID: 0}
   damageNumberParticles: {fileID: 0}
+  upgrades: []
 --- !u!1001 &2353740123741392353
 PrefabInstance:
   m_ObjectHideFlags: 0

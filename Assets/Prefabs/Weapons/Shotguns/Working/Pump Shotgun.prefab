@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: thisColl
       value: 
       objectReference: {fileID: 387794771917146155}
+    - target: {fileID: 721968209429068227, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemName
+      value: Pump Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 721968209429068227, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
+      propertyPath: itemRarity
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1503358749229723325, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Name
       value: PickupBase
@@ -323,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 650
-  fireRate: 1.35
+  fireRate: 0.5
   maxAmmo: 8
   maxReserveAmmo: 48
   currentReserveAmmo: 0
@@ -334,8 +342,12 @@ MonoBehaviour:
   ammoPrice: 350
   gunPrice: 1350
   canShoot: 1
+  hasAmmo: 1
+  uiStuff: {fileID: 0}
   held: 0
+  progressBar: {fileID: 0}
   reloadProgress: 0
+  rProgress: 0
   reloading: 0
   fullAmmo: 0
   gunshot: {fileID: 8300000, guid: 6a0b20e1ad72592408d8986eccd945e7, type: 3}
@@ -343,18 +355,26 @@ MonoBehaviour:
   reloadSound: {fileID: 8300000, guid: c61249d94fa987346bf8907457f3f95d, type: 3}
   defaultHit: {fileID: 8300000, guid: 5f782a7af9c9f054ca928290efa18857, type: 3}
   criticalHit: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
+  canPlayNoAmmo: 1
   soundSource: {fileID: 5834830700135925684}
   pointsPerHit: 10
+  scoreSystem: {fileID: 0}
+  hasReserveAmmo: 0
   buyModel: {fileID: 3422559042201053808, guid: 1973ba5f40304c04497555731bc85e13, type: 3}
   IgnoreLayer:
     serializedVersion: 2
     m_Bits: 68
+  rageScript: {fileID: 0}
+  symbiosisScript: {fileID: 0}
+  modifiedDamage: 0
   weaponCon: {fileID: 0}
   reloadSpeedAugment: 0
+  player: {fileID: 0}
   particleSpawnPOS: {fileID: 7954458629901356318}
   particlesOBJ: {fileID: 6527157342470819202, guid: 73cc2ab3d17f2294f91a0e67e8d4a075, type: 3}
   impactParticle: {fileID: 3290264720658229784, guid: 03bee7089ee1fd14b93714b34e86475b, type: 3}
   damageNumberParticles: {fileID: 2433047439729013060, guid: 1d3e43e011526e44c80acc3b9491645e, type: 3}
+  upgrades: []
 --- !u!54 &1713626694267904005
 Rigidbody:
   m_ObjectHideFlags: 0

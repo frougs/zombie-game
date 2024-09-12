@@ -50,7 +50,7 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public GameObject particlesOBJ;
     [SerializeField] public GameObject impactParticle;
     [SerializeField] public GameObject damageNumberParticles;
-    
+    public List<string> upgrades = new List<string>();
 
     private void Start(){
         currentAmmo = maxAmmo;

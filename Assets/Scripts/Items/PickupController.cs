@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Alteruna;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 /// <summary>
 /// NOTE FOR FUTURE, MAYBE HAVE RIGID BODY AND TRANSFORM SYNCHRONIZATION BE ENABLED/DISABLED WHEN PICKED UP OR DROPPED TO PREVENT DESYNC ISSUES WHEN WEAPONS ARE DROPPED
 /// </summary>
-
+[RequireComponent(typeof(RarityManager))]
 public class PickupController : MonoBehaviour, IInteractable
 {
     public bool startHeld;
@@ -25,7 +27,9 @@ public class PickupController : MonoBehaviour, IInteractable
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip pickupClip;
     [SerializeField] AudioClip dropClip;
-    //private float storedMass;
+    [HideInInspector] public UIContainer uiStuff;
+
+    
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(currentlyHeld == false){
             //BroadcastRemoteMethod("Interacted", gunRoot, interactionCon);
@@ -53,6 +57,7 @@ public class PickupController : MonoBehaviour, IInteractable
         if(startHeld){
             startHeld = false;
         }
+        UpdateItemUIOnPickup();
     }
     public void Drop(GameObject cam, InteractionController interactionCon){
         //Debug.Log("Dropping: " +this.gameObject.name);
@@ -73,6 +78,7 @@ public class PickupController : MonoBehaviour, IInteractable
         currentHolderIndex = 5;
         soundSource.PlayOneShot(dropClip);
         dropped?.Invoke();
+        UpdateItemUIOnDrop();
     }
     private void UpdateStatus(bool toggle){
         //BroadcastRemoteMethod("UpdateStatus", toggle);
@@ -89,8 +95,11 @@ public class PickupController : MonoBehaviour, IInteractable
             UpdateStatus(false);
         }
         else{
-             item.transform.SetParent(null);
-             UpdateStatus(true);
+            item.transform.SetParent(null);
+            UpdateStatus(true);
+        }
+        if(uiStuff == null){
+            uiStuff = FindObjectOfType<UIContainer>();
         }
 
         
@@ -151,6 +160,9 @@ public class PickupController : MonoBehaviour, IInteractable
             
             }
         }
+        if(startHeld){
+            uiStuff.UpdateItemText(GetComponent<RarityManager>().itemName, GetComponent<RarityManager>().itemColor);
+        }
     }
     private void Start(){
         if(startHeld){
@@ -164,13 +176,16 @@ public class PickupController : MonoBehaviour, IInteractable
         var player = FindObjectOfType<InteractionController>();
         Interacted(player.gunRoot, player);
     }
-    /*[SynchronizableMethod]
-    public void RemoteUpdateParent(string user){
-        Debug.Log(user);
-        var remotePlayer = GameObject.Find(user).transform;
-        var remoteGunRoot = remotePlayer.transform.Find("gunRoot");
-        item.transform.SetParent(remoteGunRoot);
-        /*var remoteGunRoot = u.gameObject.transform.Find("gunRoot");
-        item.transform.SetParent(remoteGunRoot);
-    }   */
+    public void UpdateItemUIOnPickup(){
+        //uiStuff.UpdateItemText(itemName, itemColor);
+        if(GetComponent<RarityManager>() != null){
+            uiStuff.UpdateItemText(GetComponent<RarityManager>().itemName, GetComponent<RarityManager>().itemColor);
+        }
+    }
+    public void UpdateItemUIOnDrop(){
+        uiStuff.UpdateItemText("Rock", GetComponent<RarityManager>().commonColor);
+    }
+    
+
+
 }

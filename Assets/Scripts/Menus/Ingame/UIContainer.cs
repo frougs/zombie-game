@@ -48,7 +48,9 @@ public class UIContainer : MonoBehaviour
     [SerializeField] AudioClip deathLoop;
     private bool trackAudioComplete;
     [SerializeField] AudioClip[] gameplayMusicClips;
+    [SerializeField] AudioClip[] pointsGained;
     private bool triggerDeathMusicOnce = true;
+    [SerializeField] TextMeshProUGUI itemText;
     
 
     public void UpdateMenuMusic(AudioClip music, bool looping){
@@ -135,6 +137,12 @@ public class UIContainer : MonoBehaviour
         scorePart.GetComponent<TextMeshProUGUI>().text = prefix + amount.ToString();
         if(prefix == "-"){
             uiAudio.PlayOneShot(purchase);
+        }
+        if(prefix == "+"){
+            if(pointsGained.Length > 0){
+                var index = UnityEngine.Random.Range(0, pointsGained.Length);
+                uiAudio.PlayOneShot(pointsGained[index]);
+            }
         }
     }
 
@@ -236,5 +244,12 @@ public class UIContainer : MonoBehaviour
                 UpdateMenuMusic(deathLoop, true);
             }
         }
+    }
+    public void OpenDoor(AudioClip sound){
+        uiAudio.PlayOneShot(sound);
+    }
+    public void UpdateItemText(string name, Color color){
+        itemText.text = name;
+        itemText.color = color;
     }
 }

@@ -83,6 +83,7 @@ MonoBehaviour:
   soundSource: {fileID: 7325362680230941062}
   errorPurchase: {fileID: 8300000, guid: 462eff65fa5a0c340a8cff4e09298f1e, type: 3}
   purchase: {fileID: 8300000, guid: b3ea0f8ca9cbe2c4e8903eeacc929c1d, type: 3}
+  doorOpen: {fileID: 8300000, guid: c7f66f84129148d4ea3757a3c2c8ccfa, type: 3}
 --- !u!82 &6322019318185956940
 AudioSource:
   m_ObjectHideFlags: 0
