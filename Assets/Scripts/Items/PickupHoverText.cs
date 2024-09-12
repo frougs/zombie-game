@@ -16,6 +16,8 @@ public class PickupHoverText : MonoBehaviour
     }*/
      [SerializeField] GameObject pickupPopup;
     [SerializeField] TextMeshPro pickupText;
+    [SerializeField] TextMeshPro itemName;
+    [SerializeField] float itemNameOffset;
     [SerializeField] Text getText;
     private string displayString;
     [SerializeField] private InputActionReference m_Action;
@@ -27,6 +29,7 @@ public class PickupHoverText : MonoBehaviour
         var isMe = other.GetComponent<ThirdPersonController>();
         if(isMe != null && !currentlyHeld){
             pickupPopup.SetActive(true);
+            itemName.gameObject.SetActive(true);
             var bindingString = displayString;
             pickupText.text = "Pickup: [ " + getText.text +" ]";
             active = true;
@@ -39,6 +42,7 @@ public class PickupHoverText : MonoBehaviour
     private void OnTriggerExit(Collider other){
         if(other.GetComponent<ThirdPersonController>()){
             pickupPopup.SetActive(false);
+            itemName.gameObject.SetActive(false);
             active = false;
         }
     }
@@ -46,10 +50,14 @@ public class PickupHoverText : MonoBehaviour
         if(active){
             var parent = GetComponent<Collider>().transform.root;
             pickupText.gameObject.transform.position = new Vector3(parent.position.x, parent.position.y + hoverHeight, parent.position.z);
+            if(itemName!=null){
+                itemName.gameObject.transform.position = new Vector3(parent.position.x, itemNameOffset + (parent.position.y + hoverHeight), parent.position.z);
+            }
         }
     }
     public void Held(){
         pickupPopup.SetActive(false);
+        itemName.gameObject.SetActive(false);
         active = false;
         currentlyHeld = true;
     }
@@ -58,6 +66,10 @@ public class PickupHoverText : MonoBehaviour
     }
     public void GetDisplayString(string bindingText, string uhhh, string whatthesigma){
         displayString = bindingText;
+    }
+    private void Start(){
+        pickupPopup.SetActive(false);
+        itemName.gameObject.SetActive(false);
     }
 
 }

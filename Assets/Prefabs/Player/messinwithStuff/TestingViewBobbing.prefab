@@ -3034,6 +3034,8 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   _pInput: {fileID: 0}
+  rock: {fileID: 1009169847260507626, guid: 17b964818a06bf746a8f9f52a5fae833, type: 3}
+  rockSpeed: 50
   reloadSpeedAugment: 0
 --- !u!114 &4531323468129007124
 MonoBehaviour:

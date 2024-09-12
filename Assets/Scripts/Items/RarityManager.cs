@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class RarityManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class RarityManager : MonoBehaviour
     public Rarity itemRarity;
     public Color itemColor;
     public string itemName;
+    [SerializeField] TextMeshPro itemPickupName;
     [HideInInspector] public Color commonColor;
 
     // Serializable class to pair rarity with color
@@ -47,5 +49,9 @@ public class RarityManager : MonoBehaviour
     private void Start(){
         itemColor = GetColorForRarity(itemRarity);
         commonColor = GetColorForRarity(Rarity.Common);
+        if(itemPickupName != null){
+            itemPickupName.text = itemName;
+            itemPickupName.color = itemColor;
+        }
     }
 }

@@ -314,6 +314,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Size.x
+      value: 0.04706592
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Size.y
+      value: 0.19696704
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Size.z
+      value: 0.25407493
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0021153353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Center.y
+      value: -0.020238489
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Center.z
+      value: 0.014449775
+      objectReference: {fileID: 0}
     - target: {fileID: 6537573542062941103, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Layer
       value: 6
