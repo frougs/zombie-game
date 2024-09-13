@@ -8,6 +8,8 @@ public class TheForge : MonoBehaviour
     [SerializeField] AudioClip defaultEngulf;
     [SerializeField] AudioClip mythicEngulf;
     [SerializeField] ParticleSystem fireParticles;
+    [SerializeField] int upgradeBonus;
+    private int upgradeAmount;
     public enum Rarity
     {
         Common,
@@ -45,7 +47,10 @@ public class TheForge : MonoBehaviour
         if (rarityManager != null)
         {
             fireParticles.Play();
-            var pointsForRarity = PriceForRarity(ConvertRarity(rarityManager.itemRarity));
+            if(obj.GetComponent<BaseGun>() != null){
+                upgradeAmount = (int)(upgradeBonus * obj.GetComponent<BaseGun>().upgrades.Count);
+            }
+            var pointsForRarity = upgradeAmount + PriceForRarity(ConvertRarity(rarityManager.itemRarity));
             if(rarityManager.itemRarity.ToString() != "Mythic"){
                 soundSource.PlayOneShot(defaultEngulf);
             }
@@ -55,6 +60,7 @@ public class TheForge : MonoBehaviour
             
             Destroy(obj.transform.parent.gameObject);
             StartCoroutine(PointsDelay(pointsForRarity));
+            upgradeAmount = 0;
             
         }
     }

@@ -11,6 +11,8 @@ public class TabGroup : MonoBehaviour
     public Sprite tabHover;
     public Sprite tabActive;
     public TabButton selectedTab;
+    [SerializeField] AudioSource soundSource;
+    [SerializeField] AudioClip buttonSound;
     public List<GameObject> objectsToSwap;
     public void Subscribe(TabButton button){
         if(tabButtons == null){
@@ -30,6 +32,7 @@ public class TabGroup : MonoBehaviour
     }
     public void OnTabSelected(TabButton button){
         selectedTab = button;
+        soundSource.PlayOneShot(buttonSound);
         ResetTabs();
         button.background.sprite = tabActive;
         int index = button.transform.GetSiblingIndex();

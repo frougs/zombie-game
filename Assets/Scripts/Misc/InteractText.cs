@@ -11,6 +11,11 @@ public class InteractText : MonoBehaviour
     [SerializeField] string prompt;
     void Update()
     {
-        pickupText.text = prompt +": [ " + getText.text +" ]";
+        if(prompt == null || prompt == ""){
+            pickupText.text = "[ " + getText.text +" ]";
+        }
+        else{
+            pickupText.text = prompt +": [ " + getText.text +" ]";
+        }
     }
 }

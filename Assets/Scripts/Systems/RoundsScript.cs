@@ -44,7 +44,7 @@ public class RoundsScript : MonoBehaviour
         }
     }
     private void Update(){
-        if(remainingSpawnCount == 0 && currentAlive == 0){
+        if(remainingSpawnCount <= 0 && currentAlive == 0){
             canSpawn = false;
             CalculateNextRound();
         }
@@ -67,7 +67,7 @@ public class RoundsScript : MonoBehaviour
         uiStuff.UpdateRemaining(remainingSpawnCount, totalSpawnCount);
 
         if(roundNumber % 10 == 0 && roundNumber != triggeredForThisRound){
-            uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(1);
+            uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(5);
             triggeredForThisRound = roundNumber;
 
         }

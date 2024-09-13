@@ -58,7 +58,7 @@ public class PerkBase : Purchasable, IInteractable
     }
 
     public virtual void ActivatePerk(){
-        FindObjectOfType<PopupTextScript>().Message(perkName, perkDescription, popupDuration);
+        FindObjectOfType<PopupTextScript>().Message(perkName, perkDescription, popupDuration, Color.white);
         hasPerk = true;
         AddPerkToUI();
         if(upgradeNum >= 0){

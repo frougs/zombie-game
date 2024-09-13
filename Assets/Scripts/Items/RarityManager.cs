@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RarityManager : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class RarityManager : MonoBehaviour
     public Color itemColor;
     public string itemName;
     [SerializeField] TextMeshPro itemPickupName;
+    [SerializeField] public string itemFlavorText;
     [HideInInspector] public Color commonColor;
+    public Sprite hiddenIMG;
+    public Sprite unlockedIMG;
+    public string itemDescription;
 
     // Serializable class to pair rarity with color
     [System.Serializable]

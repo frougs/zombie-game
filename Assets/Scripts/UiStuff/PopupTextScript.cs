@@ -9,12 +9,15 @@ public class PopupTextScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI headerText;
     [SerializeField] TextMeshProUGUI bodyText;
     [SerializeField] CanvasGroup canvasGroup;
-    public void Message(string header, string body, float duration){
+    public void Message(string header, string body, float duration, Color color){
         if (!string.IsNullOrEmpty(header)){
             headerText.text = header;
         }
         if (!string.IsNullOrEmpty(body)){
             bodyText.text = body;
+        }
+        if(color != null){
+            headerText.color = color;
         }
         StartCoroutine(FadeOutText(duration));
     }

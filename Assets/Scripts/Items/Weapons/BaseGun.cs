@@ -255,11 +255,12 @@ public class BaseGun : MonoBehaviour, IShootable
         }
         progressBar.gameObject.SetActive(false);
         var savedAmmo = currentReserveAmmo;
-        currentReserveAmmo += (currentAmmo - maxAmmo);
         if(currentReserveAmmo >=  maxAmmo){
+            currentReserveAmmo = currentReserveAmmo - (maxAmmo - currentAmmo);
             currentAmmo = maxAmmo;
         }
         else{
+            currentReserveAmmo = 0;
             currentAmmo = savedAmmo;
         }
         progressBar.fillAmount = 0f;
