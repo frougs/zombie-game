@@ -22,6 +22,21 @@ public class WeaponController : MonoBehaviour
         _pInput = GetComponent<PlayerInput>();
         attack = _pInput.actions["Attack"];
         reload  = _pInput.actions["Reload"];
+        if(PlayerPrefs.HasKey("RockDMG")){
+            if(PlayerPrefs.GetInt("RockDMG") != 0){
+                rockDamage += (rockDamage * ((PlayerPrefs.GetInt("RockDMG") * 10) *.01f));
+            }
+        }
+        if(PlayerPrefs.HasKey("RockPoints")){
+            if(PlayerPrefs.GetInt("RockPoints") != 0){
+                rockScorePerHit += (int)(rockScorePerHit * ((PlayerPrefs.GetInt("RockPoints") * 15) *.01f)) +1;
+            }
+        }
+        if(PlayerPrefs.HasKey("RockFR")){
+            if(PlayerPrefs.GetInt("RockFR") != 0){
+                rockFirerate -= (rockFirerate * ((PlayerPrefs.GetInt("RockFR") * 10) *.01f));
+            }
+        }
 
     }
 

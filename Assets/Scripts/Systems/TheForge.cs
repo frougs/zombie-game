@@ -9,6 +9,8 @@ public class TheForge : MonoBehaviour
     [SerializeField] AudioClip mythicEngulf;
     [SerializeField] ParticleSystem fireParticles;
     [SerializeField] int upgradeBonus;
+    [SerializeField] float powerupDropChance;
+    [SerializeField] float tokenDropChance;
     private int upgradeAmount;
     public enum Rarity
     {
@@ -66,7 +68,18 @@ public class TheForge : MonoBehaviour
     }
     private IEnumerator PointsDelay(int pointsForRarity){
         yield return new WaitForSeconds(0.15f);
-        FindObjectOfType<ScoreSystem>().AddToScore(pointsForRarity);
+        if(PlayerPrefs.HasKey("ForgeMoney")){
+            if(PlayerPrefs.GetInt("ForgeMoney") != 0){
+                int newpointsForRarity = (pointsForRarity + (int)(pointsForRarity * ((PlayerPrefs.GetInt("ForgeMoney") * 20) * .01f)) + 1);
+                FindObjectOfType<ScoreSystem>().AddToScore(newpointsForRarity);
+            }
+            else{
+                FindObjectOfType<ScoreSystem>().AddToScore(pointsForRarity);
+            }
+        }
+        else{
+            FindObjectOfType<ScoreSystem>().AddToScore(pointsForRarity);
+        }
     }
 
     private TheForge.Rarity ConvertRarity(RarityManager.Rarity rarity)

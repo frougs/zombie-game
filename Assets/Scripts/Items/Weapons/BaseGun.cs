@@ -51,6 +51,7 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public GameObject impactParticle;
     [SerializeField] public GameObject damageNumberParticles;
     public List<string> upgrades = new List<string>();
+    private Coroutine reloadRoutine;
 
     private void Start(){
         currentAmmo = maxAmmo;
@@ -173,6 +174,14 @@ public class BaseGun : MonoBehaviour, IShootable
         canShoot = true;
     }
     private void Update(){
+        if(held == false && reloadRoutine != null){
+            StopCoroutine(reloadRoutine);
+            progressBar.fillAmount = 0f;
+            reloadProgress = 0f;
+            reloading = false;
+            progressBar.gameObject.SetActive(false);
+            
+        }
         if(currentReserveAmmo <= 0){
             currentReserveAmmo = 0;
             hasReserveAmmo = false;
@@ -238,7 +247,7 @@ public class BaseGun : MonoBehaviour, IShootable
     }
     public void Reload(){
         if(currentReserveAmmo > 0){
-            StartCoroutine(ReloadTimer());
+            reloadRoutine = StartCoroutine(ReloadTimer());
         }
     }
     IEnumerator ReloadTimer(){

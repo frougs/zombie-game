@@ -14325,7 +14325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +20%
+  m_text: +0%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -15376,8 +15376,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7318127432488794063}
-        m_TargetAssemblyTypeName: UpgradeWorkbenchAugments, Assembly-CSharp
+      - m_Target: {fileID: 159949439231019081}
+        m_TargetAssemblyTypeName: BaseUpgrades, Assembly-CSharp
         m_MethodName: Unlock
         m_Mode: 3
         m_Arguments:
@@ -16683,12 +16683,12 @@ MonoBehaviour:
   unlockBlocks:
   - {fileID: 2516956466692420429}
   - {fileID: 1819263476442024634}
-  augmentAmount: 5
+  augmentAmount: 10
   amounttexts:
   - {fileID: 1596299269336900615}
   - {fileID: 9156976881324535444}
   - {fileID: 6760849502662112394}
-  maxAugmentAmount: 15
+  maxAugmentAmount: 30
   priceText: {fileID: 8755589720457607974}
   price: 2
 --- !u!1 &2951551445609742551
@@ -29097,8 +29097,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7318127432488794063}
-        m_TargetAssemblyTypeName: UpgradeWorkbenchAugments, Assembly-CSharp
+      - m_Target: {fileID: 4853494230391622600}
+        m_TargetAssemblyTypeName: BaseUpgrades, Assembly-CSharp
         m_MethodName: Unlock
         m_Mode: 3
         m_Arguments:
@@ -44209,7 +44209,9 @@ MonoBehaviour:
   - {fileID: 5521254364079911050}
   - {fileID: 4871770208465236074}
   augmentAmount: 7
-  amounttexts: []
+  amounttexts:
+  - {fileID: 8573007034164134051}
+  - {fileID: 4904490696432522531}
   maxAugmentAmount: 21
   priceText: {fileID: 6276699206277842988}
   price: 2
@@ -45704,8 +45706,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7318127432488794063}
-        m_TargetAssemblyTypeName: UpgradeWorkbenchAugments, Assembly-CSharp
+      - m_Target: {fileID: 2968591720247584424}
+        m_TargetAssemblyTypeName: BaseUpgrades, Assembly-CSharp
         m_MethodName: Unlock
         m_Mode: 3
         m_Arguments:
@@ -46902,9 +46904,11 @@ MonoBehaviour:
   unlockBlocks:
   - {fileID: 8977839953705978455}
   - {fileID: 3158606238107343318}
-  augmentAmount: 10
-  amounttexts: []
-  maxAugmentAmount: 30
+  augmentAmount: 20
+  amounttexts:
+  - {fileID: 8657202667119029532}
+  - {fileID: 8331888808461436593}
+  maxAugmentAmount: 40
   priceText: {fileID: 6541675292431142535}
   price: 2
 --- !u!1 &7947902957947344180
