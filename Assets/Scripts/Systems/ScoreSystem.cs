@@ -10,6 +10,7 @@ public class ScoreSystem : MonoBehaviour
     // [SerializeField] Color gainMoneyColor;
     // [SerializeField] Color loseMoneyColor;
     [SerializeField] public int score = 0;
+    public bool doublePoints = false;
     // Update is called once per frame
     void Update()
     {
@@ -20,9 +21,17 @@ public class ScoreSystem : MonoBehaviour
 
     public void AddToScore(int addscore){
         //Debug.Log("adding to score");
-        score += addscore;
+        if(!doublePoints){
+            score += addscore;
+            uiStuff.CreateScoreParticle("+", addscore);
+        }
+        else{
+            score += (int)(addscore * 2);
+            var doubledScore = (int)(addscore * 2);
+            uiStuff.CreateScoreParticle("+", doubledScore);
+        }
+        
         uiStuff.UpdateScore(score);
-        uiStuff.CreateScoreParticle("+", addscore);
     }
     public void SubtractScore(int subscore){
         score -= subscore;

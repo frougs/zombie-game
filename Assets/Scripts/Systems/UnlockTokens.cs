@@ -7,7 +7,7 @@ public class UnlockTokens : MonoBehaviour
     [SerializeField] AudioClip tokenEarnedSound;
     public void AddUpgradeToken(int amount){
         PlayerPrefs.SetInt("UpgradeTokens", PlayerPrefs.GetInt("UpgradeTokens") + amount);
-        GetComponent<UIContainer>().AddedTokenAnimation();
+        GetComponent<UIContainer>().AddedTokenAnimation(amount);
         this.GetComponent<AudioSource>().PlayOneShot(tokenEarnedSound);
 
     }

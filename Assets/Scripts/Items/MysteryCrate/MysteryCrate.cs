@@ -29,6 +29,8 @@ public class MysteryCrate : Purchasable, IInteractable
     private GameObject collectItem;
     [Header("Misc")]
     [SerializeField] TextMeshPro priceText;
+    public bool fireSale;
+
     
 
     private void Start(){
@@ -39,13 +41,18 @@ public class MysteryCrate : Purchasable, IInteractable
 
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(used == false){
-            var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
-            if(scoreSystem.score >= price){
-                scoreSystem.SubtractScore(price);
-                ActivateBox();
+            if(!fireSale){
+                var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
+                if(scoreSystem.score >= price){
+                    scoreSystem.SubtractScore(price);
+                    ActivateBox();
+                }
+                else{
+                    soundSource.PlayOneShot(errorPurchase);
+                }
             }
             else{
-                soundSource.PlayOneShot(errorPurchase);
+                ActivateBox();
             }
         }
         else{
@@ -113,6 +120,11 @@ public class MysteryCrate : Purchasable, IInteractable
     }
 
     private void Update(){
-        priceText.text = "$" + price.ToString();
+        if(!fireSale){
+            priceText.text = "$" + price.ToString();
+        }
+        else{
+            priceText.text = "FREE!!";
+        }
     }
 }

@@ -22,7 +22,9 @@ public class LightningHammer : BaseGun
                 else{
                     modifiedDamage = damage;
                 }
-                currentAmmo -= 1;
+                if(!infiniteAmmo){
+                    currentAmmo -= 1;
+                }
                 if(soundSource != null){
                     soundSource.PlayOneShot(gunshot);
                             if(particlesOBJ != null){
@@ -154,7 +156,12 @@ public class LightningHammer : BaseGun
                     // if(soundSource != null){
                     //     soundSource.PlayOneShot(criticalHit);
                     // }
-                    damagableOBJ.Damaged(modifiedDamage * critMultiplier, player, damagable.transform.position);
+                    if(!InstaKillActive){
+                        damagableOBJ.Damaged(modifiedDamage * critMultiplier, player, damagable.transform.position);
+                    }
+                    else{
+                        damagableOBJ.Damaged(Mathf.Infinity, player, damagable.transform.position);
+                    }
                 }
             }
         }

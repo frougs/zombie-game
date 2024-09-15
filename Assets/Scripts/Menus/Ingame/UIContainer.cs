@@ -28,6 +28,8 @@ public class UIContainer : MonoBehaviour
     [SerializeField] GameObject rageBar;
     [SerializeField] Image rageBarFill;
     [SerializeField] GameObject doubleDamageObj;
+    [Header("Powerup Stuff")]
+    [SerializeField] GameObject powerupParent;
     [Header("Upgrade Token Stuff")]
     [SerializeField] TextMeshProUGUI upgradeTokenCount;
     [SerializeField] GameObject spawnTokenPOS;
@@ -163,6 +165,23 @@ public class UIContainer : MonoBehaviour
             image.sprite = TextureToSprite(icon);
         }
     }
+    public void AddPowerUp(Texture2D icon, string name, bool instant){
+        if(!instant){
+            GameObject powerupObject = new GameObject(name+"UI");
+            powerupObject.transform.SetParent(powerupParent.transform, false);
+            Image image = powerupObject.AddComponent<Image>();
+            if(icon != null){
+                image.sprite = TextureToSprite(icon);
+            }
+        }
+    }
+    public void RemovePowerUp(string name){
+        foreach(Transform child in powerupParent.transform){
+            if(child.name == name +"UI"){
+                Destroy(child.gameObject);
+            }
+        }
+    }
 
     Sprite TextureToSprite(Texture2D texture){
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
@@ -184,9 +203,10 @@ public class UIContainer : MonoBehaviour
         upgradeTokenCount.text = PlayerPrefs.GetInt("UpgradeTokens").ToString();
     }
 
-    public void AddedTokenAnimation(){
+    public void AddedTokenAnimation(int amount){
         // Also add a sound here LOL!
-        Instantiate(addedTokenPrefab, spawnTokenPOS.transform);
+        var tokenObj = Instantiate(addedTokenPrefab, spawnTokenPOS.transform);
+        tokenObj.GetComponentInChildren<TextMeshProUGUI>().text = "+" + amount.ToString();
     }
 
     public void LateUpdate(){

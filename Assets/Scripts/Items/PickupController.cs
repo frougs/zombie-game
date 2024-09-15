@@ -78,6 +78,9 @@ public class PickupController : MonoBehaviour, IInteractable
         currentHolderIndex = 5;
         soundSource.PlayOneShot(dropClip);
         dropped?.Invoke();
+        if(item.GetComponent<BaseGun>() != null){
+            item.GetComponent<BaseGun>().StopReload();
+        }
         UpdateItemUIOnDrop();
     }
     private void UpdateStatus(bool toggle){

@@ -33,6 +33,8 @@ public class Dummy : MonoBehaviour, IDamagable
     [SerializeField] GameObject damagedParticles;
     public AudioClip[] attackClips;
     public AudioSource soundSource;
+    [SerializeField] float powerupDropChance;
+    [SerializeField] GameObject[] powerups;
     public void Damaged(float damage, GameObject attacker, Vector3 hitPoint){
         if(damagedParticles != null){
             Instantiate(damagedParticles, hitPoint, Quaternion.LookRotation((player.transform.position - hitPoint).normalized));
@@ -107,6 +109,12 @@ public class Dummy : MonoBehaviour, IDamagable
         }
     }
     private void Death(){
+        float randomValue = UnityEngine.Random.value;
+        if(randomValue <= powerupDropChance){
+            var index = UnityEngine.Random.Range(0, powerups.Length);
+            var yAdjusted = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
+            Instantiate(powerups[index], yAdjusted, Quaternion.identity);
+        }
         FindObjectOfType<ScoreSystem>().AddToScore(killBonus);
         FindObjectOfType<RoundsScript>().remainingSpawnCount -= 1;
         FindObjectOfType<RoundsScript>().currentAlive -= 1;

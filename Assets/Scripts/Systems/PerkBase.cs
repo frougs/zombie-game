@@ -23,6 +23,7 @@ public class PerkBase : Purchasable, IInteractable
     [SerializeField] public AudioSource soundSource;
     [SerializeField] public AudioClip errorPurchase;
     [SerializeField] public AudioClip purchase;
+    [SerializeField] Color perkColor;
 
     public virtual void Update(){
         // if(player == null){
@@ -58,7 +59,7 @@ public class PerkBase : Purchasable, IInteractable
     }
 
     public virtual void ActivatePerk(){
-        FindObjectOfType<PopupTextScript>().Message(perkName, perkDescription, popupDuration, Color.white);
+        FindObjectOfType<PopupTextScript>().Message(perkName, perkDescription, popupDuration, perkColor);
         hasPerk = true;
         AddPerkToUI();
         if(upgradeNum >= 0){

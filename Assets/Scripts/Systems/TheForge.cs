@@ -11,7 +11,12 @@ public class TheForge : MonoBehaviour
     [SerializeField] int upgradeBonus;
     [SerializeField] float powerupDropChance;
     [SerializeField] float tokenDropChance;
+    [SerializeField] GameObject[] powerUps;
+    [SerializeField] GameObject powerUpSpawnPoint;
+    // [SerializeField] Animator chestAnimator;
+    private GameObject spawnedPowerUp;
     private int upgradeAmount;
+    private UIContainer uiStuff;
     public enum Rarity
     {
         Common,
@@ -62,9 +67,29 @@ public class TheForge : MonoBehaviour
             
             Destroy(obj.transform.parent.gameObject);
             StartCoroutine(PointsDelay(pointsForRarity));
+            float poweruprandomValue = UnityEngine.Random.value;
+            if(poweruprandomValue <= powerupDropChance){
+                SpawnPowerUp();
+            }
+            float tokenuprandomValue = UnityEngine.Random.value;
+            if(tokenuprandomValue <= tokenDropChance){
+                AddToken();
+            }
             upgradeAmount = 0;
             
         }
+    }
+    public void Start(){
+        powerupDropChance += ((PlayerPrefs.GetInt("ForgePowerups") * 10)  * .01f);
+        tokenDropChance += ((PlayerPrefs.GetInt("ForgeTokens") * 7)  * .01f);
+    }
+    private void SpawnPowerUp(){
+        var index = UnityEngine.Random.Range(0, powerUps.Length);
+        spawnedPowerUp = Instantiate(powerUps[index], powerUpSpawnPoint.transform.position, Quaternion.identity);
+        // chestAnimator.SetBool("open", true);
+    }
+    private void AddToken(){
+        uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(1);
     }
     private IEnumerator PointsDelay(int pointsForRarity){
         yield return new WaitForSeconds(0.15f);
@@ -94,5 +119,10 @@ public class TheForge : MonoBehaviour
         case RarityManager.Rarity.Mythic: return TheForge.Rarity.Mythic;
         default: return TheForge.Rarity.Common;
     }
+    }
+    private void Update(){
+        if(uiStuff == null){
+            uiStuff = FindObjectOfType<UIContainer>();
+        }
     }
 }

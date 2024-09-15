@@ -52,6 +52,8 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public GameObject damageNumberParticles;
     public List<string> upgrades = new List<string>();
     private Coroutine reloadRoutine;
+    public bool InstaKillActive;
+    public bool infiniteAmmo;
 
     private void Start(){
         currentAmmo = maxAmmo;
@@ -73,7 +75,9 @@ public class BaseGun : MonoBehaviour, IShootable
                 else{
                     modifiedDamage = damage;
                 }
-                currentAmmo -= 1;
+                if(!infiniteAmmo){
+                    currentAmmo -= 1;
+                }
                 if(soundSource != null){
                     soundSource.PlayOneShot(gunshot);
                             if(particlesOBJ != null){
@@ -93,37 +97,43 @@ public class BaseGun : MonoBehaviour, IShootable
                     //Debug.Log("hit: " +hitData.transform.gameObject.name);
                     if(hitData.transform.gameObject != player){
                         if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
-                            try{
-                                var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
-                                dmgParticles.GetComponent<CFXR_ParticleText>().text = modifiedDamage.ToString();
-                                dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
-                            }
-                            catch(Exception e){
-                                Debug.LogWarning(e.ToString());
-                            }
+                            // try{
+                                
+                            // }
+                            // catch(Exception e){
+                            //     Debug.LogWarning(e.ToString());
+                            // }
+                            var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                             if(symbiosisScript != null){
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
                                 }
                             }
-                            damagable.Damaged(modifiedDamage, shooter, hitData.point);
+                            if(InstaKillActive == false){
+                                damagable.Damaged(modifiedDamage, shooter, hitData.point);
+                                dmgParticles.GetComponent<CFXR_ParticleText>().text = modifiedDamage.ToString();
+                            }
+                            else{
+                                damagable.Damaged(Mathf.Infinity, shooter, hitData.point);
+                                dmgParticles.GetComponent<CFXR_ParticleText>().text = Mathf.Infinity.ToString();
+                            }
                             if(soundSource != null){
                                 soundSource.PlayOneShot(defaultHit);
                             }
+                            dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
                             scoreSystem.AddToScore(pointsPerHit);
                             canShoot = false;
                             rageScript.Hit();
                         }
                         //Crit hit
                         else if(damagable != null && hitData.transform.gameObject.tag == "CriticalSpot"){
-                            try{
-                                var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
-                                dmgParticles.GetComponent<CFXR_ParticleText>().text = (modifiedDamage * critMultiplier).ToString();
-                                dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
-                            }
-                            catch(Exception e){
-                                Debug.LogWarning(e.ToString());
-                            }
+                            // try{
+                            //     var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+                            // }
+                            // catch(Exception e){
+                            //     Debug.LogWarning(e.ToString());
+                            // }
+                            var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                             if(symbiosisScript != null){
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
@@ -132,7 +142,15 @@ public class BaseGun : MonoBehaviour, IShootable
                             if(soundSource != null){
                                 soundSource.PlayOneShot(criticalHit);
                             }
-                            damagable.Damaged(modifiedDamage * critMultiplier, shooter, hitData.point);
+                            if(InstaKillActive == false){
+                                dmgParticles.GetComponent<CFXR_ParticleText>().text = (modifiedDamage * critMultiplier).ToString();
+                                damagable.Damaged(modifiedDamage * critMultiplier, shooter, hitData.point);
+                            }
+                            else{
+                                damagable.Damaged(Mathf.Infinity, shooter, hitData.point);
+                                dmgParticles.GetComponent<CFXR_ParticleText>().text = Mathf.Infinity.ToString();
+                            }
+                            dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
                             scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
                             canShoot = false;
                             rageScript.CritHit();
@@ -173,14 +191,20 @@ public class BaseGun : MonoBehaviour, IShootable
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
     }
-    private void Update(){
-        if(held == false && reloadRoutine != null){
+    public void StopReload(){
+        if(reloadRoutine != null){
             StopCoroutine(reloadRoutine);
             progressBar.fillAmount = 0f;
             reloadProgress = 0f;
             reloading = false;
             progressBar.gameObject.SetActive(false);
             
+        }
+    }
+    private void Update(){
+        if(held == false){
+            InstaKillActive = false;
+            infiniteAmmo = false;
         }
         if(currentReserveAmmo <= 0){
             currentReserveAmmo = 0;

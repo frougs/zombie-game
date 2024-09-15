@@ -265,6 +265,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c8ead1f8dff80d948b124154a86de279, type: 3}
   - {fileID: 8300000, guid: 2100b72b92ee44b45939b0e6d6fdf91c, type: 3}
   soundSource: {fileID: 5432607642075890622}
+  powerupDropChance: 0.02
+  powerups:
+  - {fileID: 339429636941257857, guid: a31aa8970b26aea4687cc7e9256f09c1, type: 3}
+  - {fileID: 3606997223988679970, guid: 7da906716b4e7bc448ebf211b71120d2, type: 3}
+  - {fileID: 3894066057703946213, guid: 31784c9949260104fb3aacf86be91e77, type: 3}
+  - {fileID: 8036946400100677438, guid: 4c9af60b7d3834b4ca43a8f5bb8a6e42, type: 3}
+  - {fileID: 4573347836656141913, guid: 220d88d419637274f971e76cd6bb4e34, type: 3}
+  - {fileID: 383640939926145469, guid: d7f551c5352e173479c37c57c6e278ab, type: 3}
 --- !u!195 &4226794117900371105
 NavMeshAgent:
   m_ObjectHideFlags: 0

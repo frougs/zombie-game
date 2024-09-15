@@ -8,7 +8,7 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     [SerializeField] GameObject[] planks;
     private UIContainer uiStuff;
     [SerializeField] public float barrierCapacity;
-    [SerializeField] private float currentProgress;
+    [SerializeField] public float currentProgress;
     [SerializeField] public float progressPerInteract;
     [SerializeField] AudioClip repairSound;
     [SerializeField] AudioClip breakSound;
