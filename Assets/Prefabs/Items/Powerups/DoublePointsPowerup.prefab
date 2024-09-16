@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2059025585209792536}
   - component: {fileID: 7185748411632388218}
   - component: {fileID: 6142144027905514452}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 1509226048127773465}
   - component: {fileID: 2970554942234270606}
   - component: {fileID: 3388040884991131425}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoublePointsPowerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
   rotationSpeed: 50
   powerupName: Double Money
   pickupParticles: {fileID: 7983502252784382849, guid: 05fc5a4c51b017748a73287e414ab8a2, type: 3}
-  selfDestructTime: 0
+  selfDestructTime: 15
 --- !u!1 &3909925433724630480
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 2987808818436941140}
   - component: {fileID: 8004952304334860530}
   - component: {fileID: 8113707269784283780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 1216356972986978091}
   - component: {fileID: 4223445068981638788}
   - component: {fileID: 4831239809664319583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 5596679287701885618}
   - component: {fileID: 1124216867676821868}
   - component: {fileID: 9146169201144508739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 4417731953037577485}
   - component: {fileID: 2105541306655197956}
   - component: {fileID: 7053465184550109922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 1889247227120932511}
   - component: {fileID: 3729354142748011868}
   - component: {fileID: 6706065742906316240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 6061239689990594660}
   - component: {fileID: 6348039237734920484}
   - component: {fileID: 1405821972975536630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1288,6 +1288,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR3 LightGlow A (Loop)
       objectReference: {fileID: 0}
+    - target: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2275721571885089005, guid: acdb90624a404aa438447006f1026065, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7336
@@ -1344,6 +1348,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3550968669729317587, guid: acdb90624a404aa438447006f1026065, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410310426095441352, guid: acdb90624a404aa438447006f1026065, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6890765397544793498, guid: acdb90624a404aa438447006f1026065, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1351,6 +1363,10 @@ PrefabInstance:
     - target: {fileID: 7710086954383210093, guid: acdb90624a404aa438447006f1026065, type: 3}
       propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773184688824279198, guid: acdb90624a404aa438447006f1026065, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8986935675043883179, guid: acdb90624a404aa438447006f1026065, type: 3}
       propertyPath: m_Materials.Array.size

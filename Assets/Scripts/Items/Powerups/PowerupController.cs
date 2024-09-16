@@ -86,6 +86,7 @@ public class PowerupController : MonoBehaviour
 
     private IEnumerator PowerUpEffect(Texture2D icon, string name, string description, PowerupInfo powerup, bool isInstant)
     {
+        this.GetComponent<AudioSource>().PlayOneShot(powerup.powerUpSound);
         AddPowerUpToUI(icon, name, isInstant);
         TextPopUp(name, description, uiPopupDuration);
         yield return new WaitForSeconds(powerupDuration);

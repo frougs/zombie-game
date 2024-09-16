@@ -12,7 +12,10 @@ public class Symbiosis : PerkBase
 
     public void EnemyDeath(GameObject enemyPos){
         if(hasPerk){
-            Instantiate(ammoDropObj, enemyPos.transform.position, Quaternion.identity);
+            //Instantiate(ammoDropObj, enemyPos.transform.position, Quaternion.identity);
+            if(FindObjectOfType<InteractionController>().currentlyHeld.GetComponent<BaseGun>() != null){
+                FindObjectOfType<InteractionController>().currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo += 5;
+            }
         }
     }
     public override void PerkUpgrade1(){

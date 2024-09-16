@@ -256,6 +256,9 @@ public class BaseGun : MonoBehaviour, IShootable
         if(rageScript == null){
             rageScript = FindObjectOfType<Rage>();
         }
+        if(currentReserveAmmo > maxReserveAmmo){
+            currentReserveAmmo = maxReserveAmmo;
+        }
         /*if(FindObjectOfType<WeaponController>() == null && weaponCon == null){
             weaponCon = FindObjectOfType<WeaponController>();
         }

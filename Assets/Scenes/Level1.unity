@@ -22366,7 +22366,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  lever: {fileID: 0}
+  lever: {fileID: 1663663890}
   soundSource: {fileID: 1975009393}
   powerOnSound: {fileID: 8300000, guid: fd9f5d04bf72dec4bb739272a4843828, type: 3}
 --- !u!4 &731301025
@@ -32632,7 +32632,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.7, y: -135.5}
+  m_AnchoredPosition: {x: -75, y: -190.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &979682099
@@ -40796,7 +40796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1247335877
 Transform:
   m_ObjectHideFlags: 0
@@ -48296,37 +48296,37 @@ MonoBehaviour:
   - powerupIcon: {fileID: 2800000, guid: c4bef377b425ac84895c5d375df9f77a, type: 3}
     powerUpName: Gamblin' Time
     powerUpDescription: ITS NOT AN ADDICTION!!
-    powerUpSound: {fileID: 0}
+    powerUpSound: {fileID: 8300000, guid: 1d2fee3a3559a224ca659234f12474c4, type: 3}
     powerupScriptClassName: FireSalePowerup
     isInstant: 0
   - powerupIcon: {fileID: 2800000, guid: 8e3da4273bf6f3c4ebef21b0e7030f78, type: 3}
     powerUpName: Infinite Ammo
     powerUpDescription: Who Pays for All This Ammo??
-    powerUpSound: {fileID: 0}
+    powerUpSound: {fileID: 8300000, guid: 1465bea4596858544a5bb717477abe65, type: 3}
     powerupScriptClassName: InfiniteAmmoPowerup
     isInstant: 0
   - powerupIcon: {fileID: 2800000, guid: ef53e33dc566e9a4cb31276d9a8ddc60, type: 3}
     powerUpName: InstaKill
     powerUpDescription: BOMB YOU, BOMB YOU, KILL YOU, KILL YOU!
-    powerUpSound: {fileID: 0}
+    powerUpSound: {fileID: 8300000, guid: 22ddc9a978eabaa419a0c0308e6bc75e, type: 3}
     powerupScriptClassName: InstaKillPickup
     isInstant: 0
   - powerupIcon: {fileID: 0}
     powerUpName: Nuke
-    powerUpDescription: Lay Waste to Your Enemies
-    powerUpSound: {fileID: 0}
+    powerUpDescription: I Don't Want to Set the World on Fire..
+    powerUpSound: {fileID: 8300000, guid: 6a149646b25367c4a9cab70e31c67f62, type: 3}
     powerupScriptClassName: NukePowerup
     isInstant: 1
   - powerupIcon: {fileID: 0}
     powerUpName: Barrier Repair
     powerUpDescription: Who Needs Therapy Anyway?
-    powerUpSound: {fileID: 0}
+    powerUpSound: {fileID: 8300000, guid: e66f0aad3a6365046914c582baf3f7ab, type: 3}
     powerupScriptClassName: BarrierRepairPowerup
     isInstant: 1
   - powerupIcon: {fileID: 2800000, guid: f772c5ff086f5a745874c146cc317b62, type: 3}
     powerUpName: Double Money
     powerUpDescription: Give the Goblin Some Gold
-    powerUpSound: {fileID: 0}
+    powerUpSound: {fileID: 8300000, guid: 29871b4778e5f2a4b8467d6b2bb3ccfc, type: 3}
     powerupScriptClassName: DoublePointsPowerup
     isInstant: 0
 --- !u!1001 &1521330978
@@ -53687,6 +53687,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.0448217, y: 4.424223, z: 7.6821074}
   m_Center: {x: -0.23300314, y: 1.7121115, z: 0.36221337}
+--- !u!1 &1663663890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2155eacbc07fc2346859c2f4ff50e91a, type: 3}
+  m_PrefabInstance: {fileID: 347794731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1666096061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60275,6 +60280,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -452.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4827124659475098257, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888868749020684053, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888868749020684053, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888868749020684053, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888868749020684053, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888868749020684053, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -268.08
+      objectReference: {fileID: 0}
     - target: {fileID: 4914712262714540082, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -61034,6 +61063,10 @@ PrefabInstance:
     - target: {fileID: 6450607399283844909, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531626036555923983, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 264.7
       objectReference: {fileID: 0}
     - target: {fileID: 6660293331361425642, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_AnchorMax.y
