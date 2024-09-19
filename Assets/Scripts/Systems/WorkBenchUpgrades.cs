@@ -69,7 +69,7 @@ public class WorkBenchUpgrades : Purchasable, IInteractable
         upgradeUI.SetActive(true);
         menuOpen = true;
     }
-    private void CloseMenu(){
+    public void CloseMenu(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         player.GetComponent<ThirdPersonController>().enabled = true;

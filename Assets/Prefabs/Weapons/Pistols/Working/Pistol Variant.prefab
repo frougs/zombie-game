@@ -314,6 +314,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5891197990401704750, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: m_Text
+      value: F
+      objectReference: {fileID: 0}
     - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Size.x
       value: 0.04706592

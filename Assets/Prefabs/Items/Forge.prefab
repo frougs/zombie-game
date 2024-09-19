@@ -78,6 +78,11 @@ MonoBehaviour:
   defaultEngulf: {fileID: 8300000, guid: 06828a876792c954cb39773f17f3a0b2, type: 3}
   mythicEngulf: {fileID: 8300000, guid: 3e3ee247e7da2b642928518ec9df147f, type: 3}
   fireParticles: {fileID: 7261971333874577551}
+  upgradeBonus: 0
+  powerupDropChance: 0
+  tokenDropChance: 0
+  powerUps: []
+  powerUpSpawnPoint: {fileID: 0}
   rarityPrices:
   - itemRarity: 0
     price: 100

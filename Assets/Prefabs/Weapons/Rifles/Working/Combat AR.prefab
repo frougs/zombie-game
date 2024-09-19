@@ -391,6 +391,8 @@ MonoBehaviour:
   impactParticle: {fileID: 3290264720658229784, guid: 03bee7089ee1fd14b93714b34e86475b, type: 3}
   damageNumberParticles: {fileID: 2433047439729013060, guid: 1d3e43e011526e44c80acc3b9491645e, type: 3}
   upgrades: []
+  InstaKillActive: 0
+  infiniteAmmo: 0
 --- !u!54 &5391702046985658435
 Rigidbody:
   m_ObjectHideFlags: 0

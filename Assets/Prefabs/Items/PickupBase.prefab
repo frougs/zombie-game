@@ -239,7 +239,11 @@ MonoBehaviour:
   itemColor: {r: 0, g: 0, b: 0, a: 0}
   itemName: 
   itemPickupName: {fileID: 1917318838467463987}
+  itemFlavorText: 
   commonColor: {r: 0, g: 0, b: 0, a: 0}
+  hiddenIMG: {fileID: 0}
+  unlockedIMG: {fileID: 0}
+  itemDescription: 
   rarityColors:
   - rarity: 0
     color: {r: 1, g: 1, b: 1, a: 1}

@@ -60,15 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "7c4565dd-80f7-4532-9f9b-12f48caef3f5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "d2ff7042-8553-41e7-98fe-225371b2d89e",
@@ -87,15 +78,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Inventory",
-                    "type": "Button",
-                    "id": "6b8042bb-a771-4ba3-a98e-dfae38d70fe3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Reload",
                     "type": "Button",
                     "id": "207594ff-88bb-4944-8413-c6db6f269c77",
@@ -105,27 +87,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Melee",
-                    "type": "Button",
-                    "id": "858400bc-63af-452b-8532-adee5db13610",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Grenade",
                     "type": "Button",
                     "id": "66af2b1e-a9f8-48b0-a2d0-c625a44b159d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Heal",
-                    "type": "Button",
-                    "id": "5dc72d2b-6b12-47db-9a72-5cf2a0ad672e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -254,17 +218,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3a490576-5de3-4390-8dfb-f6585756fe1a",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7b342d99-2c61-4b57-a547-d4f119148980",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -287,17 +240,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7df730b4-16d9-4fc0-a804-9306a6846f48",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4b962bad-493b-406b-a1f2-3dc7642995d5",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -309,34 +251,12 @@
                 },
                 {
                     "name": "",
-                    "id": "571969d6-0614-47f4-86fd-37bcf1ddbec0",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Melee",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1c17f9d4-9389-4eb6-af40-7f273bfafb35",
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Grenade",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0d0557f0-dac6-41ab-a920-74778ff4df88",
-                    "path": "<Keyboard>/h",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

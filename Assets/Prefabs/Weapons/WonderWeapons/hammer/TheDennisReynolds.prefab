@@ -228,6 +228,8 @@ MonoBehaviour:
   impactParticle: {fileID: 7214447472987976522, guid: 4867e90915b59b64ca36d1c1695b8211, type: 3}
   damageNumberParticles: {fileID: 2433047439729013060, guid: 1d3e43e011526e44c80acc3b9491645e, type: 3}
   upgrades: []
+  InstaKillActive: 0
+  infiniteAmmo: 0
   projectile: {fileID: 4314848030985360490, guid: ddaa9b2c215d6aa4fb78a502cf3b0281, type: 3}
   projectileSpeed: 20
   impactAudioSource: {fileID: 1028185963104246852}

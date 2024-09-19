@@ -648,6 +648,7 @@ MonoBehaviour:
   soundSource: {fileID: 2045781889987183398}
   errorPurchase: {fileID: 8300000, guid: 462eff65fa5a0c340a8cff4e09298f1e, type: 3}
   purchase: {fileID: 8300000, guid: fd4078c84e03c5a42ae8275aebc82941, type: 3}
+  perkColor: {r: 0, g: 0, b: 0, a: 0}
   firstPurchased: 0
 --- !u!65 &7859787500542603437
 BoxCollider:

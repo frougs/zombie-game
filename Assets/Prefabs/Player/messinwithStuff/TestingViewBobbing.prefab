@@ -3036,6 +3036,11 @@ MonoBehaviour:
   _pInput: {fileID: 0}
   rock: {fileID: 1009169847260507626, guid: 17b964818a06bf746a8f9f52a5fae833, type: 3}
   rockSpeed: 50
+  rockThrownSound: {fileID: 0}
+  rockScorePerHit: 0
+  rockDamage: 0
+  rockFirerate: 0
+  rockCritMultiplier: 0
   reloadSpeedAugment: 0
 --- !u!114 &4531323468129007124
 MonoBehaviour:
@@ -3079,6 +3084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  doublePoints: 0
 --- !u!1 &4975896531655984168
 GameObject:
   m_ObjectHideFlags: 0

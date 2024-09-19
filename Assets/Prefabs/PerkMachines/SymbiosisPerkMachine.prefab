@@ -647,6 +647,7 @@ MonoBehaviour:
   soundSource: {fileID: 5575246052528231228}
   errorPurchase: {fileID: 8300000, guid: 462eff65fa5a0c340a8cff4e09298f1e, type: 3}
   purchase: {fileID: 8300000, guid: fd4078c84e03c5a42ae8275aebc82941, type: 3}
+  perkColor: {r: 0, g: 0, b: 0, a: 0}
   ammoDropObj: {fileID: 1474381863660203281, guid: 0f76207277f0aca49983fde1dd02247d, type: 3}
   lifeSteal: 0
   lifeStealPercent: 0.01

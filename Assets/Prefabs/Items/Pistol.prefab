@@ -259,6 +259,8 @@ MonoBehaviour:
   impactParticle: {fileID: 0}
   damageNumberParticles: {fileID: 0}
   upgrades: []
+  InstaKillActive: 0
+  infiniteAmmo: 0
 --- !u!1001 &2353740123741392353
 PrefabInstance:
   m_ObjectHideFlags: 0

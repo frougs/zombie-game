@@ -174,6 +174,7 @@ MonoBehaviour:
   soundSource: {fileID: 5339041004609928864}
   errorPurchase: {fileID: 8300000, guid: 462eff65fa5a0c340a8cff4e09298f1e, type: 3}
   purchase: {fileID: 8300000, guid: fd4078c84e03c5a42ae8275aebc82941, type: 3}
+  perkColor: {r: 0, g: 0, b: 0, a: 0}
   burstSpeedAmount: 10
   burstDuration: 1
   burstTransitionTime: 0.5
