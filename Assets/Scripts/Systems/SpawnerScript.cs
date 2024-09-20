@@ -29,7 +29,7 @@ public class SpawnerScript : MonoBehaviour
         zombie.GetComponent<Dummy>().spawnedRoom = room;
         roundsScript.roundSpawned += 1;
         roundsScript.currentAlive += 1;
-        spawnDelay = (1f / roundsScript.roundNumber) *5;
+        spawnDelay =  Mathf.Clamp(10 - roundsScript.roundNumber, 2, 10);
         StartCoroutine(SpawnCooldown());
 
     }

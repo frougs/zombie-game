@@ -82,7 +82,8 @@ private void Update(){
 }
 
 private void CalculateNextRound(){
-    float nextSpawnAmount = Mathf.Ceil((totalSpawnCount * 2.5f) / 2f);
+    //float nextSpawnAmount = Mathf.Ceil((totalSpawnCount * 2.5f) / 2f);
+    float nextSpawnAmount = r1SpawnCount + Mathf.Ceil(0.08f * Mathf.Pow(roundNumber, 2) + 2 * roundNumber);
     roundSpawned = 0;
     roundNumber++;
     uiStuff.UpdateRound(roundNumber);

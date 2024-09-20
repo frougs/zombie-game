@@ -3595,17 +3595,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\r\nVer 1.01 Patch Notes - 9/15-2024\r\n [New Additions]\n- Revamed item
-    system, to try and reduce the chance of you accidentally picking up an item you
-    didn't want to\r\n- Added item text and rarity color to the HUD and above the
-    dropped item\r\n- Added the new \"Forge\", which allows you to recycle unwanted
-    items, money gained is tied to the items rarity.\r\n- Added new \"Rock\" which
-    replaces your weapon when you arent currently holding one\r\n- Added Powerup
-    drops: Infinite Ammo, Nuke, Gamblin' Time, InstaKill, Barrier Repair, Double
-    Money\r\n- Added new sections to the journal and upgrades: Found Mythics, this
-    displays all mythic items you have picked up, Forge upgrades, this allows you
-    to upgrade the forge to increase the rewards gained from reycling items, and
-    finally Rock upgades, which allows you to upgrade your rock.\r\n- Added highest
+  m_text: "\r\nVer 1.01 Patch Notes - 9/20-2024\r\n[Changes]\n- Increased AK damage
+    80 -> 400\n- Reworked round calculations and spawning speeds.\n [New Additions]\n-
+    Revamed item system, to try and reduce the chance of you accidentally picking
+    up an item you didn't want to\r\n- Added item text and rarity color to the HUD
+    and above the dropped item\r\n- Added the new \"Forge\", which allows you to
+    recycle unwanted items, money gained is tied to the items rarity.\r\n- Added
+    new \"Rock\" which replaces your weapon when you arent currently holding one\r\n-
+    Added Powerup drops: Infinite Ammo, Nuke, Gamblin' Time, InstaKill, Barrier Repair,
+    Double Money\r\n- Added new sections to the journal and upgrades: Found Mythics,
+    this displays all mythic items you have picked up, Forge upgrades, this allows
+    you to upgrade the forge to increase the rewards gained from reycling items,
+    and finally Rock upgades, which allows you to upgrade your rock.\r\n- Added highest
     round count to track the highest round you achieved on that level in the level
     select\r\n- Added various new sound effects and particle effects\r\n- Revamped
     some of the UI visuals\r\n- Added points gain for repairing barriers\r\n- Added
