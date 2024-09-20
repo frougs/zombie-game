@@ -15,7 +15,7 @@ public class RoomDetection : MonoBehaviour
         }
     }
     private void OnTriggerExit(Collider other){
-         if(other.gameObject.GetComponent<ThirdPersonController>() != null){
+        if(other.gameObject.GetComponent<ThirdPersonController>() != null){
             foreach(SpawnerScript spawner in spawners){
                 spawner.playerActive = false;
             }

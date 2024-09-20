@@ -59,4 +59,7 @@ public class RarityManager : MonoBehaviour
             itemPickupName.color = itemColor;
         }
     }
+    public Color GetItemColor(){
+        return GetColorForRarity(itemRarity);
+    }
 }

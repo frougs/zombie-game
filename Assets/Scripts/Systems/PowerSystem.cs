@@ -14,7 +14,7 @@ public class PowerSystem : MonoBehaviour, IInteractable
     public void Interacted(GameObject gunRoot, InteractionController interactionCon){
         if(powerToggled == false){
             powerOn?.Invoke();
-            lever.transform.rotation = Quaternion.Euler(-30.0f, lever.transform.rotation.y, lever.transform.rotation.z);
+            lever.transform.rotation = Quaternion.Euler(60.0f, -90f, lever.transform.rotation.z);
             powerToggled = true;
             soundSource.PlayOneShot(powerOnSound);
         }

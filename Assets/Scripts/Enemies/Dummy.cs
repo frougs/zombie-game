@@ -108,7 +108,7 @@ public class Dummy : MonoBehaviour, IDamagable
             }
         }
     }
-    private void Death(){
+    public void Death(){
         float randomValue = UnityEngine.Random.value;
         if(randomValue <= powerupDropChance){
             var index = UnityEngine.Random.Range(0, powerups.Length);

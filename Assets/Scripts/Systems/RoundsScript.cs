@@ -31,6 +31,9 @@ public class RoundsScript : MonoBehaviour
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip roundStartClip;
     private bool maxZombiesReached;
+
+    //Testing
+    public bool spawningConditionsReached;
     private void Start(){
         if(roundNumber == 0){
             roundNumber = 1;
@@ -43,47 +46,55 @@ public class RoundsScript : MonoBehaviour
             soundSource = this.GetComponentInChildren<AudioSource>();
         }
     }
-    private void Update(){
-        if(remainingSpawnCount <= 0 && currentAlive == 0){
-            canSpawn = false;
-            CalculateNextRound();
-        }
-        else if(roundSpawned != totalSpawnCount && canSpawn && !maxZombiesReached){
-            StartSpawning();
-        }
-        if(currentAlive >= maxZombiesAtOnce){
-            maxZombiesReached = true;
-        }
-        else{
-            maxZombiesReached = false;
-        }
-        if(uiStuff == null){
-            uiStuff = FindObjectOfType<UIContainer>();
-        }
-        else{
-            roundText = uiStuff.roundText;
-        }
-        roundText = uiStuff.roundText;
-        uiStuff.UpdateRemaining(remainingSpawnCount, totalSpawnCount);
-
-        if(roundNumber % 10 == 0 && roundNumber != triggeredForThisRound){
-            uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(5);
-            triggeredForThisRound = roundNumber;
-
-        }
-
+private void Update(){
+    // Check if round is over
+    if (remainingSpawnCount <= 0 && currentAlive <= 0) {
+        CalculateNextRound();
     }
-    private void CalculateNextRound(){
-        float nextSpawnAmount = ((totalSpawnCount * 2.5f)/2f);
-        roundSpawned = 0;
-        roundNumber += 1;
-        uiStuff.UpdateRound(roundNumber);
-        zombieBaseHP += zombieHpAdditive;
-        totalSpawnCount = (int)nextSpawnAmount;
-        remainingSpawnCount = (int)totalSpawnCount;
-        StartCoroutine(RoundStartDelay());
 
+    // Ensure remainingSpawnCount does not go below 0
+    remainingSpawnCount = Mathf.Max(remainingSpawnCount, 0);
+
+    // Start spawning if conditions are met
+    if (canSpawn && roundSpawned < totalSpawnCount && !maxZombiesReached) {
+        StartSpawning();
     }
+
+    // Update maxZombiesReached based on currentAlive
+    maxZombiesReached = currentAlive >= maxZombiesAtOnce;
+
+    // Update UI and spawning conditions
+    if (uiStuff == null) {
+        uiStuff = FindObjectOfType<UIContainer>();
+    }
+    roundText = uiStuff.roundText;
+    uiStuff.UpdateRemaining(remainingSpawnCount, totalSpawnCount);
+
+    // Handle upgrade tokens every 10 rounds
+    if (roundNumber % 10 == 0 && roundNumber != triggeredForThisRound) {
+        uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(5);
+        triggeredForThisRound = roundNumber;
+    }
+
+    // Update spawning conditions for UI
+    spawningConditionsReached = (roundSpawned < totalSpawnCount) && canSpawn && !maxZombiesReached;
+    uiStuff.UpdateTestingUI(currentAlive, canSpawn, spawningConditionsReached, maxZombiesReached, roundSpawned);
+}
+
+private void CalculateNextRound(){
+    float nextSpawnAmount = Mathf.Ceil((totalSpawnCount * 2.5f) / 2f);
+    roundSpawned = 0;
+    roundNumber++;
+    uiStuff.UpdateRound(roundNumber);
+    zombieBaseHP += zombieHpAdditive;
+    totalSpawnCount = (int)nextSpawnAmount;
+    remainingSpawnCount = totalSpawnCount;
+
+    // Reset canSpawn for the new round
+    canSpawn = false; 
+    StartCoroutine(RoundStartDelay());
+}
+
     private void StartSpawning(){
         if(canSpawn){
             foreach(GameObject spawner in activeSpawners){

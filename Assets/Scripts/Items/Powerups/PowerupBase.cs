@@ -13,6 +13,11 @@ public class PowerupBase : MonoBehaviour
     private Vector3 startPos;
 
     [SerializeField] float selfDestructTime;
+    float minDist = Mathf.Infinity;
+    GameObject closestBarrier = null;
+    public bool insideRoom = false;
+    private bool detectRoom = false;
+    private bool ranCollisionCheck = false;
 
     void Start()
     {
@@ -20,6 +25,11 @@ public class PowerupBase : MonoBehaviour
         if(selfDestructTime != 0){
             Destroy(this.gameObject, selfDestructTime);
         }
+        StartCoroutine(WaitForRoomDetection());
+    }
+    private IEnumerator WaitForRoomDetection(){
+        yield return new WaitForSeconds(0.5f);
+        detectRoom = true;
     }
 
     void Update()
@@ -30,6 +40,12 @@ public class PowerupBase : MonoBehaviour
 
         // Rotate
         this.gameObject.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        if(insideRoom == false && detectRoom){
+            MoveToSpawnPoint();
+        }
+        if(!ranCollisionCheck){
+            CheckCollisions();
+        }
     }
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.GetComponent<ThirdPersonController>() != null){
@@ -37,5 +53,41 @@ public class PowerupBase : MonoBehaviour
             Instantiate(pickupParticles, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
+    }
+    // private void OnTriggerStay(Collider other){
+    //     if(other.gameObject.GetComponent<RoomDetection>() != null){
+    //         insideRoom = true;
+    //         detectRoom = false;
+    //     }
+    // }
+private void CheckCollisions() {
+    RoomDetection[] roomColliders = FindObjectsOfType<RoomDetection>();
+    bool isInsideRoom = false;
+
+    foreach (RoomDetection roomCollider in roomColliders) {
+        if (GetComponent<Collider>().bounds.Intersects(roomCollider.GetComponent<Collider>().bounds)) {
+            isInsideRoom = true;
+            break;
+        }
+    }
+
+    this.insideRoom = isInsideRoom;
+    ranCollisionCheck = true;
+}
+
+
+    private void MoveToSpawnPoint(){
+            Debug.Log(this.gameObject.name + " is NOT Touching room detection");
+            var barriers = FindObjectsOfType<BarrierScript>();
+            foreach(var barrier in barriers){
+                float dist = Vector3.Distance(barrier.gameObject.transform.position, this.transform.position);
+                if(dist < minDist){
+                    closestBarrier = barrier.gameObject;
+                    minDist = dist;
+                }
+            }
+            Debug.Log("Closest Barrier: " +closestBarrier.gameObject.name);
+            Vector3 spawnPoint = closestBarrier.GetComponent<BarrierScript>().powerupSpawnPoint.transform.position;
+            transform.position = spawnPoint;
     }
 }

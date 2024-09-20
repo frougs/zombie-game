@@ -11,6 +11,7 @@ public class WallBuyScript : Purchasable, IInteractable
     [SerializeField] bool ammoMode;
     [SerializeField] GameObject spawnPOS;
     [SerializeField] TextMeshPro priceText;
+    [SerializeField] TextMeshPro itemName;
     [SerializeField] GameObject examplePOS;
     [SerializeField] int forSaleID;
     [SerializeField] public AudioSource soundSource;
@@ -62,6 +63,14 @@ public class WallBuyScript : Purchasable, IInteractable
         //     ammoMode = false;
         // }
         priceText.text = "$" + price.ToString();
+        if(!ammoMode){
+            itemName.text = buyItem.GetComponentInChildren<RarityManager>().itemName;
+            itemName.color = buyItem.GetComponentInChildren<RarityManager>().GetItemColor();
+        }
+        else{
+            itemName.text = "Ammo";
+            itemName.color = Color.white;
+        }
     }
     private void Start(){
         Instantiate(buyItem.GetComponent<BaseGun>().buyModel, examplePOS.transform.position, examplePOS.transform.rotation, examplePOS.transform);

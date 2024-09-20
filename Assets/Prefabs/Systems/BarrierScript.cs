@@ -14,6 +14,7 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     [SerializeField] AudioClip breakSound;
     [SerializeField] AudioSource soundSource;
     [SerializeField] int repairPoints;
+    public GameObject powerupSpawnPoint;
     private void Start(){
         currentProgress = barrierCapacity;
         soundSource = this.GetComponent<AudioSource>();

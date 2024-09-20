@@ -53,8 +53,21 @@ public class UIContainer : MonoBehaviour
     [SerializeField] AudioClip[] pointsGained;
     private bool triggerDeathMusicOnce = true;
     [SerializeField] TextMeshProUGUI itemText;
-    
+    [Header("Testing Stuff")]
+    [SerializeField] TextMeshProUGUI currentAliveText;
+    [SerializeField] TextMeshProUGUI canSpawnText;
+    [SerializeField] TextMeshProUGUI maxZombiesReachedText;
+    [SerializeField] TextMeshProUGUI spawningConditionsReachedText;
+    [SerializeField] TextMeshProUGUI roundSpawnedText;
+    public void UpdateTestingUI(int currentAlive, bool canSpawn, bool spawningConditionsReached, bool maxZombiesReached, int roundSpawned){
+        currentAliveText.text = "Current alive: " +currentAlive.ToString();
+        canSpawnText.text = "Can Spawn?: " +canSpawn.ToString();
+        spawningConditionsReachedText.text = "Spawning Conditions Reached?: " +spawningConditionsReached.ToString();
+        maxZombiesReachedText.text = "Max Zombies Reached?: " +maxZombiesReached.ToString();
+        roundSpawnedText.text = "Round Spawned: " +roundSpawned.ToString();
+        
 
+    }
     public void UpdateMenuMusic(AudioClip music, bool looping){
         menuMusic.clip = music;
         menuMusic.loop = looping;

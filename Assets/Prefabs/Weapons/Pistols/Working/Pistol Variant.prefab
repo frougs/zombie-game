@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5891197990401704750, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Text
-      value: F
+      value: E
       objectReference: {fileID: 0}
     - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Size.x
@@ -360,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7616857873333870606, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: startHeld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9193978400874210921, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Layer
