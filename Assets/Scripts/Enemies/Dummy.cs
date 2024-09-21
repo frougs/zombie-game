@@ -45,7 +45,7 @@ public class Dummy : MonoBehaviour, IDamagable
         }
     }
     private void Start(){
-        healthText.text = maxHealth.ToString() + " | " +maxHealth.ToString();
+        //healthText.text = maxHealth.ToString() + " | " +maxHealth.ToString();
         eRend = GetComponent<Renderer>();
         currentHealth = maxHealth;
         nav = GetComponent<NavMeshAgent>();
@@ -62,8 +62,8 @@ public class Dummy : MonoBehaviour, IDamagable
             Death();
         }
         if(currentHealth != maxHealth && !dead){
-            healthText.gameObject.SetActive(true);
-            healthText.text = currentHealth.ToString() + " | " +maxHealth.ToString();
+            // healthText.gameObject.SetActive(true);
+            // healthText.text = currentHealth.ToString() + " | " +maxHealth.ToString();
         }
         /*if(startChase){
             EnableEnemy();

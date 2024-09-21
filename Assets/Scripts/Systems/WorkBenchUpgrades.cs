@@ -62,6 +62,9 @@ public class WorkBenchUpgrades : Purchasable, IInteractable
         CheckAugments();
         UpdateMenu();
         CheckUpgrades();
+        if(currentGun.GetComponent<BaseGun>() != false){
+            currentGun.GetComponent<BaseGun>().canShoot = false;
+        }
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         player.GetComponent<ThirdPersonController>().enabled = false;
@@ -70,12 +73,19 @@ public class WorkBenchUpgrades : Purchasable, IInteractable
         menuOpen = true;
     }
     public void CloseMenu(){
+        StartCoroutine(GunDelay());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         player.GetComponent<ThirdPersonController>().enabled = true;
         upgradeUI.SetActive(false);
         FindObjectOfType<Pause>().inMenu = false;
         menuOpen = false;
+    }
+    private IEnumerator GunDelay(){
+        yield return new WaitForSeconds(0.15f);
+        if(currentGun.GetComponent<BaseGun>() != false){
+            currentGun.GetComponent<BaseGun>().canShoot = true;
+        }
     }
     private void UpdateMenu(){
         damageText.text = "+" + damageAugmentAmnt + "%";

@@ -13,6 +13,7 @@ public class PauseController : MonoBehaviour
     [SerializeField] AudioClip pauseMusic;
     public bool isPaused;
     private UIContainer uiStuff;
+    public Pause playerPauseScript;
     public void OnPause(){
         pMenu.SetActive(true);
         background.SetActive(true);
@@ -35,6 +36,7 @@ public class PauseController : MonoBehaviour
     private void Start(){
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerPauseScript = FindObjectOfType<Pause>();
     }
     public void UnpausedFromButton(){
         //sMenu.SetActive(true);
@@ -44,5 +46,8 @@ public class PauseController : MonoBehaviour
         if(uiStuff == null){
             uiStuff = FindObjectOfType<UIContainer>();
         }
+    }
+    public void UnPausedFromMenu(){
+        playerPauseScript.UnPause();
     }
 }

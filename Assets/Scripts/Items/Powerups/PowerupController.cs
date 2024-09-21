@@ -73,10 +73,12 @@ public class PowerupController : MonoBehaviour
                 }
             }
         }
-        if(this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0) != null){
+        try{
             this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>().InstaKillActive = false;
             this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>().infiniteAmmo = false;
         }
+        catch (Exception e){}
+        this.GetComponent<WeaponController>().instaKillActive = false;
         var boxes = FindObjectsOfType<MysteryCrate>();
         foreach (var box in boxes){
             box.fireSale = false;

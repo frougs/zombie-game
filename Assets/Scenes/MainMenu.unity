@@ -3595,27 +3595,68 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\r\nVer 1.01 Patch Notes - 9/20-2024\r\n[Changes]\n- Increased AK damage
-    80 -> 400\n- Reworked round calculations and spawning speeds.\n [New Additions]\n-
-    Revamed item system, to try and reduce the chance of you accidentally picking
-    up an item you didn't want to\r\n- Added item text and rarity color to the HUD
-    and above the dropped item\r\n- Added the new \"Forge\", which allows you to
-    recycle unwanted items, money gained is tied to the items rarity.\r\n- Added
-    new \"Rock\" which replaces your weapon when you arent currently holding one\r\n-
-    Added Powerup drops: Infinite Ammo, Nuke, Gamblin' Time, InstaKill, Barrier Repair,
-    Double Money\r\n- Added new sections to the journal and upgrades: Found Mythics,
-    this displays all mythic items you have picked up, Forge upgrades, this allows
-    you to upgrade the forge to increase the rewards gained from reycling items,
-    and finally Rock upgades, which allows you to upgrade your rock.\r\n- Added highest
-    round count to track the highest round you achieved on that level in the level
-    select\r\n- Added various new sound effects and particle effects\r\n- Revamped
-    some of the UI visuals\r\n- Added points gain for repairing barriers\r\n- Added
-    temp \"delete data\" button on the main menu to delete all saved data for testing\r\n-
-    Added secret to clicking on the Lamonsters faces in the main menu GOTEEM!\r\n\r\n[Bug
-    fixes]\n- Fixed current round not tracking properly\r\n- Fixed remaining zombies
-    not tracking properly\r\n- Fixed some spots where you could get stuck in the
-    wall\r\n- Fixed rage bar not displaying properly\r\n- Fixed weapon reload continuing
-    even when the weapon was dropped\r\n"
+  m_text: 'Ver 1.02 Patch Notes - 9/20-2024
+
+    [Changes]
+
+    - You no longer start
+    with a pistol, instead you begin with the rock
+
+    This was done to give it
+    more use, especially in the early game and give you reasons to upgrade it.
+
+    -
+    Changed default interact key to "F"
+
+    - Can now hold down the interact key
+    to interact with objects
+
+    - Changed visuals on damage number particles
+
+    -
+    Removed enemy health text
+
+    - Buffed Mac10 Damage 16 -> 24
+
+    - Decreased
+    Combat AR Firerate 0.05 -> 0.1
+
+    - Added "Resume" button to pause menu
+
+    -
+    Removed "Delete Tokens" button from pause menu
+
+    - Increased Famas points
+    gain 10 -> 30 to reflect the burst fire
+
+
+
+    [Bug Fixes]
+
+    - In-game menu
+    buttons not effected by SFX slider
+
+    - Can no longer shoot while in Workbench
+    menu
+
+    - Can no longer buy ammo from the wall if your current gun is full
+
+    -
+    Can no longer buy perks multiple times
+
+    - Fixed pistol gunshot particles
+    placement and item name not appearing on the wall buy
+
+    - Instakill now effects
+    the rock
+
+    - Powerups now end properly
+
+
+
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3642,8 +3683,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 23.92
+  m_fontSizeBase: 23.92
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

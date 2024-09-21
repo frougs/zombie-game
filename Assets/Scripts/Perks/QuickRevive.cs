@@ -24,6 +24,9 @@ public class QuickRevive : PerkBase
                 soundSource.PlayOneShot(errorPurchase);
             }
         }
+        else{
+            soundSource.PlayOneShot(errorPurchase);
+        }
     }
     public override void DefaultPerk(){
         player.GetComponent<PlayerHealth>().weaponXEnabled = true;

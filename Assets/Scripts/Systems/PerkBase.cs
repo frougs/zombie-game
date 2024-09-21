@@ -46,11 +46,14 @@ public class PerkBase : Purchasable, IInteractable
     public virtual void Interacted(GameObject gunRoot, InteractionController interactionCon){
         player = interactionCon.gameObject;
         var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
-        if(scoreSystem.score >= price){
+        if(scoreSystem.score >= price && hasPerk == false){
                 scoreSystem.SubtractScore(price);
-            if(powered && hasPerk == false){
+            if(powered){
                 ActivatePerk();
                 soundSource.PlayOneShot(purchase);
+            }
+            else{
+                soundSource.PlayOneShot(errorPurchase);
             }
         }
         else{

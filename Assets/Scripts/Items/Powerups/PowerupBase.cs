@@ -28,7 +28,7 @@ public class PowerupBase : MonoBehaviour
         StartCoroutine(WaitForRoomDetection());
     }
     private IEnumerator WaitForRoomDetection(){
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         detectRoom = true;
     }
 

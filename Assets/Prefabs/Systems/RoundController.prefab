@@ -61,6 +61,7 @@ MonoBehaviour:
   midColor: {r: 0, g: 0, b: 0, a: 0}
   soundSource: {fileID: 4585939368483985608}
   roundStartClip: {fileID: 8300000, guid: 466c3c406c1a71f4b82f14a05ba2b59d, type: 3}
+  spawningConditionsReached: 0
 --- !u!1001 &503591308905992751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71,7 +72,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.035035323
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x

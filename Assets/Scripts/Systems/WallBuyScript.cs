@@ -32,9 +32,14 @@ public class WallBuyScript : Purchasable, IInteractable
         if(ammoMode){
             var scoreSystem = interactionCon.GetComponent<ScoreSystem>();
             if(scoreSystem.score >= buyItem.GetComponent<BaseGun>().ammoPrice){
-                scoreSystem.SubtractScore(price);
-                interactionCon.currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxReserveAmmo;
-                interactionCon.currentlyHeld.GetComponent<BaseGun>().currentAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxAmmo;
+                if(interactionCon.currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo < interactionCon.currentlyHeld.GetComponent<BaseGun>().maxReserveAmmo || interactionCon.currentlyHeld.GetComponent<BaseGun>().currentAmmo < interactionCon.currentlyHeld.GetComponent<BaseGun>().maxAmmo){
+                    scoreSystem.SubtractScore(price);
+                    interactionCon.currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxReserveAmmo;
+                    interactionCon.currentlyHeld.GetComponent<BaseGun>().currentAmmo = interactionCon.currentlyHeld.GetComponent<BaseGun>().maxAmmo;
+                }
+                else{
+                    soundSource.PlayOneShot(errorPurchase);
+                }
             }
             else{
                 soundSource.PlayOneShot(errorPurchase);

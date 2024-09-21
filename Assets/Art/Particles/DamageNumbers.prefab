@@ -68,12 +68,46 @@ PrefabInstance:
       propertyPath: isDynamic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7917834296969287871, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917834296969287871, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7917834296969287871, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8099996740612524614, guid: 141e1779869c79845bd243610f187f47, type: 3}
       propertyPath: moveWithTransform
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8099996740612524614, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099996740612524614, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099996740612524614, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7234397732377281473, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 8517014862179665, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 2487228207061690323, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 8531373763360605142, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 2663985976336099335, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 4961218688227076146, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 2796415749829474357, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 8180007414035781148, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 5574433086189793848, guid: 141e1779869c79845bd243610f187f47, type: 3}
+    - {fileID: 7447735382495192886, guid: 141e1779869c79845bd243610f187f47, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47, type: 3}

@@ -18,6 +18,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float rockCritMultiplier;
     private bool canThrowRock = true;
     public float reloadSpeedAugment;
+    public bool instaKillActive = false;
     private void Start(){
         _pInput = GetComponent<PlayerInput>();
         attack = _pInput.actions["Attack"];
@@ -85,7 +86,12 @@ public class WeaponController : MonoBehaviour
             StartCoroutine(ShotDelay());
             GameObject launchedProj = Instantiate(rock, GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, Quaternion.identity);
             Rigidbody rb = launchedProj.GetComponent<Rigidbody>();
-            launchedProj.GetComponent<ThrownRock>().AssignVariables(rockDamage, this.gameObject, rockScorePerHit, rockCritMultiplier);
+            if(!instaKillActive){
+                launchedProj.GetComponent<ThrownRock>().AssignVariables(rockDamage, this.gameObject, rockScorePerHit, rockCritMultiplier);
+            }
+            else{
+                            launchedProj.GetComponent<ThrownRock>().AssignVariables(Mathf.Infinity, this.gameObject, rockScorePerHit, rockCritMultiplier);
+            }
             if(rb != null){
                             rb.velocity =  GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward * rockSpeed;
                             GetComponent<AudioSource>().PlayOneShot(rockThrownSound);

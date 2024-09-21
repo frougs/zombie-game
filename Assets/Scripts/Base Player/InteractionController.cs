@@ -35,7 +35,7 @@ public class InteractionController : MonoBehaviour
         if(interact.triggered){
         }
         //Picks up the item
-        if(interact.triggered && canInteract){
+        if(interact.triggered && canInteract || interact.IsPressed() && canInteract){
             if(Physics.Raycast(this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, interactRange)){
                 IInteractable interactable  = hitData.transform.gameObject.GetComponentInChildren<IInteractable>();
                 if(interactable != null && holdingItem == false){

@@ -17,25 +17,10 @@ public class Pause : MonoBehaviour
         //     return;
         if(pause.triggered){
             if(!paused && !inMenu){
-                //Debug.Log("Opened Pause Menu");
-                PauseMenuSingleton.instance.GetComponent<PauseController>().OnPause();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                //GetComponent<ThirdPersonController>().LockCameraPosition = true;
-                this.GetComponent<ThirdPersonController>().enabled = false;
-                paused = true;
-                Time.timeScale = 0f;
+                GamePaused();
             }
             else if(paused){
-                PauseMenuSingleton.instance.GetComponent<PauseController>().UnPause();
-                PauseMenuSingleton.instance.GetComponent<PauseController>().UnpausedFromButton();
-                //Debug.Log("Closed Pause Menu");
-                paused = false;
-                this.GetComponent<ThirdPersonController>().enabled = true;
-                GetComponent<ThirdPersonController>().LockCameraPosition = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Time.timeScale = 1.0f;
+                UnPause();
             }
         }
     }
@@ -48,6 +33,27 @@ public class Pause : MonoBehaviour
         _pInput = GetComponent<PlayerInput>();
         pause = _pInput.actions["Pause"];
         Time.timeScale = 1.0f;
+    }
+    public void GamePaused(){
+                        //Debug.Log("Opened Pause Menu");
+                PauseMenuSingleton.instance.GetComponent<PauseController>().OnPause();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                //GetComponent<ThirdPersonController>().LockCameraPosition = true;
+                this.GetComponent<ThirdPersonController>().enabled = false;
+                paused = true;
+                Time.timeScale = 0f;
+    }
+    public void UnPause(){
+                PauseMenuSingleton.instance.GetComponent<PauseController>().UnPause();
+                PauseMenuSingleton.instance.GetComponent<PauseController>().UnpausedFromButton();
+                //Debug.Log("Closed Pause Menu");
+                paused = false;
+                this.GetComponent<ThirdPersonController>().enabled = true;
+                GetComponent<ThirdPersonController>().LockCameraPosition = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Time.timeScale = 1.0f;
     }
 }
 

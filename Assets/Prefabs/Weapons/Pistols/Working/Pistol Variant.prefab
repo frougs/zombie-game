@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 8570937457361077226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.055, z: 0.154}
+  m_LocalPosition: {x: 0.009, y: -0.004, z: 0.026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,6 +171,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
     - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: reloadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c61249d94fa987346bf8907457f3f95d, type: 3}
+    - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: reloadSpeed
       value: 0.5
       objectReference: {fileID: 0}
@@ -209,7 +213,7 @@ PrefabInstance:
     - target: {fileID: -3151516678890321413, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: damageNumberParticles
       value: 
-      objectReference: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47, type: 3}
+      objectReference: {fileID: 7434637958133090017, guid: eebb479fc50d01d4784cc48f8dc2b735, type: 3}
     - target: {fileID: 327552499752576255, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -290,6 +294,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3075633566375506978, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
+      propertyPath: itemName
+      value: Pistol
+      objectReference: {fileID: 0}
     - target: {fileID: 3579002943849171618, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -316,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5891197990401704750, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Text
-      value: E
+      value: F
       objectReference: {fileID: 0}
     - target: {fileID: 6125471122184128125, guid: d7d75898bc48ead4e851191ab9643fef, type: 3}
       propertyPath: m_Size.x
