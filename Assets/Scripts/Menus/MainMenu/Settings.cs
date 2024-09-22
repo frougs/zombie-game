@@ -12,12 +12,16 @@ public class Settings : MonoBehaviour
     [Header("Default Values")]
     float defaultSens = 4f;
     float defaultMusicVolume = 0.5f;
+    float defaultTrackVolume = 0.25f;
     float defaultSFXVolume = 0.5f;
     int defaultScreenMode = 0;
+    float defaultFOV = 60f;
     [Header("Slider Objects")]
     [SerializeField] Slider sfxSliderObject;
     [SerializeField] Slider musicSliderObject;
     [SerializeField] Slider sensSliderObject;
+    [SerializeField] Slider ingameTrackSliderObject;
+    [SerializeField] Slider fovSliderObject;
     public void Start(){
         ScreenMode(PlayerPrefs.GetInt("ScreenMode"));
 
@@ -40,6 +44,18 @@ public class Settings : MonoBehaviour
         else{
             SFXVolumeSlider(defaultSFXVolume);
         }
+        if(PlayerPrefs.HasKey("TrackVolume")){
+            IngameTrackVolumeSlider(PlayerPrefs.GetFloat("TrackVolume"));
+        }
+        else{
+            IngameTrackVolumeSlider(defaultTrackVolume);
+        }
+        if(PlayerPrefs.HasKey("FOV")){
+            FOVSlider(PlayerPrefs.GetFloat("FOV"));
+        }
+        else{
+            FOVSlider(defaultFOV);
+        }
     }
     public void ScreenMode(int mode){
         //_fullscreenMode = mode;
@@ -57,6 +73,20 @@ public class Settings : MonoBehaviour
                     //Debug.Log("Windowed");
                 }
             
+    }
+    public void FOVSlider(float value){
+        PlayerPrefs.SetFloat("FOV", value);
+        fovSliderObject.value = PlayerPrefs.GetFloat("FOV");
+    }
+    public void IngameTrackVolumeSlider(float value){
+        PlayerPrefs.SetFloat("TrackVolume", value);
+        AudioSource[] audioSources = Resources.FindObjectsOfTypeAll<AudioSource>();
+        foreach(AudioSource a in audioSources){
+            if(a.tag == "TrackMusic"){
+                a.volume = PlayerPrefs.GetFloat("TrackVolume");
+            }
+        }
+        ingameTrackSliderObject.value = PlayerPrefs.GetFloat("TrackVolume");
     }
     public void MusicVolumeSlider(float value){
         PlayerPrefs.SetFloat("MusicVolume", value);
@@ -95,5 +125,7 @@ public class Settings : MonoBehaviour
         MusicVolumeSlider(defaultMusicVolume);
         SFXVolumeSlider(defaultSFXVolume);
         UpdateSens(defaultSens);
+        IngameTrackVolumeSlider(defaultTrackVolume);
+        FOVSlider(defaultFOV);
     }
 }

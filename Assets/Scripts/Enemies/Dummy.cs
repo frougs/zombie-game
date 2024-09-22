@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
 using System;
+// using System.Diagnostics;
 
 public class Dummy : MonoBehaviour, IDamagable
 {
@@ -35,6 +36,8 @@ public class Dummy : MonoBehaviour, IDamagable
     public AudioSource soundSource;
     [SerializeField] float powerupDropChance;
     [SerializeField] GameObject[] powerups;
+    [SerializeField] GameObject deathParticles;
+    // public string enemyID;
     public void Damaged(float damage, GameObject attacker, Vector3 hitPoint){
         if(damagedParticles != null){
             Instantiate(damagedParticles, hitPoint, Quaternion.LookRotation((player.transform.position - hitPoint).normalized));
@@ -55,6 +58,8 @@ public class Dummy : MonoBehaviour, IDamagable
         if(soundSource == null){
             soundSource = GetComponentInChildren<AudioSource>();
         }
+        // Guid thisuuid = Guid.NewGuid();
+        // enemyID = thisuuid.ToString(); 
 
     }
     private void FixedUpdate(){
@@ -109,6 +114,7 @@ public class Dummy : MonoBehaviour, IDamagable
         }
     }
     public void Death(){
+        Instantiate(deathParticles, this.transform.position, Quaternion.identity);
         float randomValue = UnityEngine.Random.value;
         if(randomValue <= powerupDropChance){
             var index = UnityEngine.Random.Range(0, powerups.Length);

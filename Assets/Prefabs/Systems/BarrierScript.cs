@@ -17,7 +17,6 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
     public GameObject powerupSpawnPoint;
     private void Start(){
         currentProgress = barrierCapacity;
-        soundSource = this.GetComponent<AudioSource>();
     }
     private void Update(){
         if(soundSource == null){
@@ -47,14 +46,14 @@ public class BarrierScript : MonoBehaviour, IInteractable, IDamagable
         if(currentProgress < barrierCapacity){
             FindObjectOfType<ScoreSystem>().AddToScore(repairPoints);
             currentProgress += progressPerInteract;
-            soundSource.PlayOneShot(repairSound);
+            this.soundSource.PlayOneShot(repairSound);
         }
     }
     public void Damaged(float damage, GameObject attacker, Vector3 pos){
         if(attacker.GetComponent<Dummy>() != null){
             if(barrierActive){
                 currentProgress -= damage;
-                soundSource.PlayOneShot(breakSound);
+                this.soundSource.PlayOneShot(breakSound);
             }
         }
     }

@@ -211,9 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322fbaa5ea998d54cb3c3e989a568b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 35
-  fireRate: 0.08
-  maxAmmo: 24
+  damage: 50
+  fireRate: 0.15
+  maxAmmo: 20
   maxReserveAmmo: 76
   currentReserveAmmo: 0
   reloadSpeed: 0.8
@@ -413,7 +413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5235901270771543261, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.39758012
       objectReference: {fileID: 0}
     - target: {fileID: 8478063287026731932, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Size.x
@@ -468,7 +468,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.39758012
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

@@ -9,6 +9,8 @@ TagManager:
   - CriticalSpot
   - SFX
   - Music
+  - FxTemporaire
+  - TrackMusic
   layers:
   - Default
   - TransparentFX

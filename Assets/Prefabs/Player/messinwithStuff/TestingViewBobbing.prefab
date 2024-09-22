@@ -2839,6 +2839,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _speed: 0
   _pInput: {fileID: 0}
   move:
     m_Name: 
@@ -2880,6 +2881,8 @@ MonoBehaviour:
   burstSpeedAmount: 0
   burstDuration: 0
   burstTransitionTime: 0
+  sprintingBlocked: 0
+  isSprinting: 0
   soundSource: {fileID: 6864120095425979356}
 --- !u!114 &341115122220948221
 MonoBehaviour:
@@ -3033,15 +3036,29 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  aim:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ba4d470e-b81a-47e6-a693-1b0fa83a6bc4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   _pInput: {fileID: 0}
   rock: {fileID: 1009169847260507626, guid: 17b964818a06bf746a8f9f52a5fae833, type: 3}
   rockSpeed: 50
   rockThrownSound: {fileID: 0}
+  soundSource: {fileID: 0}
   rockScorePerHit: 0
   rockDamage: 0
   rockFirerate: 0
   rockCritMultiplier: 0
   reloadSpeedAugment: 0
+  instaKillActive: 0
+  adsFOVAdditive: 0
+  adsTransitionTime: 0
+  cam: {fileID: 0}
 --- !u!114 &4531323468129007124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3069,6 +3086,7 @@ MonoBehaviour:
   regenerationRate: 2
   soundSource: {fileID: 6864120095425979356}
   damagedClip: {fileID: 8300000, guid: cb806a62fb8d8044f94c0ff81fd1aa15, type: 3}
+  extraLifeUsed: {fileID: 0}
   chanceToIgnoreHit: 0
   damageNegationAmount: 0
 --- !u!114 &4782608058825388342

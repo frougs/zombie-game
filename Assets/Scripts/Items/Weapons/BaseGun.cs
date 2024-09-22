@@ -96,6 +96,7 @@ public class BaseGun : MonoBehaviour, IShootable
                     //NonCrit hit
                     //Debug.Log("hit: " +hitData.transform.gameObject.name);
                     if(hitData.transform.gameObject != player){
+                        float damageAmount = 0f;
                         if(damagable != null && hitData.transform.gameObject.tag != "CriticalSpot"){
                             // try{
                                 
@@ -103,7 +104,7 @@ public class BaseGun : MonoBehaviour, IShootable
                             // catch(Exception e){
                             //     Debug.LogWarning(e.ToString());
                             // }
-                            var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+                            //var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                             if(symbiosisScript != null){
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
@@ -111,16 +112,18 @@ public class BaseGun : MonoBehaviour, IShootable
                             }
                             if(InstaKillActive == false){
                                 damagable.Damaged(modifiedDamage, shooter, hitData.point);
-                                dmgParticles.GetComponent<CFXR_ParticleText>().text = modifiedDamage.ToString();
+                                //dmgParticles.GetComponent<CFXR_ParticleText>().text = modifiedDamage.ToString();
+                                damageAmount = modifiedDamage;
                             }
                             else{
                                 damagable.Damaged(Mathf.Infinity, shooter, hitData.point);
-                                dmgParticles.GetComponent<CFXR_ParticleText>().text = Mathf.Infinity.ToString();
+                                //dmgParticles.GetComponent<CFXR_ParticleText>().text = Mathf.Infinity.ToString();
+                                damageAmount = Mathf.Infinity;
                             }
                             if(soundSource != null){
                                 soundSource.PlayOneShot(defaultHit);
                             }
-                            dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
+                            //dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
                             scoreSystem.AddToScore(pointsPerHit);
                             canShoot = false;
                             rageScript.Hit();
@@ -133,7 +136,7 @@ public class BaseGun : MonoBehaviour, IShootable
                             // catch(Exception e){
                             //     Debug.LogWarning(e.ToString());
                             // }
-                            var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+                            //var dmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                             if(symbiosisScript != null){
                                 if(symbiosisScript.lifeSteal && player != null){
                                     player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
@@ -143,14 +146,16 @@ public class BaseGun : MonoBehaviour, IShootable
                                 soundSource.PlayOneShot(criticalHit);
                             }
                             if(InstaKillActive == false){
-                                dmgParticles.GetComponent<CFXR_ParticleText>().text = (modifiedDamage * critMultiplier).ToString();
+                                //dmgParticles.GetComponent<CFXR_ParticleText>().text = (modifiedDamage * critMultiplier).ToString();
+                                damageAmount = modifiedDamage * critMultiplier;
                                 damagable.Damaged(modifiedDamage * critMultiplier, shooter, hitData.point);
                             }
                             else{
                                 damagable.Damaged(Mathf.Infinity, shooter, hitData.point);
-                                dmgParticles.GetComponent<CFXR_ParticleText>().text = Mathf.Infinity.ToString();
+                                //dmgParticles.GetComponent<CFXR_ParticleText>().text = Mathf.Infinity.ToString();
+                                damageAmount = Mathf.Infinity;
                             }
-                            dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
+                            //dmgParticles.GetComponent<CFXR_ParticleText>().UpdateText();
                             scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
                             canShoot = false;
                             rageScript.CritHit();
@@ -158,6 +163,9 @@ public class BaseGun : MonoBehaviour, IShootable
                         else{
                             Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                             //Debug.LogWarning("Damagable not found");
+                        }
+                        if(damagable != null){
+                            UpdateParticle(hitData, damageAmount);
                         }
                     }
                 }
@@ -178,6 +186,39 @@ public class BaseGun : MonoBehaviour, IShootable
                 }
                 
             }
+        }
+    }
+    private void UpdateParticle(RaycastHit hitData, float damageAmount){
+        try{
+        damageAmount = Mathf.Floor(damageAmount);
+        bool foundCurrentParticle = false;
+        var activeDamageNumbers = FindObjectsOfType<AlreadyActiveDamageParticle>();
+        var damageableIDGenerator = hitData.transform.gameObject.GetComponentInParent<DamageableIDGenerator>();
+        if(damageableIDGenerator == null){
+            damageableIDGenerator = hitData.transform.gameObject.GetComponent<DamageableIDGenerator>();
+        }
+        //Debug.Log(damageableIDGenerator.ID);
+        if(activeDamageNumbers != null && activeDamageNumbers.Length > 0){
+            foreach (var particle in activeDamageNumbers){
+                if (damageableIDGenerator != null && particle.GetComponent<AlreadyActiveDamageParticle>().enemyID == damageableIDGenerator.ID){
+                    //Reset the particle
+                    foundCurrentParticle = true;
+                    particle.GetComponent<AlreadyActiveDamageParticle>().ResetParticle(damageAmount, hitData.point);
+                    //Debug.Log("Found Currently Active Particle");
+                    break;
+                }
+            }
+        }
+        if(!foundCurrentParticle){
+            //Debug.Log("No currently active particle found.. Making one and assigning values");
+            //Spawn New particle and assign the ID
+            var newDmgParticles = Instantiate(damageNumberParticles, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
+            newDmgParticles.GetComponent<AlreadyActiveDamageParticle>().NewParticle(damageAmount);
+            newDmgParticles.GetComponent<AlreadyActiveDamageParticle>().enemyID = damageableIDGenerator.ID;
+        }
+        }
+        catch(Exception e){
+            Debug.LogWarning(e.ToString());
         }
     }
     public IEnumerator NoAmmoSound(){

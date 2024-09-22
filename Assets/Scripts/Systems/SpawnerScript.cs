@@ -21,12 +21,13 @@ public class SpawnerScript : MonoBehaviour
         roundsScript = FindObjectOfType<RoundsScript>();
     }
 
-    public void Spawn(int zombieHP){
+    public void Spawn(int zombieHP, float currentZombieSpeed){
         //Debug.Log("Trying to spawn cuh");
         //var randomInRadius = new Vector3(this.transform.position.x + Random.Range(maxXRange * -1, maxXRange), this.transform.position.y, this.transform.position.z +  Random.Range(maxZRange * -1, maxZRange));
         var zombie = Instantiate(zombiePrefab, this.transform.position, Quaternion.identity);
         zombie.GetComponent<Dummy>().maxHealth = zombieHP;
         zombie.GetComponent<Dummy>().spawnedRoom = room;
+        zombie.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = currentZombieSpeed;
         roundsScript.roundSpawned += 1;
         roundsScript.currentAlive += 1;
         spawnDelay =  Mathf.Clamp(10 - roundsScript.roundNumber, 2, 10);

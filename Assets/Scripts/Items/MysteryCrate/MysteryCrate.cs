@@ -14,6 +14,7 @@ public class MysteryCrate : Purchasable, IInteractable
     [Header("Animation Stuff")]
     [SerializeField] Animator lidAnimator;
     [SerializeField] GameObject light;
+    [SerializeField] ParticleSystem soulParticles;
     [Header("Gun References")]
     [SerializeField] GameObject[] guns;
     [SerializeField] GameObject gunSpawnPOS;
@@ -61,6 +62,7 @@ public class MysteryCrate : Purchasable, IInteractable
     }
 
     public void ActivateBox(){
+        soulParticles.Play();
         soundSource.PlayOneShot(purchase);
         soundSource.PlayOneShot(mysteryCrateJingle);
         gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");

@@ -1605,7 +1605,9 @@ MonoBehaviour:
   jMenu: {fileID: 6964345712377539874}
   journalTabs: {fileID: 9114157443513833591}
   background: {fileID: 4344642952641379352}
+  pauseMusic: {fileID: 0}
   isPaused: 0
+  playerPauseScript: {fileID: 0}
 --- !u!114 &8699513986931869345
 MonoBehaviour:
   m_ObjectHideFlags: 0

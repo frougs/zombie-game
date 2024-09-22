@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-//using Alteruna;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
 
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -82,7 +82,7 @@ using System.Collections;
         private float _cinemachineTargetPitch;
 
         // player
-        private float _speed;
+        [HideInInspector] public float _speed;
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
@@ -118,8 +118,11 @@ using System.Collections;
         [HideInInspector] public float burstDuration;
         [HideInInspector] public float burstTransitionTime;
         private Coroutine burstSprintCoroutine;
+        public bool sprintingBlocked = false;
+        public bool isSprinting;
 
         [SerializeField] AudioSource soundSource;
+        //[SerializeField] float sprintFOVChangeSpeed;
 
         //private bool _hasAnimator;
 
@@ -186,13 +189,33 @@ using System.Collections;
             JumpAndGravity();
             GroundedCheck();
             Move();
-            if(sprint.triggered && quickFeet){
+            
+            if(sprint.triggered && quickFeet && isSprinting){
                 //Debug.Log("Starting quick feet!!");
                 burstSprintCoroutine = StartCoroutine(BurstSprintCoroutine());
             }
             if(sprint.IsPressed() == false && burstSprintCoroutine != null){
                 StopCoroutine(burstSprintCoroutine);
             }
+            if(sprint.IsPressed()){
+                isSprinting = CanSprint();
+            }
+            else{
+                isSprinting = false;
+            }
+            // if(isSprinting){
+            //     //var cam = CameraSingleton.instance.gameObject.GetComponent<CinemachineVirtualCamera>();
+            //     //var cam = CameraSingleton.instance.gameObject.GetComponent<FOVController>();
+            //     var cam = FindObjectOfType<FOVController>();
+            //     float sprintFOV = PlayerPrefs.GetFloat("FOV") += sprintFOVAddititve;
+            //     float sprintFOVTransitionTime = this.GetComponent<RigidBody>().velocity.magnitude;
+            //     sprintFOVTransitionTime = Mathf.Clamp(sprintFOVTransitionTime/SprintSpeed, 0f, 1f);
+            //     cam.FOVChange(sprintFOV, sprintFOVTransitionTime);
+            // }
+            // else if(!isSprinting && sprintingBlocked == false){
+            //     //CameraSingleton.instance.gameObject.GetComponent<FOVController>().canRevert = true;
+            //     FindObjectOfType<FOVController>().canRevert = true;
+            // }
         }
         private IEnumerator BurstSprintCoroutine(){
             float elapsedTime = 0f;
@@ -271,13 +294,21 @@ using System.Collections;
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
+        private bool CanSprint(){
+            if(sprintingBlocked == false){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 
         private void Move()
         {
             //         if (!_avatar.IsMe)
             // return;
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = sprint.IsPressed() ? SprintSpeed : MoveSpeed;
+            float targetSpeed = isSprinting ? SprintSpeed : MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

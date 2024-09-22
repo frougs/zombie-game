@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     private Coroutine regen;
     [SerializeField] AudioSource soundSource;
     [SerializeField] AudioClip damagedClip;
+    [SerializeField] AudioClip extraLifeUsed;
 
     //JuqMaster stuff
     [Header("Juq Master Stuff")]
@@ -82,6 +83,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     private void LateUpdate(){
         if(extraLives > 0 && currentHealth <= 0){
             extraLives -= 1;
+            soundSource.PlayOneShot(extraLifeUsed);
             currentHealth += extraLifeBoost;
             regen = StartCoroutine(RegenerateHealthAfterDelay());
         }

@@ -15,6 +15,9 @@ public class RoundsScript : MonoBehaviour
     [SerializeField] int r1SpawnCount;
     [SerializeField] float roundDelay;
     [SerializeField] int maxZombiesAtOnce;
+    [SerializeField] float baseZombieSpeed = 1.5f;
+    [SerializeField] float modifiedZombieSpeed = 0.1f;
+    [SerializeField] float currentZombieSpeed;
     [SerializeField] public int currentAlive;
     //[SerializeField] GameObject zombiePrefab;
     public List<GameObject> activeSpawners = new List<GameObject>();
@@ -35,6 +38,7 @@ public class RoundsScript : MonoBehaviour
     //Testing
     public bool spawningConditionsReached;
     private void Start(){
+        currentZombieSpeed = baseZombieSpeed;
         if(roundNumber == 0){
             roundNumber = 1;
             totalSpawnCount = r1SpawnCount;
@@ -74,7 +78,14 @@ private void Update(){
     if (roundNumber % 10 == 0 && roundNumber != triggeredForThisRound) {
         uiStuff.GetComponent<UnlockTokens>().AddUpgradeToken(5);
         triggeredForThisRound = roundNumber;
+        if(roundNumber == 10){
+            currentZombieSpeed = currentZombieSpeed + 1;
+        }
+        else{
+            currentZombieSpeed += modifiedZombieSpeed;
+        }
     }
+    currentZombieSpeed = Mathf.Clamp(currentZombieSpeed, 0f, 3.2f);
 
     // Update spawning conditions for UI
     spawningConditionsReached = (roundSpawned < totalSpawnCount) && canSpawn && !maxZombiesReached;
@@ -100,7 +111,7 @@ private void CalculateNextRound(){
         if(canSpawn){
             foreach(GameObject spawner in activeSpawners){
                 if(spawner.GetComponent<SpawnerScript>().onCooldown == false){
-                    spawner.GetComponent<SpawnerScript>().Spawn(zombieBaseHP);
+                    spawner.GetComponent<SpawnerScript>().Spawn(zombieBaseHP, currentZombieSpeed);
                 }
             }
         }

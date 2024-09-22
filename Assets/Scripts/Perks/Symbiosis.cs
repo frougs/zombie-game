@@ -15,6 +15,7 @@ public class Symbiosis : PerkBase
             //Instantiate(ammoDropObj, enemyPos.transform.position, Quaternion.identity);
             if(FindObjectOfType<InteractionController>().currentlyHeld.GetComponent<BaseGun>() != null){
                 FindObjectOfType<InteractionController>().currentlyHeld.GetComponent<BaseGun>().currentReserveAmmo += 5;
+                uiStuff.AddedAmmoAnimation(5);
             }
         }
     }

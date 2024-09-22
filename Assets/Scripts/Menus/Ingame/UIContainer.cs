@@ -34,6 +34,9 @@ public class UIContainer : MonoBehaviour
     [SerializeField] TextMeshProUGUI upgradeTokenCount;
     [SerializeField] GameObject spawnTokenPOS;
     [SerializeField] GameObject addedTokenPrefab;
+    [Header("Added Ammo Stuff")]
+    [SerializeField] GameObject addedAmmoPrefab;
+    [SerializeField] GameObject spawnAddedAmmoPOS;
 
     private AudioSource uiAudio;
     [SerializeField] AudioClip purchase;
@@ -76,7 +79,7 @@ public class UIContainer : MonoBehaviour
     public void PauseAllSounds(){
         AudioSource[] audioSources = Resources.FindObjectsOfTypeAll<AudioSource>();
         foreach (AudioSource a in audioSources){
-            if(a.tag == "Music" || a.tag == "SFX"){
+            if(a.tag == "Music" || a.tag == "SFX" || a.tag == "TrackMusic"){
                 if(a.gameObject.layer != LayerMask.NameToLayer("MenuMusic")){
                 a.Pause();
                 }
@@ -88,7 +91,7 @@ public class UIContainer : MonoBehaviour
     public void UnpauseAllSounds(){
         AudioSource[] audioSources = Resources.FindObjectsOfTypeAll<AudioSource>();
         foreach (AudioSource a in audioSources){
-                    if(a.tag == "Music" || a.tag == "SFX"){
+                    if(a.tag == "Music" || a.tag == "SFX" || a.tag == "TrackMusic"){
                         if(a.gameObject.layer != LayerMask.NameToLayer("MenuMusic")){
                         a.UnPause();
                         }
@@ -220,6 +223,10 @@ public class UIContainer : MonoBehaviour
         // Also add a sound here LOL!
         var tokenObj = Instantiate(addedTokenPrefab, spawnTokenPOS.transform);
         tokenObj.GetComponentInChildren<TextMeshProUGUI>().text = "+" + amount.ToString();
+    }
+    public void AddedAmmoAnimation(int amount){
+        var ammoObj = Instantiate(addedAmmoPrefab, spawnAddedAmmoPOS.transform);
+        ammoObj.GetComponentInChildren<TextMeshProUGUI>().text = "+" +amount.ToString();
     }
 
     public void LateUpdate(){

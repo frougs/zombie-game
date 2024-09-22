@@ -8,6 +8,8 @@ public class PowerupController : MonoBehaviour
     private UIContainer uiStuff;
     [SerializeField] float uiPopupDuration;
     [SerializeField] public float powerupDuration;
+    [SerializeField] AudioSource soundSource;
+    private Coroutine powerupDurationCoroutine;
 
     public enum Powerup
     {
@@ -30,6 +32,7 @@ public class PowerupController : MonoBehaviour
     }
 
     public PowerupInfo[] powerups;
+    private Dictionary<string, Coroutine> activePowerups = new Dictionary<string, Coroutine>();
 
     public void PowerUpCollected(string powerupName)
     {
@@ -45,7 +48,28 @@ public class PowerupController : MonoBehaviour
 
     public void TriggerPowerUp(PowerupInfo powerup)
     {
-        StartCoroutine(PowerUpEffect(powerup.powerupIcon, powerup.powerUpName, powerup.powerUpDescription, powerup, powerup.isInstant));
+        if(powerup.isInstant == false){
+            if (activePowerups.TryGetValue(powerup.powerUpName, out Coroutine existingCoroutine))
+            {
+                // Restart the existing coroutine
+                StopCoroutine(existingCoroutine);
+            }
+            else{
+                AddPowerUpToUI(powerup.powerupIcon, powerup.powerUpName, powerup.isInstant);
+            }
+
+            // Start a new coroutine for the powerup
+            Coroutine newCoroutine = StartCoroutine(PowerUpEffect(powerup.powerupIcon, powerup.powerUpName, powerup.powerUpDescription, powerup, powerup.isInstant));
+            activePowerups[powerup.powerUpName] = newCoroutine;
+        }
+        else{
+            StartCoroutine(PowerUpEffect(powerup.powerupIcon, powerup.powerUpName, powerup.powerUpDescription, powerup, powerup.isInstant));
+        }
+
+
+        //powerupDurationCoroutine = StartCoroutine(PowerUpEffect(powerup.powerupIcon, powerup.powerUpName, powerup.powerUpDescription, powerup, powerup.isInstant));
+        soundSource.PlayOneShot(powerup.powerUpSound);
+        TextPopUp(powerup.powerUpName, powerup.powerUpDescription, uiPopupDuration);
 
         if (!string.IsNullOrEmpty(powerup.powerupScriptClassName))
         {
@@ -88,9 +112,6 @@ public class PowerupController : MonoBehaviour
 
     private IEnumerator PowerUpEffect(Texture2D icon, string name, string description, PowerupInfo powerup, bool isInstant)
     {
-        this.GetComponent<AudioSource>().PlayOneShot(powerup.powerUpSound);
-        AddPowerUpToUI(icon, name, isInstant);
-        TextPopUp(name, description, uiPopupDuration);
         yield return new WaitForSeconds(powerupDuration);
         EndPowerUp(powerup);
         RemovePowerUpFromUI(powerup.powerUpName);
