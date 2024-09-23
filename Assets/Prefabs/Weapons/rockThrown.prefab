@@ -209,6 +209,10 @@ PrefabInstance:
       value: AudioPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 7696012220474827296, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696012220474827296, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_TagString
       value: SFX
       objectReference: {fileID: 0}

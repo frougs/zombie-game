@@ -64,17 +64,21 @@ public class BaseGun : MonoBehaviour, IShootable
         weaponCon = FindObjectOfType<WeaponController>();
     }
     public virtual void Shot(GameObject shooter){
+        //Debug.Log("Shot Triggered");
         if(shooter.GetComponent<ThirdPersonController>() != null){
             player = shooter;
         }
         if(reloading == false){
             if(canShoot && hasAmmo){
+                try{
                 if(rageScript.doubledamage){
                     modifiedDamage = damage * 2f;
                 }
                 else{
                     modifiedDamage = damage;
                 }
+                }
+                catch(Exception e){}
                 if(!infiniteAmmo){
                     currentAmmo -= 1;
                 }
@@ -87,7 +91,7 @@ public class BaseGun : MonoBehaviour, IShootable
                             }
                 }
                 if(Physics.Raycast(shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward, out RaycastHit hitData, range,  ~IgnoreLayer)){
-                    
+                    //Debug.Log("Shooting raycast");
                     //Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                     //Vector3 towardsPlayer = (player.transform.position - impParticle.transform.position).normalized;
                     //Debug.Log(hitData.transform.position);
