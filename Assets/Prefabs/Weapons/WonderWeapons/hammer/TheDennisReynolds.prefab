@@ -185,8 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1000
   fireRate: 1
-  maxAmmo: 200
-  maxReserveAmmo: 1000
+  maxAmmo: 20
+  maxReserveAmmo: 180
   currentReserveAmmo: 0
   reloadSpeed: 10
   range: 1000

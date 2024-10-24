@@ -25,6 +25,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float adsFOVAdditive;
     [SerializeField] float adsTransitionTime;
     public FOVController cam;
+    [SerializeField] float aimSensAddititve;
     
     private void Start(){
         cam = FindObjectOfType<FOVController>();
@@ -52,12 +53,6 @@ public class WeaponController : MonoBehaviour
 
     private void Update(){
         if(PauseMenuSingleton.instance.GetComponent<PauseController>().isPaused == false){
-            if(aim.IsPressed()){
-                //ADS logic
-            }
-            else{
-                //Return to default Logic
-            }
             if(attack.IsPressed()){
                 try{
                     var child = this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject;
@@ -99,11 +94,12 @@ public class WeaponController : MonoBehaviour
                 this.gameObject.GetComponent<ThirdPersonController>().sprintingBlocked = true;
                 var adsFOV = PlayerPrefs.GetFloat("FOV") - adsFOVAdditive;
                 cam.FOVChange(adsFOV, adsTransitionTime);
+                this.GetComponent<ThirdPersonController>().lookSens = PlayerPrefs.GetFloat("Sensitivity") - aimSensAddititve;
             }
             else{
                 //Add logic for reverting the FOV controller
                 this.gameObject.GetComponent<ThirdPersonController>().sprintingBlocked = false;
-
+                this.GetComponent<ThirdPersonController>().lookSens = PlayerPrefs.GetFloat("Sensitivity");
                 cam.canRevert = true;
             }
         }
