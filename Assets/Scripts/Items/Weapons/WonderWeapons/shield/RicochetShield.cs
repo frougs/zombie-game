@@ -36,6 +36,8 @@ public class RicochetShield : BaseGun
                 if(projectile != null){
                     //GameObject launchedProj = Instantiate(projectile, shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, Quaternion.LookRotation(-1 * (shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position - transform.position)));
                     GameObject launchedProj = Instantiate(projectile, transform.position, Quaternion.identity);
+                    launchedProj.GetComponent<RicochetShieldProjectile>().shield = this;
+                    launchedProj.GetComponent<RicochetShieldProjectile>().player = player;
                     Rigidbody rb = launchedProj.GetComponent<Rigidbody>();
                     if(rb != null){
                         rb.velocity =  shooter.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward * projectileSpeed;
@@ -60,4 +62,65 @@ public class RicochetShield : BaseGun
             }
         }
     }
+    public void Hit(GameObject damagable)
+    {
+        if(soundSource != null){
+            soundSource.PlayOneShot(criticalHit);
+        }
+        if(symbiosisScript != null){
+            if(symbiosisScript.lifeSteal && player != null){
+                player.GetComponent<PlayerHealth>().currentHealth += modifiedDamage * symbiosisScript.lifeStealPercent;
+            }
+        }
+        scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
+        canShoot = false;
+        rageScript.CritHit();
+
+        IDamagable damagableOBJ = damagable.GetComponent<IDamagable>();
+        if(damagableOBJ != null){
+            if(damagable != player && damagable.GetComponent<BarrierScript>() == null){
+                if(!InstaKillActive){
+                    damagableOBJ.Damaged(modifiedDamage * critMultiplier, player, damagable.transform.position);
+                    UpdateParticle(damagable, modifiedDamage * critMultiplier);
+                }
+                else{
+                    damagableOBJ.Damaged(Mathf.Infinity, player, damagable.transform.position);
+                    UpdateParticle(damagable, Mathf.Infinity);
+                }
+            }
+        }
+    }
+    private void UpdateParticle(GameObject hitData, float damageAmount){
+        try{
+        damageAmount = Mathf.Floor(damageAmount);
+        bool foundCurrentParticle = false;
+        var activeDamageNumbers = FindObjectsOfType<AlreadyActiveDamageParticle>();
+        var damageableIDGenerator = hitData.transform.gameObject.GetComponentInParent<DamageableIDGenerator>();
+        if(damageableIDGenerator == null){
+            damageableIDGenerator = hitData.transform.gameObject.GetComponent<DamageableIDGenerator>();
+        }
+        //Debug.Log(damageableIDGenerator.ID);
+        if(activeDamageNumbers != null && activeDamageNumbers.Length > 0){
+            foreach (var particle in activeDamageNumbers){
+                if (damageableIDGenerator != null && particle.GetComponent<AlreadyActiveDamageParticle>().enemyID == damageableIDGenerator.ID){
+                    //Reset the particle
+                    foundCurrentParticle = true;
+                    particle.GetComponent<AlreadyActiveDamageParticle>().ResetParticle(damageAmount, hitData.transform.position);
+                    //Debug.Log("Found Currently Active Particle");
+                    break;
+                }
+            }
+        }
+        if(!foundCurrentParticle){
+            //Spawn New particle and assign the ID
+            var newDmgParticles = Instantiate(damageNumberParticles, hitData.transform.position, Quaternion.LookRotation((player.transform.position - hitData.transform.position).normalized));
+            newDmgParticles.GetComponent<AlreadyActiveDamageParticle>().NewParticle(damageAmount);
+            newDmgParticles.GetComponent<AlreadyActiveDamageParticle>().enemyID = damageableIDGenerator.ID;
+        }
+        }
+        catch(Exception e){
+            Debug.LogWarning(e.ToString());
+        }
+    }
+
 }

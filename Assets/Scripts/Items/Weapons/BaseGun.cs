@@ -54,7 +54,7 @@ public class BaseGun : MonoBehaviour, IShootable
     private Coroutine reloadRoutine;
     public bool InstaKillActive;
     public bool infiniteAmmo;
-
+    public event Action WeaponShot;
     private void Start(){
         currentAmmo = maxAmmo;
         currentReserveAmmo = maxReserveAmmo;
@@ -170,6 +170,9 @@ public class BaseGun : MonoBehaviour, IShootable
                         }
                         if(damagable != null){
                             UpdateParticle(hitData, damageAmount);
+                            if(player.GetComponent<JitterBugController>() != null){
+                                    player.GetComponent<JitterBugController>().StartChainLighting(hitData.transform.gameObject);
+                            }
                         }
                     }
                 }
