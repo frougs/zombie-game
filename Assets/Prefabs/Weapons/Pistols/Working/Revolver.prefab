@@ -242,6 +242,11 @@ MonoBehaviour:
   upgrades: []
   InstaKillActive: 0
   infiniteAmmo: 0
+  reloadBuffActive: 0
+  reloadBuffDuration: 0
+  reloadBuffAmount: 0
+  reloadBuffParticles: {fileID: 0}
+  blockShooting: 0
 --- !u!4 &5705449659772503005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4df3ce82db8e66645afd54ab1d5b0262, type: 3}

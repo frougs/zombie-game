@@ -15,12 +15,16 @@ public class ThrownRock : MonoBehaviour
     [SerializeField] AudioSource soundSource;
     [SerializeField] GameObject damageNumberParticles;
     private bool hitOnce = false;
-        private void OnCollisionEnter(Collision obj){
-            //Debug.Log("Rock Hit: " +obj.gameObject.name);
+    public List<GameObject> alreadyHit = new List<GameObject>();
+    public bool rockUpgradeActive = false;
+    [SerializeField] float projLifetime;
+    private void OnTriggerEnter(Collider obj){
+        if(rockUpgradeActive){
+        //Debug.Log("Rock Hit: " +obj.gameObject.name);
             if(obj.gameObject.GetComponent<IDamagable>() != null && obj.gameObject.GetComponent<ThirdPersonController>() == null && obj.gameObject.GetComponent<BarrierScript>() == null){
                 IDamagable damagableOBJ = obj.gameObject.GetComponent<IDamagable>();
-                if(damagableOBJ != null && hitOnce == false){
-                    hitOnce = true;
+                if(damagableOBJ != null && !alreadyHit.Contains(obj.gameObject)){
+                    
                     float damageAmount = 0f;
                     if(obj.gameObject.tag == "CriticalSpot"){
                         damagableOBJ.Damaged(rockDamage * critPercent, player, this.transform.position);
@@ -32,22 +36,57 @@ public class ThrownRock : MonoBehaviour
                         damageAmount = rockDamage;
                         player.GetComponent<WeaponController>().soundSource.PlayOneShot(hitSound);
                     }
+                    player.GetComponent<JitterBugController>().CreateLightning(obj.gameObject);
                     player.GetComponent<ScoreSystem>().AddToScore(scorePerHit);
                     UpdateParticle(obj.gameObject, damageAmount);
+                    alreadyHit.Add(obj.gameObject);
                 }
             }
-
+            //Destroy(this.gameObject);
             if(impactParticles != null){
                 Instantiate(impactParticles, this.transform.position, Quaternion.LookRotation((player.transform.position - this.transform.position).normalized));
             }
-            
+        }
+        else{
             Destroy(this.gameObject);
         }
-        public void AssignVariables(float damage, GameObject player, int rockScorePerHit, float critAmnt){
+    }
+        private void OnCollisionEnter(Collision obj){
+            if(!rockUpgradeActive){
+                //Debug.Log("Rock Hit: " +obj.gameObject.name);
+                if(obj.gameObject.GetComponent<IDamagable>() != null && obj.gameObject.GetComponent<ThirdPersonController>() == null && obj.gameObject.GetComponent<BarrierScript>() == null){
+                    IDamagable damagableOBJ = obj.gameObject.GetComponent<IDamagable>();
+                    if(damagableOBJ != null && hitOnce == false){
+                        hitOnce = true;
+                        float damageAmount = 0f;
+                        if(obj.gameObject.tag == "CriticalSpot"){
+                            damagableOBJ.Damaged(rockDamage * critPercent, player, this.transform.position);
+                            damageAmount = rockDamage * critPercent;
+                            player.GetComponent<WeaponController>().soundSource.PlayOneShot(critSound);
+                        }
+                        else if(obj.gameObject.tag != "CriticalSpot"){
+                            damagableOBJ.Damaged(rockDamage, player, this.transform.position);
+                            damageAmount = rockDamage;
+                            player.GetComponent<WeaponController>().soundSource.PlayOneShot(hitSound);
+                        }
+                        player.GetComponent<ScoreSystem>().AddToScore(scorePerHit);
+                        UpdateParticle(obj.gameObject, damageAmount);
+                    }
+                }
+
+                if(impactParticles != null){
+                    Instantiate(impactParticles, this.transform.position, Quaternion.LookRotation((player.transform.position - this.transform.position).normalized));
+                }
+                
+                Destroy(this.gameObject);
+            }
+        }
+        public void AssignVariables(float damage, GameObject player, int rockScorePerHit, float critAmnt, bool rockUpgrade){
             this.rockDamage = damage;
             this.player = player;
             this.scorePerHit = rockScorePerHit;
             this.critPercent = critAmnt;
+            this.rockUpgradeActive = rockUpgrade;
         }
     private void UpdateParticle(GameObject hitObj, float damageAmount){
         try{
@@ -81,5 +120,8 @@ public class ThrownRock : MonoBehaviour
         catch(Exception e){
             Debug.LogWarning(e.ToString());
         }
+    }
+    private void Start(){
+        Destroy(this.gameObject, projLifetime);
     }
 }

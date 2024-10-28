@@ -152,6 +152,9 @@ MonoBehaviour:
   critSound: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
   soundSource: {fileID: 2080864189618489096}
   damageNumberParticles: {fileID: 7434637958133090017, guid: eebb479fc50d01d4784cc48f8dc2b735, type: 3}
+  alreadyHit: []
+  rockUpgradeActive: 0
+  projLifetime: 5
 --- !u!1001 &2718253168611675631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,7 +165,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.053909875
       objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x

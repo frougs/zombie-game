@@ -73,7 +73,7 @@ public class RicochetShield : BaseGun
             }
         }
         scoreSystem.AddToScore((int)(pointsPerHit * critMultiplier));
-        canShoot = false;
+        //canShoot = false;
         rageScript.CritHit();
 
         IDamagable damagableOBJ = damagable.GetComponent<IDamagable>();

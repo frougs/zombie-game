@@ -14,6 +14,9 @@ public class JitterBugController : MonoBehaviour
     [HideInInspector] public float damage;
     [HideInInspector] public float chainRange;
     [HideInInspector] public float lightningDuration;
+    [HideInInspector] public float reloadBuffAmount;
+    [HideInInspector] public float reloadBuffDuration;
+    [SerializeField] GameObject reloadBuffParticles;
     public GameObject lightningPrefab; // Prefab for the lightning effect
     // private LineRenderer lineRenderer;
     // public GameObject lightningParticles;
@@ -24,7 +27,7 @@ public class JitterBugController : MonoBehaviour
             CreateLightning(initialHit);
         }
     }
-    private void CreateLightning(GameObject initialHit){
+    public void CreateLightning(GameObject initialHit){
         var visualLightning = Instantiate(lightningPrefab, initialHit.transform.position, Quaternion.identity);
         visualLightning.GetComponent<ChainLightning>().maxChains = maxChains;
         visualLightning.GetComponent<ChainLightning>().damage = damage;
@@ -34,10 +37,14 @@ public class JitterBugController : MonoBehaviour
         visualLightning.GetComponent<ChainLightning>().StartLightning(initialHit);
 
     }
-    public void UpgradeRock(){
-
-    }
-    public void SubscribeToEnemyDeath(){
-
+    public void Update(){
+        if(this.GetComponent<InteractionController>().currentlyHeld != null){
+            if(reloadBuffActive && this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>() != null){
+                this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>().reloadBuffActive = true;
+                this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>().reloadBuffAmount = reloadBuffAmount;
+                this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>().reloadBuffDuration = reloadBuffDuration;
+                this.GetComponent<InteractionController>().gunRoot.transform.GetChild(0).gameObject.GetComponent<BaseGun>().reloadBuffParticles = reloadBuffParticles;
+            }
+        }
     }
 }

@@ -52,9 +52,15 @@ public class BaseGun : MonoBehaviour, IShootable
     [SerializeField] public GameObject damageNumberParticles;
     public List<string> upgrades = new List<string>();
     private Coroutine reloadRoutine;
+    private Coroutine reloadBuffRoutine;
     public bool InstaKillActive;
     public bool infiniteAmmo;
-    public event Action WeaponShot;
+    public bool reloadBuffActive;
+    public float reloadBuffDuration;
+    public float reloadBuffAmount;
+    private GameObject activeReloadBuffParticles;
+    [HideInInspector] public GameObject reloadBuffParticles;
+    public bool blockShooting;
     private void Start(){
         currentAmmo = maxAmmo;
         currentReserveAmmo = maxReserveAmmo;
@@ -246,13 +252,18 @@ public class BaseGun : MonoBehaviour, IShootable
             reloadProgress = 0f;
             reloading = false;
             progressBar.gameObject.SetActive(false);
-            
+        }
+        if(reloadBuffRoutine != null){
+            StopCoroutine(reloadBuffRoutine);
+            Destroy(activeReloadBuffParticles);
+            modifiedDamage = modifiedDamage / reloadBuffAmount;
         }
     }
     private void Update(){
         if(held == false){
             InstaKillActive = false;
             infiniteAmmo = false;
+            reloadBuffActive = false;
         }
         if(currentReserveAmmo <= 0){
             currentReserveAmmo = 0;
@@ -350,6 +361,21 @@ public class BaseGun : MonoBehaviour, IShootable
         progressBar.fillAmount = 0f;
         reloadProgress = 0f;
         reloading = false;
+        if(reloadBuffActive){
+            reloadBuffRoutine = StartCoroutine(ReloadBuff());
+        }
+    }
+    IEnumerator ReloadBuff(){
+        var oldModifiedDamage = modifiedDamage;
+        activeReloadBuffParticles = Instantiate(reloadBuffParticles, this.transform.position, this.transform.rotation, this.transform);
+        float elapsedTime = 0f;
+        while(elapsedTime < reloadBuffDuration){
+            modifiedDamage = oldModifiedDamage * reloadBuffAmount;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        modifiedDamage = modifiedDamage / reloadBuffAmount;
+        Destroy(activeReloadBuffParticles);
     }
     public void RefillAmmo(){
         currentAmmo = maxAmmo;

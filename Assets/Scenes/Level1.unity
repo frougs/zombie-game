@@ -9725,6 +9725,9 @@ MonoBehaviour:
   damage: 0
   chainRange: 0
   lightningDuration: 0
+  reloadBuffAmount: 0
+  reloadBuffDuration: 0
+  reloadBuffParticles: {fileID: 3641503242167098370, guid: 979b7b63bf2247241aa2341c1bc728b9, type: 3}
   lightningPrefab: {fileID: 8948462023896426144, guid: 3b47cca37bbad314789afe125d2ba66d, type: 3}
 --- !u!4 &206533945 stripped
 Transform:
@@ -63055,11 +63058,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c78d16e4711178429930c47d8e89427, type: 3}
---- !u!1 &1071939584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 545532613772203975, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-  m_PrefabInstance: {fileID: 1816039010}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1072204783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101485,46 +101483,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2aeea187d4a9dce4da2f26d62f5bbc96, type: 3}
   m_PrefabInstance: {fileID: 85276575}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1788834623 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3724469605317675071, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-  m_PrefabInstance: {fileID: 1816039010}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1788834624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788834623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93911fd091f10c34b9addb6e274a0436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  price: 0
-  discountAmount: 0
-  discountApplied: 0
-  powered: 1
-  light: {fileID: 1985874695}
-  perkIcon: {fileID: 2800000, guid: 4c5f43359553c1f458f816bfbbac590e, type: 3}
-  perkName: JitterBug
-  perkDescription: BEES!!! AHHHH!!
-  upgradeNum: 0
-  player: {fileID: 0}
-  popupDuration: 2.5
-  hasPerk: 0
-  uiStuff: {fileID: 0}
-  priceText: {fileID: 1839297075}
-  needPowerObj: {fileID: 1071939584}
-  soundSource: {fileID: 2025452280}
-  errorPurchase: {fileID: 8300000, guid: 462eff65fa5a0c340a8cff4e09298f1e, type: 3}
-  purchase: {fileID: 8300000, guid: fd4078c84e03c5a42ae8275aebc82941, type: 3}
-  perkColor: {r: 0.93725497, g: 0.027450982, b: 0.6, a: 1}
-  maxChain: 5
-  chainDamage: 10
-  chainRange: 25
-  lightningDuration: 0.2
 --- !u!4 &1789592461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4478235978383186, guid: 9c78d16e4711178429930c47d8e89427, type: 3}
@@ -103715,18 +103673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JitterbugPerkMachine
       objectReference: {fileID: 0}
-    - target: {fileID: 8253340851831470886, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-      propertyPath: powered
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8253340851831470886, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3724469605317675071, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1788834624}
     - targetCorrespondingSourceObject: {fileID: 701516299297686932, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -104702,17 +104652,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1839297075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 533286538740628652, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-  m_PrefabInstance: {fileID: 1816039010}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1840692464 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4478235978383186, guid: 9c78d16e4711178429930c47d8e89427, type: 3}
@@ -112023,11 +111962,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c78d16e4711178429930c47d8e89427, type: 3}
---- !u!108 &1985874695 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 3515238615041835932, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-  m_PrefabInstance: {fileID: 1816039010}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1985954794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114697,11 +114631,6 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 742939695747478896, guid: b4ece76cc6671f94b87438c54393b0c8, type: 3}
   m_PrefabInstance: {fileID: 2025151398}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &2025452280 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1153238782492055273, guid: 8f19fd8b49de6ad449c278458dcd6db2, type: 3}
-  m_PrefabInstance: {fileID: 1816039010}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2027103154
 PrefabInstance:
@@ -121100,7 +121029,7 @@ PrefabInstance:
       objectReference: {fileID: 1258977205}
     - target: {fileID: 6599535295333123023, guid: d1046947825146c439cfb2bf10803a85, type: 3}
       propertyPath: score
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7528780506606959307, guid: d1046947825146c439cfb2bf10803a85, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target

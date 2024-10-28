@@ -261,6 +261,11 @@ MonoBehaviour:
   upgrades: []
   InstaKillActive: 0
   infiniteAmmo: 0
+  reloadBuffActive: 0
+  reloadBuffDuration: 0
+  reloadBuffAmount: 0
+  reloadBuffParticles: {fileID: 0}
+  blockShooting: 0
 --- !u!1001 &2353740123741392353
 PrefabInstance:
   m_ObjectHideFlags: 0

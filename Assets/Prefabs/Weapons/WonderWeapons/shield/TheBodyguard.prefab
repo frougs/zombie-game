@@ -238,6 +238,11 @@ MonoBehaviour:
   upgrades: []
   InstaKillActive: 0
   infiniteAmmo: 0
+  reloadBuffActive: 0
+  reloadBuffDuration: 0
+  reloadBuffAmount: 0
+  reloadBuffParticles: {fileID: 0}
+  blockShooting: 0
   projectile: {fileID: 3946294616191740008, guid: 3e4e2a7927be30e40890a85a70799283, type: 3}
   projectileSpeed: 20
   impactAudioSource: {fileID: 0}

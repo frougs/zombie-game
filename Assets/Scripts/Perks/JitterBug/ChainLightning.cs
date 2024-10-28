@@ -112,7 +112,7 @@ private IEnumerator ChainLightningCoroutine(GameObject lastHit)
 
         if (closestObject != null)
         {
-            Debug.Log($"Found closest object: {closestObject.name} at distance: {closestDistance}");
+            //Debug.Log($"Found closest object: {closestObject.name} at distance: {closestDistance}");
         }
         else
         {

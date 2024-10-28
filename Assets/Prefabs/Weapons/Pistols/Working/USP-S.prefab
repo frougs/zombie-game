@@ -190,6 +190,11 @@ MonoBehaviour:
   upgrades: []
   InstaKillActive: 0
   infiniteAmmo: 0
+  reloadBuffActive: 0
+  reloadBuffDuration: 0
+  reloadBuffAmount: 0
+  reloadBuffParticles: {fileID: 0}
+  blockShooting: 0
 --- !u!54 &5263455617272733977
 Rigidbody:
   m_ObjectHideFlags: 0

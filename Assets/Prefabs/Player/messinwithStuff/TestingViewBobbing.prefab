@@ -3197,6 +3197,8 @@ MonoBehaviour:
   adsFOVAdditive: 30
   adsTransitionTime: 10
   cam: {fileID: 0}
+  aimSensAddititve: 0
+  rockUpgradeActive: 0
 --- !u!114 &4531323468129007124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5070,7 +5072,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.053909875
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

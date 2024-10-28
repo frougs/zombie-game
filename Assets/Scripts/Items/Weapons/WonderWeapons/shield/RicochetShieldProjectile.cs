@@ -92,7 +92,7 @@ public class RicochetShieldProjectile : MonoBehaviour
         }
         //Debug.Log("Distance between player: " +Vector3.Distance(transform.position, player.transform.position));
         if(Vector3.Distance(transform.position, player.transform.position) <= 2f && hitSomething){
-            shield.canShoot = true;
+            //shield.canShoot = true;
             Destroy(this.gameObject);
         }
         if(moveToTarget && currentTarget != null){

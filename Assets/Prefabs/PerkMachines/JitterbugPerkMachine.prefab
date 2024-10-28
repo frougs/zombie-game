@@ -483,7 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1501684720125761055}
   - component: {fileID: 4545025063111371035}
-  - component: {fileID: 8253340851831470886}
+  - component: {fileID: 6755180936606412853}
   m_Layer: 0
   m_Name: JitterbugPerkMachine
   m_TagString: Untagged
@@ -534,7 +534,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.54, z: 0}
---- !u!114 &8253340851831470886
+--- !u!114 &6755180936606412853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -543,17 +543,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3724469605317675071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb7c4a809e7d9814684f461221ba1c4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 93911fd091f10c34b9addb6e274a0436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 2500
+  price: 4000
   discountAmount: 0
   discountApplied: 0
   powered: 0
   light: {fileID: 3515238615041835932}
-  perkIcon: {fileID: 2800000, guid: 54e160c801ba4954ba1724906e449cfa, type: 3}
-  perkName: Juq Master
-  perkDescription: Nepali Women...
+  perkIcon: {fileID: 2800000, guid: 4c5f43359553c1f458f816bfbbac590e, type: 3}
+  perkName: Jitter Bug
+  perkDescription: Welcome to the party dude!
   upgradeNum: 0
   player: {fileID: 0}
   popupDuration: 2.5
@@ -564,11 +564,18 @@ MonoBehaviour:
   soundSource: {fileID: 1153238782492055273}
   errorPurchase: {fileID: 8300000, guid: 462eff65fa5a0c340a8cff4e09298f1e, type: 3}
   purchase: {fileID: 8300000, guid: fd4078c84e03c5a42ae8275aebc82941, type: 3}
-  perkColor: {r: 0, g: 0, b: 0, a: 0}
-  healthBoost: 50
-  level1HealthBoost: 0
-  chanceToIgnoreHit: 0.2
-  damageNegationAmount: 5
+  perkColor: {r: 0.93725497, g: 0.027450982, b: 0.6, a: 1}
+  maxChain: 5
+  chainDamage: 10
+  chainRange: 25
+  lightningDuration: 0.2
+  reloadBuffAmount: 1.5
+  reloadBuffDuration: 2.5
+  upgradedRock: {fileID: 5742698200336472848, guid: 3a7a2af30e0487642b5d7352ff83b689, type: 3}
+  deathField: {fileID: 7275217710360239786, guid: c71c8b50f17e5fc42950e8668490e5ca, type: 3}
+  fieldDuration: 5
+  fieldDamage: 10
+  fieldFirerate: 0.2
 --- !u!1 &7415872134164956616
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +893,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.053909875
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

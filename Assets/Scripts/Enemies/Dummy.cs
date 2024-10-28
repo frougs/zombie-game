@@ -37,6 +37,7 @@ public class Dummy : MonoBehaviour, IDamagable
     [SerializeField] float powerupDropChance;
     [SerializeField] GameObject[] powerups;
     [SerializeField] GameObject deathParticles;
+
     // public string enemyID;
     public void Damaged(float damage, GameObject attacker, Vector3 hitPoint){
         if(damagedParticles != null){
@@ -125,13 +126,8 @@ public class Dummy : MonoBehaviour, IDamagable
         FindObjectOfType<RoundsScript>().remainingSpawnCount -= 1;
         FindObjectOfType<RoundsScript>().currentAlive -= 1;
         FindObjectOfType<Symbiosis>().EnemyDeath(this.gameObject);
+        FindObjectOfType<JitterBug>().SpawnField(this.transform.position);
         Destroy(this.gameObject);
-        // healthText.gameObject.SetActive(false);
-        // dead = true;
-        // eRend.material = deadMat;
-        // StartCoroutine(RegenTimer());
-        // chasing = false;
-        // nav.SetDestination(this.transform.position);
 
     }
     IEnumerator RegenTimer(){

@@ -11,7 +11,7 @@ public class WeaponController : MonoBehaviour
     [HideInInspector] public InputAction reload;
     [HideInInspector] public InputAction aim;
     [HideInInspector] public PlayerInput _pInput;
-    [SerializeField] GameObject rock;
+    [SerializeField] public GameObject rock;
     [SerializeField] float rockSpeed;
     [SerializeField] AudioClip rockThrownSound;
     [SerializeField] public AudioSource soundSource;
@@ -26,6 +26,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float adsTransitionTime;
     public FOVController cam;
     [SerializeField] float aimSensAddititve;
+    public bool rockUpgradeActive;
     
     private void Start(){
         cam = FindObjectOfType<FOVController>();
@@ -108,13 +109,13 @@ public class WeaponController : MonoBehaviour
         //Debug.Log("Throwing rock");
         if(canThrowRock){
             StartCoroutine(ShotDelay());
-            GameObject launchedProj = Instantiate(rock, GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, Quaternion.identity);
+            GameObject launchedProj = Instantiate(rock, this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position, Quaternion.LookRotation(-1 * (this.GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.position - transform.position)));
             Rigidbody rb = launchedProj.GetComponent<Rigidbody>();
             if(!instaKillActive){
-                launchedProj.GetComponent<ThrownRock>().AssignVariables(rockDamage, this.gameObject, rockScorePerHit, rockCritMultiplier);
+                launchedProj.GetComponent<ThrownRock>().AssignVariables(rockDamage, this.gameObject, rockScorePerHit, rockCritMultiplier, rockUpgradeActive);
             }
             else{
-                            launchedProj.GetComponent<ThrownRock>().AssignVariables(Mathf.Infinity, this.gameObject, rockScorePerHit, rockCritMultiplier);
+                launchedProj.GetComponent<ThrownRock>().AssignVariables(Mathf.Infinity, this.gameObject, rockScorePerHit, rockCritMultiplier, rockUpgradeActive);
             }
             if(rb != null){
                             rb.velocity =  GetComponent<ThirdPersonController>().CinemachineCameraTarget.transform.forward * rockSpeed;
