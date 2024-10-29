@@ -12,12 +12,13 @@ public class JitterBug : PerkBase
     [SerializeField] float reloadBuffAmount;
     [SerializeField] float reloadBuffDuration;
     [SerializeField] GameObject upgradedRock;
+    [SerializeField] AudioClip upgradedRockThrownSound;
     [Header("Death Field Stuffs")]
     [SerializeField] GameObject deathField;
     [SerializeField] float fieldDuration;
     [SerializeField] float fieldDamage;
     [SerializeField] float fieldFirerate;
-    bool spawnFieldOnDeath;
+    bool spawnFieldOnDeath = false;
     public override void DefaultPerk(){
         //Add chain lightning logic here
         controller = player.GetComponent<JitterBugController>();
@@ -36,6 +37,7 @@ public class JitterBug : PerkBase
     public override void PerkUpgrade2(){
         //Rock Upgrade Logic here
         controller.GetComponent<WeaponController>().rock = upgradedRock;
+        controller.GetComponent<WeaponController>().rockThrownSound = upgradedRockThrownSound;
         controller.GetComponent<WeaponController>().rockUpgradeActive = true;
     }
     public override void PerkUpgrade3(){
@@ -52,11 +54,13 @@ public class JitterBug : PerkBase
         
     }
     public void SpawnField(Vector3 pos){
-        var deathFieldSpawned = Instantiate(deathField, pos, Quaternion.identity);
-        deathFieldSpawned.GetComponent<JitterbugExplosion>().player = player;
-        deathFieldSpawned.GetComponent<JitterbugExplosion>().fieldDuration = fieldDuration;
-        deathFieldSpawned.GetComponent<JitterbugExplosion>().fieldDamage = fieldDamage;
-        deathFieldSpawned.GetComponent<JitterbugExplosion>().fieldDamageInterval = fieldFirerate;
+        if(spawnFieldOnDeath){
+            var deathFieldSpawned = Instantiate(deathField, pos, Quaternion.identity);
+            deathFieldSpawned.GetComponent<JitterbugExplosion>().player = player;
+            deathFieldSpawned.GetComponent<JitterbugExplosion>().fieldDuration = fieldDuration;
+            deathFieldSpawned.GetComponent<JitterbugExplosion>().fieldDamage = fieldDamage;
+            deathFieldSpawned.GetComponent<JitterbugExplosion>().fieldDamageInterval = fieldFirerate;
+        }
     }
 
 }

@@ -20,7 +20,7 @@ public class ThrownRock : MonoBehaviour
     [SerializeField] float projLifetime;
     private void OnTriggerEnter(Collider obj){
         if(rockUpgradeActive){
-        //Debug.Log("Rock Hit: " +obj.gameObject.name);
+        Debug.Log("Rock Hit: " +obj.gameObject.name);
             if(obj.gameObject.GetComponent<IDamagable>() != null && obj.gameObject.GetComponent<ThirdPersonController>() == null && obj.gameObject.GetComponent<BarrierScript>() == null){
                 IDamagable damagableOBJ = obj.gameObject.GetComponent<IDamagable>();
                 if(damagableOBJ != null && !alreadyHit.Contains(obj.gameObject)){
@@ -53,7 +53,7 @@ public class ThrownRock : MonoBehaviour
     }
         private void OnCollisionEnter(Collision obj){
             if(!rockUpgradeActive){
-                //Debug.Log("Rock Hit: " +obj.gameObject.name);
+                Debug.Log("Rock Hit: " +obj.gameObject.name);
                 if(obj.gameObject.GetComponent<IDamagable>() != null && obj.gameObject.GetComponent<ThirdPersonController>() == null && obj.gameObject.GetComponent<BarrierScript>() == null){
                     IDamagable damagableOBJ = obj.gameObject.GetComponent<IDamagable>();
                     if(damagableOBJ != null && hitOnce == false){

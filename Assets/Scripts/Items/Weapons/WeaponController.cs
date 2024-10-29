@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     [HideInInspector] public PlayerInput _pInput;
     [SerializeField] public GameObject rock;
     [SerializeField] float rockSpeed;
-    [SerializeField] AudioClip rockThrownSound;
+    [SerializeField] public AudioClip rockThrownSound;
     [SerializeField] public AudioSource soundSource;
     [SerializeField] int rockScorePerHit;
     [SerializeField] float rockDamage;

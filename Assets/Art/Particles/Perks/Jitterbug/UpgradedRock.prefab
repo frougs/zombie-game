@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f7c6ad6bd4f8784d89a7a45ede9f568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactParticles: {fileID: 7868187189991032972, guid: 71dd6311e0743da46923e0c73e851107, type: 3}
+  impactParticles: {fileID: 7868187189991032972, guid: 189b69b890e80814da64591292be1e3f, type: 3}
   hitSound: {fileID: 8300000, guid: 5f782a7af9c9f054ca928290efa18857, type: 3}
   critSound: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
   soundSource: {fileID: 2695489086959636948}
@@ -166,7 +166,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.053909875
+      value: 0.3369358
       objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x

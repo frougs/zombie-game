@@ -122,5 +122,9 @@ public class RicochetShield : BaseGun
             Debug.LogWarning(e.ToString());
         }
     }
+    public void PlayImpactSound(Vector3 pos){
+        impactAudioSource.transform.position = pos;
+        impactAudioSource.GetComponent<AudioSource>().PlayOneShot(impactSound);
+    }   
 
 }

@@ -105,6 +105,7 @@ MonoBehaviour:
   projMaxLifetime: 5
   player: {fileID: 0}
   hitSomething: 0
+  impactParticles: {fileID: 9161755111176198574, guid: aabf05254b23d4a47859f5d9b8d4784c, type: 3}
 --- !u!114 &6394014177706782609
 MonoBehaviour:
   m_ObjectHideFlags: 0

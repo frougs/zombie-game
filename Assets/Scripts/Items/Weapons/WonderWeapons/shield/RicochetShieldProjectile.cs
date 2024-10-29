@@ -15,9 +15,11 @@ public class RicochetShieldProjectile : MonoBehaviour
     private GameObject currentTarget;
     private bool moveToTarget;
     private bool returningToPlayer;
+    [SerializeField] GameObject impactParticles;
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.GetComponent<IDamagable>() != null && other.gameObject.GetComponent<ThirdPersonController>() == null && other.gameObject.GetComponent<BarrierScript>() == null){
             shield.Hit(other.gameObject);
+            SendImpactInfo();
         }
     }
     private void OnCollisionEnter(Collision collision){
@@ -26,10 +28,12 @@ public class RicochetShieldProjectile : MonoBehaviour
             if(maxBounces > 0){
                 Debug.Log("Finding Next target..");
                 FindNextTarget();
+                SendImpactInfo();
             }
         }
         else{
             ReturnToPlayer();
+            SendImpactInfo();
         }
         if(collision.gameObject != null && collision.gameObject.GetComponent<ThirdPersonController>() == null){
             hitSomething = true;
@@ -103,5 +107,9 @@ public class RicochetShieldProjectile : MonoBehaviour
         if(currentTarget == null && returningToPlayer == false && hitSomething){
             FindNextTarget();
         }
+    }
+    private void SendImpactInfo(){
+        shield.PlayImpactSound(this.transform.position);
+        Instantiate(impactParticles, this.transform.position, Quaternion.identity);
     }
 }

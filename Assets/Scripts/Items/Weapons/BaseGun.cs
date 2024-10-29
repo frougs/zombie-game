@@ -200,6 +200,8 @@ public class BaseGun : MonoBehaviour, IShootable
                 
             }
         }
+        
+        
     }
     private void UpdateParticle(RaycastHit hitData, float damageAmount){
         try{
