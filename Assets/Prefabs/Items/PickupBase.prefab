@@ -272,7 +272,7 @@ MonoBehaviour:
   startHeld: 0
   item: {fileID: 0}
   rb: {fileID: 0}
-  thisColl: {fileID: 0}
+  thisColl: {fileID: 8478063287026731932}
   objColl: {fileID: 0}
   dropForce: 2
   currentlyHeld: 0
