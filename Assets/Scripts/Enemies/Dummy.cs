@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
 using System;
+//using UnityEngine.Events;
 // using System.Diagnostics;
 
 public class Dummy : MonoBehaviour, IDamagable
@@ -11,12 +12,12 @@ public class Dummy : MonoBehaviour, IDamagable
     [SerializeField] public float maxHealth;
     [SerializeField] float regenDelay;
     [SerializeField] TextMeshPro healthText;
-    [SerializeField] float currentHealth;
+    [SerializeField] public float currentHealth;
     private bool dead;
     [SerializeField] Material deadMat;
     [SerializeField] Material aliveMat;
     private Renderer eRend;
-    private NavMeshAgent nav;
+    [HideInInspector] public NavMeshAgent nav;
     public bool startChase;
     private bool chasing;
     public GameObject player;
@@ -37,11 +38,31 @@ public class Dummy : MonoBehaviour, IDamagable
     [SerializeField] float powerupDropChance;
     [SerializeField] GameObject[] powerups;
     [SerializeField] GameObject deathParticles;
+    [SerializeField] public Animator anim;
+    public bool isDamagable;
+    [HideInInspector] public UIContainer uiStuff;
+    [HideInInspector] public bool moving;
+    //public UnityEvent enemyDeath;
+    
 
     // public string enemyID;
     public void Damaged(float damage, GameObject attacker, Vector3 hitPoint){
+
         if(damagedParticles != null){
             Instantiate(damagedParticles, hitPoint, Quaternion.LookRotation((player.transform.position - hitPoint).normalized));
+            anim.SetBool("Damaged", true);
+            anim.SetBool("Damaged", false);
+        }
+        //Debug.Log("OUCHIE!!!! I WAS DAMAGED FOR: " + damage);
+        if(!dead && isDamagable){
+            currentHealth -= damage;
+        }
+    }
+    public void BossWeakSpot(float damage, GameObject attacker, Vector3 hitPoint){
+        if(damagedParticles != null){
+            Instantiate(damagedParticles, hitPoint, Quaternion.LookRotation((player.transform.position - hitPoint).normalized));
+            anim.SetBool("Damaged", true);
+            anim.SetBool("Damaged", false);
         }
         //Debug.Log("OUCHIE!!!! I WAS DAMAGED FOR: " + damage);
         if(!dead){
@@ -61,6 +82,10 @@ public class Dummy : MonoBehaviour, IDamagable
         }
         // Guid thisuuid = Guid.NewGuid();
         // enemyID = thisuuid.ToString(); 
+        if (uiStuff == null)
+        {
+            uiStuff = FindObjectOfType<UIContainer>();
+        }
 
     }
     private void FixedUpdate(){
@@ -115,6 +140,7 @@ public class Dummy : MonoBehaviour, IDamagable
         }
     }
     public void Death(){
+        //enemyDeath.Invoke();
         Instantiate(deathParticles, this.transform.position, Quaternion.identity);
         float randomValue = UnityEngine.Random.value;
         if(randomValue <= powerupDropChance){
@@ -152,7 +178,9 @@ public class Dummy : MonoBehaviour, IDamagable
             soundSource.PlayOneShot(attackClips[index]);
         }
         currentlyAttacking = true;
+        anim.SetBool("Attacking", true);
         yield return new WaitForSeconds(attackDelay);
+        anim.SetBool("Attacking", false);
         //Debug.Log("Attacking");
         currentlyAttacking = false;
         if(Vector3.Distance(this.transform.position, target.transform.position) <= attackDistance){
@@ -220,9 +248,17 @@ public class Dummy : MonoBehaviour, IDamagable
         return closestBarrier != null ? closestBarrier : player;
         //return closestBarrier;
     }
-    private void Update(){
+    public virtual void Update(){
         if(player == null){
             player = FindObjectOfType<ThirdPersonController>().gameObject;
+        }
+        if(nav.velocity != Vector3.zero){
+            anim.SetBool("Moving", true);
+            moving = true;
+        }
+        else{
+            anim.SetBool("Moving", false);
+            moving = false;
         }
     }
 }

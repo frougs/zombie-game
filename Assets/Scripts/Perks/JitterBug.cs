@@ -45,11 +45,11 @@ public class JitterBug : PerkBase
         spawnFieldOnDeath = true;
     }
         public override void GetUpgradeLevel(){
-        if(PlayerPrefs.HasKey("JitterBug")){
-            upgradeNum = PlayerPrefs.GetInt("JitterBug");
+        if(PlayerPrefs.HasKey("Jitterbug")){
+            upgradeNum = PlayerPrefs.GetInt("Jitterbug");
         }
         else{
-            PlayerPrefs.SetInt("JitterBug", 0);
+            PlayerPrefs.SetInt("Jitterbug", 0);
         }
         
     }

@@ -253,6 +253,7 @@ MonoBehaviour:
   currentHealth: 0
   deadMat: {fileID: 2100000, guid: 2f37cb88e855ea34e8ce9ab679ab8c23, type: 2}
   aliveMat: {fileID: 2100000, guid: 3766dc98b50f7164ab5e98f4e09b6263, type: 2}
+  nav: {fileID: 0}
   startChase: 0
   player: {fileID: 0}
   target: {fileID: 0}
@@ -278,6 +279,13 @@ MonoBehaviour:
   - {fileID: 4573347836656141913, guid: 220d88d419637274f971e76cd6bb4e34, type: 3}
   - {fileID: 383640939926145469, guid: d7f551c5352e173479c37c57c6e278ab, type: 3}
   deathParticles: {fileID: 7729820728782272661, guid: 1b57c9bf6170f3b4caf7aec1992a6412, type: 3}
+  anim: {fileID: 0}
+  isDamagable: 0
+  uiStuff: {fileID: 0}
+  moving: 0
+  enemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!195 &4226794117900371105
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -854,7 +862,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.3369358
+      value: 0.2870339
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance
@@ -1031,7 +1039,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.3369358
+      value: 0.2870339
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

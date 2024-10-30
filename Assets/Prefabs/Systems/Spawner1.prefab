@@ -48,7 +48,7 @@ MonoBehaviour:
   playerActive: 0
   maxPlayerDistance: 100
   onCooldown: 0
-  zombiePrefab: {fileID: 1326706379660568098, guid: 011a36626766c2a4a887f543dc114345, type: 3}
+  zombiePrefab: {fileID: 4595432917090475877, guid: 7f799aa6204af44438df2d1604e67e06, type: 3}
   spawnDelay: 16
   player: {fileID: 0}
   maxXRange: 0

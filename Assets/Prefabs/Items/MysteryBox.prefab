@@ -265,6 +265,21 @@ MonoBehaviour:
   - {fileID: 3402201950728168177, guid: 62f3ab47e213afc4c8e037df13a9b5b4, type: 3}
   - {fileID: 39725216594797428, guid: 47af76c7157fe0d458f6040bc108575b, type: 3}
   - {fileID: 8966357612978260292, guid: a8ad68a3b7ec1c44cafd86d0ef4fab50, type: 3}
+  - {fileID: 7437928203675386487, guid: 4504d8c9eda7a3b48a05ebe60839c3c9, type: 3}
+  - {fileID: 7699328521404810892, guid: 3be683a74a44a9c4f859a5a51c554cf6, type: 3}
+  - {fileID: 4215995596726286194, guid: 51ae0acb6f5fa5345a6dc5a96d875125, type: 3}
+  - {fileID: 5830273623516781480, guid: bd2b47cd2e6c7f247953d0d765775e27, type: 3}
+  - {fileID: 5168034602907532495, guid: 8b12851a07bb8094a97e7feda793f99c, type: 3}
+  - {fileID: 765857558488140923, guid: 0f65f9169892c4c41827dd003ccf657a, type: 3}
+  - {fileID: 4471644223074896943, guid: 5010adb3f7a599d45ad7ff6c69322a52, type: 3}
+  - {fileID: 9136757873143575631, guid: 810ae45c5216e9b43b6beafe702afdc7, type: 3}
+  - {fileID: 6817787801348705171, guid: 20f0cc0f84c35474bb0d385b9b9aee3d, type: 3}
+  - {fileID: 8767224121372073068, guid: a25e46484468fb54e8a4baa77e07db0a, type: 3}
+  - {fileID: 3913798225735070617, guid: d612e355d2cefb141a30816922dad936, type: 3}
+  - {fileID: 2807229649818601086, guid: c82f490f7ea8d6143b897d14da31a13f, type: 3}
+  - {fileID: 6040590870974976732, guid: e2039773e4dcbcc4b9b09ace32731056, type: 3}
+  - {fileID: 3560389493260167186, guid: 6ea99ecbc12785a429b0afd4c6c8c15d, type: 3}
+  - {fileID: 8750271584296156302, guid: a04b25872fd2cb648b609f3525ec0719, type: 3}
   gunSpawnPOS: {fileID: 8118860989250552840}
   gunContainer: {fileID: 3777165312551487766, guid: a2488ba85020b6a49b29b6efa9cf115f, type: 3}
   gunParent: {fileID: 2581882932538186404, guid: 5f84f207d8125e448a62cc92fd4efa85, type: 3}
@@ -751,7 +766,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.021560723
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x

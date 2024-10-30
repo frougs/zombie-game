@@ -62,6 +62,21 @@ public class UIContainer : MonoBehaviour
     [SerializeField] TextMeshProUGUI maxZombiesReachedText;
     [SerializeField] TextMeshProUGUI spawningConditionsReachedText;
     [SerializeField] TextMeshProUGUI roundSpawnedText;
+    [Header("Golem Boss Stuff")]
+    [SerializeField] GameObject golemBossParent;
+    [SerializeField] GameObject golemBossArmor;
+    [SerializeField] GameObject golemBossHealth;
+
+    public void ToggleGolemParent(bool toggle){
+        golemBossParent.SetActive(toggle);
+    }
+
+    public void UpdateGolemHealth(float health, float maxHealth){
+        golemBossHealth.GetComponent<Image>().fillAmount = health/maxHealth;
+    }
+    public void UpdateGolemArmor(float health, float maxHealth){
+        golemBossArmor.GetComponent<Image>().fillAmount = health/maxHealth;
+    }
     public void UpdateTestingUI(int currentAlive, bool canSpawn, bool spawningConditionsReached, bool maxZombiesReached, int roundSpawned){
         currentAliveText.text = "Current alive: " +currentAlive.ToString();
         canSpawnText.text = "Can Spawn?: " +canSpawn.ToString();

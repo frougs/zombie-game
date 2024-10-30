@@ -100,7 +100,7 @@ public class BaseGun : MonoBehaviour, IShootable
                     //Debug.Log("Shooting raycast");
                     //Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                     //Vector3 towardsPlayer = (player.transform.position - impParticle.transform.position).normalized;
-                    //Debug.Log(hitData.transform.position);
+                    Debug.Log(hitData.transform.gameObject.name);
 
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
