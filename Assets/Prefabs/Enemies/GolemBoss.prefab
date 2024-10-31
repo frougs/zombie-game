@@ -766,21 +766,6 @@ MonoBehaviour:
   isDamagable: 0
   uiStuff: {fileID: 0}
   moving: 0
-  enemyDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7009206336082764471}
-        m_TargetAssemblyTypeName: GolemBoss, Assembly-CSharp
-        m_MethodName: DisableHealthBar
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4031666370742328720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2646,6 +2631,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 7328183023762962784}
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
+      propertyPath: m_Volume
+      value: 0.2870339
+      objectReference: {fileID: 0}
+    - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance
       value: 1000
       objectReference: {fileID: 0}
@@ -2799,7 +2788,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.2870339
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

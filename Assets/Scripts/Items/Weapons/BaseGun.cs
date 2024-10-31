@@ -61,6 +61,7 @@ public class BaseGun : MonoBehaviour, IShootable
     private GameObject activeReloadBuffParticles;
     [HideInInspector] public GameObject reloadBuffParticles;
     public bool blockShooting;
+    public bool canReload = true;
     private void Start(){
         currentAmmo = maxAmmo;
         currentReserveAmmo = maxReserveAmmo;
@@ -70,6 +71,7 @@ public class BaseGun : MonoBehaviour, IShootable
         weaponCon = FindObjectOfType<WeaponController>();
     }
     public virtual void Shot(GameObject shooter){
+
         //Debug.Log("Shot Triggered");
         if(shooter.GetComponent<ThirdPersonController>() != null){
             player = shooter;
@@ -100,7 +102,8 @@ public class BaseGun : MonoBehaviour, IShootable
                     //Debug.Log("Shooting raycast");
                     //Instantiate(impactParticle, hitData.point, Quaternion.LookRotation((player.transform.position - hitData.point).normalized));
                     //Vector3 towardsPlayer = (player.transform.position - impParticle.transform.position).normalized;
-                    Debug.Log(hitData.transform.gameObject.name);
+                    //Debug.Log(hitData.transform.gameObject.name);
+                    //uiStuff.LastObjHit(hitData.transform.gameObject);
 
                     IDamagable damagable = hitData.transform.gameObject.GetComponent<IDamagable>();
                     //NonCrit hit
@@ -334,9 +337,20 @@ public class BaseGun : MonoBehaviour, IShootable
         }
     }
     public void Reload(){
-        if(currentReserveAmmo > 0){
-            reloadRoutine = StartCoroutine(ReloadTimer());
+        if(canReload){
+            if(reloadRoutine != null){
+                StopReload();
+            }
+            if(currentReserveAmmo > 0){
+                reloadRoutine = StartCoroutine(ReloadTimer());
+            }
+            StartCoroutine(ReloadCoolDown());
         }
+    }
+    IEnumerator ReloadCoolDown(){
+        canReload = false;
+        yield return new WaitForSeconds(0.7f);
+        canReload = true;
     }
     IEnumerator ReloadTimer(){
         reloading = true;

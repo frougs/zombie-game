@@ -62,6 +62,7 @@ public class UIContainer : MonoBehaviour
     [SerializeField] TextMeshProUGUI maxZombiesReachedText;
     [SerializeField] TextMeshProUGUI spawningConditionsReachedText;
     [SerializeField] TextMeshProUGUI roundSpawnedText;
+    [SerializeField] TextMeshProUGUI lastHitText;
     [Header("Golem Boss Stuff")]
     [SerializeField] GameObject golemBossParent;
     [SerializeField] GameObject golemBossArmor;
@@ -85,6 +86,9 @@ public class UIContainer : MonoBehaviour
         roundSpawnedText.text = "Round Spawned: " +roundSpawned.ToString();
         
 
+    }
+    public void LastObjHit(GameObject obj){
+        lastHitText.text = "LastHit: " +obj.name;
     }
     public void UpdateMenuMusic(AudioClip music, bool looping){
         menuMusic.clip = music;

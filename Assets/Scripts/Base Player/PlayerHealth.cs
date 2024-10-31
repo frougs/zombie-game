@@ -30,6 +30,9 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     [Header("Juq Master Stuff")]
     public double chanceToIgnoreHit;
     public float damageNegationAmount;
+
+    [Header("For Debugging")]
+    public bool invincible = false;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -44,7 +47,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
 
     public void Damaged(float damage, GameObject attacker, Vector3 pos)
     {
-        if(AttemptDodge() == false){
+        if(AttemptDodge() == false && !invincible){
             if(regen != null){
                 StopCoroutine(regen);
             }

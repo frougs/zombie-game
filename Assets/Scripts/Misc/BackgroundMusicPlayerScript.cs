@@ -8,9 +8,14 @@ public class BackgroundMusicPlayerScript : MonoBehaviour
     [SerializeField] AudioClip[] backgroundTracks;
     [SerializeField] float trackDelay;
     private bool currentlySelecting = false;
+    private bool easterEggPlaying;
+    private Coroutine selectingSong;
     private void Update(){
-        if(!musicSource.isPlaying && !currentlySelecting){
-            StartCoroutine(DelayBeforeNextTrack());
+        if(!musicSource.isPlaying && !currentlySelecting && !easterEggPlaying){
+            selectingSong = StartCoroutine(DelayBeforeNextTrack());
+        }
+        if(!musicSource.isPlaying && easterEggPlaying){
+            easterEggPlaying = false;
         }
     }
     private IEnumerator DelayBeforeNextTrack(){
@@ -25,5 +30,13 @@ public class BackgroundMusicPlayerScript : MonoBehaviour
             musicSource.Play();
             currentlySelecting = false;
         }
+    }
+    public void PlayEasterEggSong(AudioClip song){
+        if(selectingSong != null){
+            StopCoroutine(selectingSong);
+        }
+        easterEggPlaying = true;
+        musicSource.clip = song;
+        musicSource.Play();
     }
 }
