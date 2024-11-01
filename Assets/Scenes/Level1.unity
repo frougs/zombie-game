@@ -14923,7 +14923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30758396b5a815e4fbccf02a2456253b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easterEggSong: {fileID: 8300000, guid: e47cf8cdd32c6604aa3698e9b727d315, type: 3}
+  easterEggSong: {fileID: 8300000, guid: c32c9f4b2ed72b94c9f1edd585ccc8a3, type: 3}
   easterEggTargets:
   - {fileID: 996404272}
   - {fileID: 842956759}
@@ -120008,6 +120008,14 @@ PrefabInstance:
     - target: {fileID: 2645786407773314263, guid: d961eaee5fb3b00468abc033e8f5df67, type: 3}
       propertyPath: m_Name
       value: MysteryBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8770235545934368006, guid: d961eaee5fb3b00468abc033e8f5df67, type: 3}
+      propertyPath: forcespawnOBJ
+      value: 
+      objectReference: {fileID: 8966357612978260292, guid: a8ad68a3b7ec1c44cafd86d0ef4fab50, type: 3}
+    - target: {fileID: 8770235545934368006, guid: d961eaee5fb3b00468abc033e8f5df67, type: 3}
+      propertyPath: forceEndSelected
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

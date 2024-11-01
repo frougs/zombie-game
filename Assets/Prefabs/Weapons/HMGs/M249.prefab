@@ -347,7 +347,7 @@ MonoBehaviour:
   criticalHit: {fileID: 8300000, guid: 67f553674b8a22b4faaa2238e670e242, type: 3}
   canPlayNoAmmo: 1
   soundSource: {fileID: 4386526805845056921}
-  pointsPerHit: 0
+  pointsPerHit: 10
   scoreSystem: {fileID: 0}
   hasReserveAmmo: 0
   buyModel: {fileID: 9160862794411988881, guid: b6f83a8d2fa513247921cbcc120f2d07, type: 3}
@@ -372,6 +372,7 @@ MonoBehaviour:
   reloadBuffAmount: 0
   reloadBuffParticles: {fileID: 0}
   blockShooting: 0
+  canReload: 1
 --- !u!1 &5080438671820967107
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +580,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance
@@ -796,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5235901270771543261, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8478063287026731932, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Size.x

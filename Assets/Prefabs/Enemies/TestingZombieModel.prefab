@@ -488,9 +488,6 @@ MonoBehaviour:
   isDamagable: 1
   uiStuff: {fileID: 0}
   moving: 0
-  enemyDeath:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!195 &4565229274286170090
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1051,7 +1048,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance
@@ -1134,7 +1131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

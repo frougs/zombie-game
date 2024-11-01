@@ -3954,9 +3954,13 @@ MonoBehaviour:
     [Bug
     Fixes]
 
+    - Increased "Max Real Voices" to allow faster firing weapons to have
+    sounds played properly
+
     - Fixed "Found Relics" page
 
-    - Fixed Journal bugs'
+    - Fixed Journal
+    bugs'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6522,6 +6526,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 4348768464897692408, guid: 04537b0d04844d844aee70b06354dbc9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4648196196536278548, guid: 04537b0d04844d844aee70b06354dbc9, type: 3}
       propertyPath: m_Name
       value: HammerRelic
@@ -6885,6 +6893,10 @@ PrefabInstance:
     - target: {fileID: 7120783894565731197, guid: 04537b0d04844d844aee70b06354dbc9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7182327156279198537, guid: 04537b0d04844d844aee70b06354dbc9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7467118622059878592, guid: 04537b0d04844d844aee70b06354dbc9, type: 3}
       propertyPath: m_IsActive

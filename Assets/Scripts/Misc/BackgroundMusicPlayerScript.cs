@@ -32,11 +32,11 @@ public class BackgroundMusicPlayerScript : MonoBehaviour
         }
     }
     public void PlayEasterEggSong(AudioClip song){
-        if(selectingSong != null){
-            StopCoroutine(selectingSong);
-        }
         easterEggPlaying = true;
         musicSource.clip = song;
         musicSource.Play();
+        if(selectingSong != null){
+            StopCoroutine(selectingSong);
+        }
     }
 }

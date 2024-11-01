@@ -3229,6 +3229,7 @@ MonoBehaviour:
   extraLifeUsed: {fileID: 8300000, guid: d5a8cee1fd5afec478a71dfa1639566f, type: 3}
   chanceToIgnoreHit: 0
   damageNegationAmount: 0
+  invincible: 0
 --- !u!114 &4782608058825388342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5072,7 +5073,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance

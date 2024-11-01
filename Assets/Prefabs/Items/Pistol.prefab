@@ -266,6 +266,7 @@ MonoBehaviour:
   reloadBuffAmount: 0
   reloadBuffParticles: {fileID: 0}
   blockShooting: 0
+  canReload: 1
 --- !u!1001 &2353740123741392353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -416,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5235901270771543261, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8478063287026731932, guid: 8b1cc4dd659b5c04a83fbe2d978acca8, type: 3}
       propertyPath: m_Size.x

@@ -1661,6 +1661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerArmature Variant - NO ALTERUNA 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6864120095425979356, guid: 190354c6d7d27c44185d4f0c90de76cc, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1829,6 +1833,10 @@ PrefabInstance:
       propertyPath: colorTransitionTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4585939368483985608, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8934410335641680800, guid: b37155dcfa5e82d46bfa49763e6ea9e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.0057716
@@ -1889,7 +1897,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.19300215
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4145891934527129836, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1968,7 +1976,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_PlayOnAwake
@@ -5048,7 +5056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3572559715583516953, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3609720801794968630, guid: 04f7cdbc8eafb3d4b81e8db4c59a4ad8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -8266,7 +8274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7978165418944333113, guid: 75d4e4f1b8cc1964fb3bc501a1660d27, type: 3}
       propertyPath: m_Volume
-      value: 0.54572964
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

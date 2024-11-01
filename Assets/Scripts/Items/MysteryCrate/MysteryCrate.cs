@@ -31,6 +31,8 @@ public class MysteryCrate : Purchasable, IInteractable
     [Header("Misc")]
     [SerializeField] TextMeshPro priceText;
     public bool fireSale;
+    public bool forceEndSelected;
+    public GameObject forcespawnOBJ;
 
     
 
@@ -89,7 +91,12 @@ public class MysteryCrate : Purchasable, IInteractable
         gun.transform.position = gunEndPos.transform.position;
         Destroy(gun);
         //Instantiate a variant of a wallbuy script that is free and doesnt display price, but instead just says press [E] or whatever then after duration put layer back to default
-        StartCoroutine(SpawnSelectedGun(finalGun));
+        if(!forceEndSelected){
+            StartCoroutine(SpawnSelectedGun(finalGun));
+        }
+        else{
+            StartCoroutine(SpawnSelectedGun(forcespawnOBJ));
+        }
     }
     private IEnumerator RandomGun(GameObject gun){
         var index = Random.Range(0, guns.Length);

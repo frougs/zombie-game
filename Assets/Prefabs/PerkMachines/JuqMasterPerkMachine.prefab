@@ -551,7 +551,7 @@ MonoBehaviour:
   light: {fileID: 2208829568567202358}
   perkIcon: {fileID: 2800000, guid: 54e160c801ba4954ba1724906e449cfa, type: 3}
   perkName: Juq Master
-  perkDescription: Nepali Women...
+  perkDescription: He knows the system...
   upgradeNum: 0
   player: {fileID: 0}
   popupDuration: 2.5
@@ -886,7 +886,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: m_Volume
-      value: 0.2870339
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -5090868379315123481, guid: 9028bf6df9ebee84d9010cebdbec3471, type: 3}
       propertyPath: MaxDistance
